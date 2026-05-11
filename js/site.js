@@ -13,7 +13,17 @@
   var menu = document.querySelector('.top-nav ul');
   if (toggle && menu) {
     // Focus trap
-    var focusableSelectors = 'a, button, input, [tabindex]:not([tabindex="-1"])';
+    var focusableSelectors = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+    function closeMenu(options) {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      document.removeEventListener('keydown', trapFocus);
+      if (options && options.restoreFocus) {
+        toggle.focus();
+      }
+    }
 
     function getFocusable() {
       return Array.from(menu.querySelectorAll(focusableSelectors));
@@ -31,32 +41,40 @@
         }
       }
       if (e.key === 'Escape') {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.focus();
-        document.removeEventListener('keydown', trapFocus);
+        closeMenu({ restoreFocus: true });
       }
     }
 
     toggle.addEventListener('click', function () {
       var open = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('menu-open', open);
       if (open) {
         var focusable = getFocusable();
         if (focusable[0]) focusable[0].focus();
         document.addEventListener('keydown', trapFocus);
       } else {
-        document.removeEventListener('keydown', trapFocus);
+        closeMenu();
       }
     });
 
     // Close when clicking a link
     menu.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
-        menu.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.removeEventListener('keydown', trapFocus);
+        closeMenu();
       });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!menu.classList.contains('open')) return;
+      if (menu.contains(e.target) || toggle.contains(e.target)) return;
+      closeMenu();
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768 && menu.classList.contains('open')) {
+        closeMenu();
+      }
     });
   }
 
@@ -64,11 +82,58 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  // === Contact form -> WhatsApp ===
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    function getFieldValue(name) {
+      var field = contactForm.elements[name];
+      if (!field) return '';
+
+      if (field.tagName === 'SELECT') {
+        return field.selectedIndex > -1 ? field.options[field.selectedIndex].text : '';
+      }
+
+      return field.value || '';
+    }
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var number = contactForm.getAttribute('data-whatsapp-number') || '351939443377';
+
+      var fields = [
+        ['Nome', getFieldValue('nome')],
+        ['Nome da empresa', getFieldValue('empresa')],
+        ['Email', getFieldValue('email')],
+        ['Telemóvel', getFieldValue('telefone')],
+        ['Tipo de projeto', getFieldValue('tipo_projeto')],
+        ['Faixa de investimento', getFieldValue('investimento')],
+        ['Prazo pretendido', getFieldValue('prazo')],
+        ['Mensagem', getFieldValue('mensagem')]
+      ];
+
+      var lines = ['ola berto tudo bem? preciso de um site. heis os meus dados.....', ''];
+
+      fields.forEach(function (field) {
+        var label = field[0];
+        var value = field[1];
+        if (typeof value === 'string' && value.trim() !== '') {
+          lines.push(label + ': ' + value.trim());
+        }
+      });
+
+      var whatsappUrl = 'https://wa.me/' + number + '?text=' + encodeURIComponent(lines.join('\n'));
+      window.location.href = whatsappUrl;
+    });
+  }
+
   // === Active link highlight ===
   var current = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.top-nav a').forEach(function (a) {
     var href = (a.getAttribute('href') || '').split('#')[0];
-    if (href === current) a.classList.add('active');
+    if (href === current) {
+      a.classList.add('active');
+      a.setAttribute('aria-current', 'page');
+    }
   });
 
   // === Service Worker ===

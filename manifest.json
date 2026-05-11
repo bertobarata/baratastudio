@@ -1,13 +1,13 @@
 {
   "name": "Barata Studio",
   "short_name": "BB",
-  "description": "Websites personalizados feitos à mão para negócios que querem crescer.",
+  "description": "Websites personalizados para negócios que precisam de presença digital credível e clara.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#E37734",
-  "background_color": "#1a1410",
+  "theme_color": "#1A6870",
+  "background_color": "#121315",
   "icons": [
     {
       "src": "assets/logos/logo-claro-transparent.png",

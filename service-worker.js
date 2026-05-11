@@ -5,8 +5,8 @@
  * so old caches are invalidated.
  */
 
-const CACHE_NAME = 'site-cache-v1';
-const RUNTIME_CACHE = 'site-runtime-v1';
+const CACHE_NAME = 'site-cache-v2';
+const RUNTIME_CACHE = 'site-runtime-v2';
 
 // Critical assets cached on install. Edit this list for your site.
 const PRECACHE_ASSETS = [
@@ -47,9 +47,8 @@ self.addEventListener('fetch', (event) => {
   // Only handle same-origin
   if (url.origin !== location.origin) return;
 
-  // Skip form submissions / external endpoints
+  // Skip non-GET requests
   if (request.method !== 'GET') return;
-  if (url.hostname.includes('formspree.io')) return;
 
   // Network-first for HTML pages
   if (request.mode === 'navigate' || request.destination === 'document') {

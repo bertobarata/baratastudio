@@ -1,151 +1,124 @@
-# Barata Studio — Kanban de Lançamento
+# Barata Studio — Kanban por Fase
 
-> Regra: sem novos estilos até a paleta estar fechada (Sprint 1 concluído).
-> Paralelo útil: Sprint 1 + Sprint 2 podem correr juntos. Sprint 3 só entra depois.
-
----
+> Regra do sistema: o trabalho avança por gate aprovado. Se uma mudança nova tocar numa decisão já fechada, regressa à fase dona dessa decisão.
 
 ## Legenda
 
 | Estado | Símbolo |
-|--------|---------|
-| TODO   | `[ ]`   |
-| DOING  | `[→]`   |
-| DONE   | `[x]`   |
+|---|---|
+| Por fazer | `[ ]` |
+| Em curso | `[→]` |
+| Feito | `[x]` |
+| Bloqueado | `[!]` |
 
-| Prioridade | Significado |
-|------------|-------------|
-| P1 | Bloqueia lançamento |
-| P2 | Degrada qualidade real |
-| P3 | Nice-to-have antes de lançar |
+## Fase 1 — Estratégia
 
----
+- Agentes: `00-creative-director` + `01-brand-positioning-strategist`
+- Output obrigatório: `positioning-brief`
+- Gate: objetivo da página, público, objeções e prova fechados
 
-## Sprint 1 — Congelar Direção
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[ ]` | P1 | Fechar `positioning-brief.md` com proposta de valor, objeções, provas e tom |
+| `[ ]` | P1 | Validar se a homepage atual responde a confiança e contacto, não só craft |
+| `[ ]` | P2 | Formalizar prova social mínima necessária para o lançamento |
 
-**Agentes:** `03-color-material-designer` (principal) · `00-creative-director` (decisão) · `01-brand-strategist` (validação curta)
-**Paralelo com:** Sprint 2 (estrutura)
-**Output:** `brand-lock` — tokens finais, combinações proibidas/aprovadas
+## Fase 2 — Conversão e Estrutura
 
-| Prioridade | Estado | Tarefa | Agente |
-|------------|--------|--------|--------|
-| P1 | `[x]` | Acento petróleo final: `#1A6870` (era `#145A61`) | `03` |
-| P1 | `[x]` | Paleta dark mode completa definida e locked | `03` |
-| P1 | `[x]` | Paleta light mode completa definida e locked | `03` |
-| P1 | `[x]` | BB logo: ratio ~14:1 sobre bg-dark, ~15:1 sobre bg-warm (AAA) | `03` |
-| P1 | `[x]` | 3 combinações proibidas documentadas em `brand-lock.md` | `03` |
-| P1 | `[x]` | 3 combinações aprovadas com rácios de uso em `brand-lock.md` | `03` |
-| P2 | `[x]` | Regra 80/15/5 documentada formalmente | `03` |
-| P2 | `[x]` | Materiais oficiais definidos (vidro fumado, metal petróleo, papel off-white, sombra suave) | `03` |
-| P2 | `[ ]` | Validar paleta contra posicionamento (não cosmética, não startup tech) | `01` |
-| P2 | `[x]` | Tokens CSS atualizados + `--teal-rgb` e `--text-light-rgb` adicionados | `03` |
+- Agentes: `02-conversion-ux-architect` + `00-creative-director`
+- Output obrigatório: `page-flow-spec`
+- Gate: narrativa, hierarquia e CTAs aprovados
 
-**Done quando:** toda a equipa usa a mesma paleta; logo funciona em claro e escuro; petróleo já não parece morto.
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[x]` | P1 | Estrutura-base da homepage documentada em `homepage-v2-outline.md` |
+| `[ ]` | P1 | Promover `homepage-v2-outline.md` para `page-flow-spec.md` com CTA map por página |
+| `[ ]` | P1 | Definir papel explícito de `precos.html`, `faq.html` e `formulario.html` no funil |
+| `[ ]` | P2 | Garantir que pedidos como "melhorar hero" ou "refazer CTA" entram nesta fase antes de copy ou visual |
 
----
+## Fase 3 — Sistema Visual
 
-## Sprint 2 — Cortar Redundância
+- Agentes: `03-visual-system-designer` + `00-creative-director`
+- Output obrigatório: `visual-system-lock`
+- Gate: tokens, tipografia, composição e consistência cross-page locked
 
-**Agentes:** `04-homepage-ux-architect` (principal) · `06-copy-messaging` (copy) · `00-creative-director` (validação)
-**Paralelo com:** Sprint 1
-**Output:** `homepage-v2-outline` — ordem, objetivo por secção, headline, transição visual
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[x]` | P1 | Base de tokens e materiais já documentada em `brand-lock.md` |
+| `[ ]` | P1 | Promover `brand-lock.md` para `visual-system-lock.md` com regras por página |
+| `[ ]` | P1 | Rever consistência visual entre `index.html`, `precos.html`, `faq.html` e `formulario.html` |
+| `[ ]` | P2 | Formalizar componentes visuais aprovados e padrões proibidos |
 
-| Prioridade | Estado | Tarefa | Agente |
-|------------|--------|--------|--------|
-| P1 | `[x]` | Process Summary (`#process`) removida do HTML — sem âncoras partidas | `04` |
-| P1 | `[x]` | Presence grid mantida — objetivo narrativo distinto de Projects (craft visível vs resultados) | `04` |
-| P1 | `[x]` | Estrutura final: Hero · Manifesto · BB Depth · Process Layers · Presence · Serviços · Projetos · CTA | `04` |
-| P1 | `[x]` | Cada secção avança argumento uma vez — sem repetição narrativa | `04` |
-| P2 | `[x]` | Headlines e transições visuais documentadas em `homepage-v2-outline.md` | `04` |
-| P2 | `[x]` | Nota de transição dark→light→dark por secção em `homepage-v2-outline.md` | `04` |
-| P2 | `[ ]` | Reescrever copy do manifesto (mais seco, menos explicativo) | `06` |
-| P2 | `[ ]` | Reescrever copy do CTA final (confiante, sem urgência forçada) | `06` |
-| P3 | `[ ]` | Rever eyebrow labels de cada secção (Posicionamento / Identidade / Processo / Resultado) | `06` |
-| P3 | `[ ]` | Escrever 3 versões do hero subtitle: seco / editorial / comercial | `06` |
+## Fase 4 — Motion e Comportamento
 
-**Done quando:** scroll sem déjà vu; nenhuma secção se desculpa; cada uma avança a narrativa.
+- Agentes: `04-motion-interaction-director` + `00-creative-director`
+- Output obrigatório: `motion-spec`
+- Gate: motion útil, controlado e com fallbacks
 
----
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[ ]` | P1 | Consolidar hero motion e restantes interações em `motion-spec.md` |
+| `[ ]` | P1 | Definir budget de performance, fallbacks mobile e `prefers-reduced-motion` |
+| `[ ]` | P2 | Separar claramente comportamento animado do sistema visual estático |
 
-## Sprint 3 — Resolver Animação Principal
+## Fase 5 — Copy
 
-**Agentes:** `05-motion-director` (principal) · `00-creative-director` (decisão go/no-go) · `04-homepage-ux-architect` (contexto UX)
-**Depende de:** Sprint 2 (estrutura fixada)
-**Output:** `hero-motion-spec` — estado inicial, estado em scroll, mobile fallback, perf budget, kill conditions
+- Agentes: `05-copy-messaging-editor` + `00-creative-director`
+- Output obrigatório: `copy-pack`
+- Gate: headlines, CTA e microcopy aprovados
 
-| Prioridade | Estado | Tarefa | Agente |
-|------------|--------|--------|--------|
-| P1 | `[x]` | Diagnóstico: conflito CSS transform + GSAP + `transform-style: preserve-3d` ausente | `05` |
-| P1 | `[x]` | Bug corrigido: `transform-style: preserve-3d` adicionado ao `.hero-bb` | `05` |
-| P1 | `[x]` | GSAP usa `gsap.set()` para estado inicial — elimina conflito com CSS transform | `05` |
-| P1 | `[x]` | Hero funciona: parallax 3D com rotationY diferenciado, scrub 2/1.5/1 por camada | `05` |
-| P2 | `[x]` | Mobile fallback: só `y` sem rotation, 30/16/8px, preserva performance | `05` |
-| P2 | `[x]` | Idle breathing: bbFront 8px/4s + bbMid 4px/5.5s — hero tem vida sem scroll | `05` |
-| P2 | `[ ]` | Testar hero com `prefers-reduced-motion` ativo (já tem handler, verificar visualmente) | `05` |
-| P3 | `[x]` | Separação em planos com rotationY diferenciado já implementada | `05` |
-| P3 | `[ ]` | Explorar vidro translúcido e highlight petróleo sobre as camadas (pós-validação visual) | `05` |
-| P3 | `[ ]` | Testar em iOS Safari (breathing + parallax com Lenis não usado — verificar nativo) | `05` |
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[ ]` | P1 | Criar `copy-pack.md` com hero, manifesto, CTA e microcopy crítica |
+| `[ ]` | P1 | Reescrever texto repetitivo e reforçar prova social |
+| `[ ]` | P2 | Garantir que `02` define slots e `05` define texto final sem sobreposição |
 
-**Done quando:** hero funciona sem glitches; mobile não sofre; animação continua forte mesmo reduzida.
+## Fase 6 — Implementação
 
----
+- Agentes: `06-frontend-implementation-architect`
+- Output obrigatório: `implementation-plan`
+- Gate: backlog técnico claro, por ficheiro e com critérios de done
 
-## Sprint 4 — Harden Técnico
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[ ]` | P1 | Criar `implementation-plan.md` com backlog por `index.html`, `precos.html`, `faq.html`, `formulario.html`, `css/styles.css` e JS relevante |
+| `[ ]` | P1 | Mapear dependências entre specs e código atual |
+| `[ ]` | P2 | Identificar riscos de performance e acessibilidade antes de editar frontend |
 
-**Agentes:** `04-homepage-ux-architect` (implementação) · `05-motion-director` (perf) · `00-creative-director` (QA final)
-**Depende de:** Sprints 1-3
-**Output:** `launch-hardening-checklist`
+## Fase 7 — QA e Publicação
 
-| Prioridade | Estado | Tarefa | Agente | Ref. audit |
-|------------|--------|--------|--------|------------|
-| P1 | `[x]` | Focus trap + Escape no menu mobile — sem foco a escapar do overlay | `04` | A11y P1 |
-| P1 | `[x]` | Footer `<h4>` → `<p class="footer-title">` — hierarquia h2→h4 corrigida | `04` | A11y P1 |
-| P1 | `[x]` | `border-left: 2px solid` removido — highlight via background + border-color | `04` | Anti-pattern P1 |
-| P2 | `[x]` | 17 rgba hardcoded substituídos por `rgba(var(--teal-rgb), ...)` e `rgba(var(--text-light-rgb), ...)` | `04` | Theming P2 |
-| P2 | `[x]` | `.header-monogram` 40→44px | `04` | Responsive P2 |
-| P2 | `[x]` | WhatsApp float: `bottom: max(24px, calc(24px + env(safe-area-inset-bottom, 0px)))` | `04` | Responsive P2 |
-| P2 | `[x]` | `loading="lazy"` em bb-depth (3 imgs) e cta-bb-bg; hero sem lazy | `04` | Perf P2 |
-| P2 | `[x]` | Skip link adicionado — "Saltar para o conteúdo" visível no focus | `04` | A11y P2 |
-| P3 | `[ ]` | Self-host fontes ou preload `<link rel="preload" as="font">` | `04` | Perf P3 |
-| P3 | `[ ]` | Remover/fundir `button--ghost-light` | `04` | Consistency P3 |
-| P3 | `[ ]` | Rever `footer-columns` max-width vs `footer-top` alinhamento | `04` | Layout P3 |
+- Agentes: `07-qa-accessibility-release-manager`
+- Output obrigatório: `release-checklist`
+- Gate: ready para GitHub Pages
 
-**Done quando:** Lighthouse melhora; keyboard navigation passa; site mais sólido sem mudar a cara.
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[x]` | P1 | Base técnica existente em `launch-hardening-checklist.md` |
+| `[ ]` | P1 | Criar `release-checklist.md` com validação de links, anchors, keyboard flow, mobile e metadata |
+| `[ ]` | P1 | Verificar readiness objetiva para GitHub Pages |
+| `[ ]` | P2 | Distinguir bugs de release de melhorias pós-lançamento |
 
----
+## Fase 8 — Iteração
 
-## Sprint 5 — Fechar Prova e Lançar
+- Agentes: `08-growth-analytics-optimizer` + `00-creative-director`
+- Output obrigatório: `optimization-backlog`
+- Gate: backlog pós-lançamento priorizado
 
-**Agentes:** `06-copy-messaging` (copy) · `04-homepage-ux-architect` (estrutura) · `00-creative-director` (aprovação final)
-**Depende de:** Sprints 1-4
-**Output:** `release-candidate`
+| Estado | Prioridade | Tarefa |
+|---|---|---|
+| `[ ]` | P1 | Criar `optimization-backlog.md` com hipóteses de conversão e próximo ciclo |
+| `[ ]` | P2 | Definir instrumentação mínima por CTA e página |
+| `[ ]` | P2 | Priorizar melhorias após observação do site ao vivo |
 
-| Prioridade | Estado | Tarefa | Agente |
-|------------|--------|--------|--------|
-| P1 | `[ ]` | Substituir "Em breve" por conceitos curados, estudos visuais ou 1 projeto demo honesto | `06` + `04` |
-| P1 | `[ ]` | Afinar CTA final (headline + body + botão) | `06` |
-| P1 | `[ ]` | Testar homepage em desktop + mobile + teclado (completo) | `00` |
-| P2 | `[ ]` | Rever todos os anchors e links (`formulario.html`, `precos.html`, `faq.html`) | `04` |
-| P2 | `[ ]` | Rever focus states em todos os elementos interativos | `04` |
-| P2 | `[ ]` | Verificar microcopy: labels, tooltips, placeholders, botões | `06` |
-| P3 | `[ ]` | Rever Open Graph image e meta description | `04` |
-| P3 | `[ ]` | Confirmar manifest.json e PWA icons estão corretos | `04` |
-| P3 | `[ ]` | Teste final cross-browser (Safari, Chrome, Firefox) | `00` |
+## Estado dos artefactos
 
-**Done quando:** homepage vende-se sozinha; nenhuma parte pede desculpa por não existir.
-
----
-
-## Resumo Executivo
-
-| Sprint | Foco | Agentes-chave | Pode correr em paralelo com |
-|--------|------|---------------|----------------------------|
-| 1 | Paleta final | `03`, `00`, `01` | Sprint 2 |
-| 2 | Estrutura / cortar | `04`, `06`, `00` | Sprint 1 |
-| 3 | Hero / motion | `05`, `00`, `04` | — (depende de S1+S2) |
-| 4 | Harden técnico | `04`, `05`, `00` | — (depende de S1-S3) |
-| 5 | Prova + lançamento | `06`, `04`, `00` | — (depende de S1-S4) |
-
-**Hoje (Sprint 1+2):** lock paleta · remover duplicação de processo · decidir hero fallback
-**Amanhã (Sprint 3+4):** reimplementar hero · corrigir border-left e tokens · acessibilidade
-**Depois (Sprint 5):** prova social · copy final · lançamento
+| Artefacto | Dono | Estado | Nota |
+|---|---|---|---|
+| `positioning-brief.md` | `01` | `[ ]` | por formalizar |
+| `page-flow-spec.md` | `02` | `[ ]` | deve absorver `homepage-v2-outline.md` |
+| `visual-system-lock.md` | `03` | `[ ]` | deve absorver `brand-lock.md` |
+| `motion-spec.md` | `04` | `[ ]` | por formalizar |
+| `copy-pack.md` | `05` | `[ ]` | por formalizar |
+| `implementation-plan.md` | `06` | `[ ]` | por formalizar |
+| `release-checklist.md` | `07` | `[ ]` | deve absorver `launch-hardening-checklist.md` |
+| `optimization-backlog.md` | `08` | `[ ]` | por formalizar |

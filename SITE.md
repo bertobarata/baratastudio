@@ -1,64 +1,92 @@
-# Barata Studio — Site Decisions
+# Barata Studio — Source of Truth
 
-## Brand
+## Negócio
 
-- **Nome oficial:** Barata Studio
-- **Monograma:** BB (usado no logo, favicon, avatar)
-- **Logo completo:** símbolo BB + texto "Barata Studio"
-- **Logo reduzido:** só BB (favicon, canto do site, avatar redes sociais)
-- **Tagline:** Do briefing ao launch: web feita à mão.
-- **Tagline curta (rodapé/assinatura):** Barata Studio · Do briefing ao launch: web feita à mão
-- **Tagline em propostas/email:** Barata Studio — Do briefing ao launch: web feita à mão.
+- Nome oficial: `Barata Studio`
+- Tagline principal: `Do briefing ao launch: web feita à mão.`
+- Oferta principal: websites personalizados para contextos formais
+- Ambiente de publicação: GitHub Pages
 
-## Propósito do site
+## Objetivo do site
 
-Apresentação de serviços web e venda de sites template.
-Público-alvo: empresas, advogados, clínicas e outros contextos formais.
+O site existe para gerar confiança suficiente para contacto. A homepage deve vender clareza, detalhe, critério e execução real; as páginas de apoio devem reduzir fricção até ao formulário.
 
-## Domínio & Email
+## Público principal
 
-- **Domínio:** usar o domínio existente (`bertobarata.pt` ou similar); o site mostra sempre "Barata Studio"
-- **Email:** `hello@bertobarata.pt` com assinatura "Barata Studio" (ou `contacto@baratastudio.pt` se registar o domínio)
+- Empresas de serviços
+- Advogados
+- Clínicas
+- Outros negócios formais que rejeitam sites genéricos
 
----
+## O que o público precisa de sentir
 
-## Placeholders por preencher
+- Este estúdio percebe contextos formais.
+- O resultado não vai parecer um template.
+- Há processo, critério e acabamento.
+- O contacto é simples e seguro.
 
-| Placeholder | Valor |
-|---|---|
-| `{{NOME_NEGOCIO}}` | Barata Studio |
-| `{{TAGLINE}}` | Do briefing ao launch: web feita à mão. |
-| `{{SITE_DESCRIPTION}}` | — |
-| `{{SITE_URL}}` | — |
-| `{{LOGO_FILE}}` | — |
-| `{{TELEFONE_WHATSAPP}}` | 351939443377 |
-| `{{TELEFONE_DISPLAY}}` | +351 939 443 377 |
-| `{{EMAIL}}` | berto.barata77@gmail.com (temporário) |
-| `{{INSTAGRAM_URL}}` | https://instagram.com/berto_barata |
-| `{{INSTAGRAM_HANDLE}}` | @berto_barata |
-| `{{HORARIO_LINHA1}}` | — (remover secção) |
-| `{{HORARIO_LINHA2}}` | — (remover secção) |
+## Proposta de valor base
 
-## Serviços
+Barata Studio desenha e implementa websites feitos à mão, com direção editorial, linguagem clara e atenção ao detalhe, para negócios que precisam de presença digital credível e não de páginas genéricas.
 
-- **Site completo com páginas** (produto principal)
-- Preços numa página separada (`precos.html`) — não na index
+## Prioridades atuais do sistema de agentes
+
+- Homepage mais orientada a confiança e contacto
+- Narrativa menos repetitiva e mais convincente
+- CTAs mais claros e melhor distribuídos
+- Consistência visual entre `index.html`, `precos.html`, `faq.html` e `formulario.html`
+- Prova social e credibilidade mais fortes
+- Workflow disciplinado antes de nova iteração visual
 
 ## Estrutura de páginas
 
-| Página | Ficheiro |
+| Página | Ficheiro | Papel no funil |
+|---|---|---|
+| Homepage | `index.html` | Convencer e encaminhar |
+| Preços | `precos.html` | Clarificar oferta e reduzir incerteza |
+| FAQ | `faq.html` | Tratar objeções |
+| Formulário | `formulario.html` | Converter interesse em contacto |
+| Serviço exemplo | `servico-exemplo.html` | Apoio editorial ou prova de detalhe |
+
+## Regras de workflow
+
+- `SITE.md` é a fonte de verdade de negócio, público e proposta.
+- `KANBAN.md` organiza trabalho por fase e gate, não por sprint solto.
+- A pasta `Agents/` define quem decide o quê e qual o próximo handoff.
+- Alterações tardias regressam à fase dona da decisão.
+
+## Artefactos oficiais
+
+- `positioning-brief.md`
+- `page-flow-spec.md`
+- `visual-system-lock.md`
+- `motion-spec.md`
+- `copy-pack.md`
+- `implementation-plan.md`
+- `release-checklist.md`
+- `optimization-backlog.md`
+
+## Artefactos herdados já úteis
+
+- `brand-lock.md`: base técnica e estética do sistema visual atual
+- `homepage-v2-outline.md`: base estrutural da homepage atual
+- `launch-hardening-checklist.md`: base do hardening técnico já concluído
+
+## Placeholders operacionais
+
+| Placeholder | Valor atual |
 |---|---|
-| Homepage | `index.html` |
-| Serviço detalhe | `servico-exemplo.html` |
-| Preços | `precos.html` *(a criar)* |
-| FAQ | `faq.html` |
-| Formulário / contacto | `formulario.html` |
+| `{{SITE_URL}}` | por fechar |
+| `{{SITE_DESCRIPTION}}` | por fechar |
+| `{{EMAIL}}` | `berto.barata77@gmail.com` temporário |
+| `{{TELEFONE_WHATSAPP}}` | `351939443377` |
+| `{{TELEFONE_DISPLAY}}` | `+351 939 443 377` |
+| `{{INSTAGRAM_URL}}` | `https://instagram.com/berto_barata` |
+| `{{INSTAGRAM_HANDLE}}` | `@berto_barata` |
 
-## Assets em falta
+## Restrições de marca
 
-- [ ] Logo BB — versão completa (`assets/BB_logo.svg`)
-- [ ] Monograma BB — só símbolo (`assets/BB_mark.svg`)
-- [ ] Favicon (`assets/favicon.png` 512×512)
-- [ ] Fotos dos serviços / templates
-- [ ] Foto hero
-- [ ] Email profissional (temporário: berto.barata77@gmail.com)
+- Não parecer startup SaaS genérica
+- Não parecer infantil
+- Não depender de efeitos gratuitos
+- Não cair em linguagem vaga de agência
