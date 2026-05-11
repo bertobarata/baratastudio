@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 158" fill="none" aria-label="BB — Barata Studio">
+  <title>BB</title>
+
+  <!-- BB mark only — sem wordmark, para header, favicon e botão flutuante -->
+  <g stroke="currentColor" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- B1 — upper left -->
+    <line x1="8"  y1="8"   x2="8"   y2="108"/>
+    <line x1="8"  y1="8"   x2="40"  y2="8"/>
+    <path d="M 40,8 C 78,8 78,56 40,56"/>
+    <line x1="40" y1="56"  x2="8"   y2="56"/>
+    <line x1="8"  y1="56"  x2="44"  y2="56"/>
+    <path d="M 44,56 C 86,56 86,108 44,108"/>
+    <line x1="44" y1="108" x2="8"   y2="108"/>
+
+    <!-- B2 — lower right, offset +36px each axis -->
+    <line x1="44" y1="44"  x2="44"  y2="144"/>
+    <line x1="44" y1="44"  x2="76"  y2="44"/>
+    <path d="M 76,44 C 114,44 114,92 76,92"/>
+    <line x1="76" y1="92"  x2="44"  y2="92"/>
+    <line x1="44" y1="92"  x2="80"  y2="92"/>
+    <path d="M 80,92 C 122,92 122,144 80,144"/>
+    <line x1="80" y1="144" x2="44"  y2="144"/>
+
+  </g>
+</svg>
