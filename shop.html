@@ -5,23 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#1A6870" />
 
-  <title>Preços &amp; Planos — Barata Studio</title>
-  <meta name="description" content="Preços base para websites personalizados, landing pages e suporte contínuo. Estrutura clara, sem surpresas e com margem para ajustar ao projeto." />
+  <title>Shop — Barata Studio</title>
+  <meta name="description" content="Camisolas e produtos físicos do estúdio. Designs originais impressos sob encomenda em Portugal e na Europa." />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Preços &amp; Planos — Barata Studio" />
-  <meta property="og:description" content="Investimento claro para projetos web com mais critério, clareza e presença digital." />
+  <meta property="og:title" content="Shop — Barata Studio" />
+  <meta property="og:description" content="Camisolas e produtos físicos com designs originais. Print-on-demand, envio EU." />
   <meta property="og:image" content="https://baratastudio.com/assets/logos/logo-escuro-transparent.png" />
-  <meta property="og:url" content="https://baratastudio.com/precos.html" />
+  <meta property="og:url" content="https://baratastudio.com/shop.html" />
 
   <link rel="icon" href="assets/logos/logo-mark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/logos/logo-claro-transparent.png" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="canonical" href="https://baratastudio.com/precos.html" />
+  <link rel="canonical" href="https://baratastudio.com/shop.html" />
   <link rel="stylesheet" href="css/styles.css?v=8" />
 </head>
-<body class="page-inner page-pricing">
+<body class="page-inner page-shop">
 
   <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
   <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
@@ -41,7 +41,7 @@
         <li><a href="index.html">Início</a></li>
         <li><a href="index.html#services">Serviços</a></li>
         <li><a href="precos.html">Preços</a></li>
-        <li><a href="shop.html">Shop</a></li>
+        <li><a href="shop.html" aria-current="page">Shop</a></li>
         <li><a href="faq.html">FAQ</a></li>
       </ul>
     </nav>
@@ -50,110 +50,119 @@
 
   <main id="main-content">
     <section class="page-hero page-hero--inner">
-      <p class="section-label section-label--center">Investimento</p>
-      <h1 class="page-title">Preços claros para decidir sem ruído.</h1>
-      <p class="page-subtitle">Cada projeto é ajustado ao contexto, mas estes valores servem como base real para perceber escopo, prazo e nível de personalização.</p>
+      <p class="section-label section-label--center">Shop</p>
+      <h1 class="page-title">Pequenas peças, com o mesmo critério.</h1>
+      <p class="page-subtitle">Camisolas com designs originais. Impressão sob encomenda em fornecedor europeu — sem stock acumulado, envio em 5 a 10 dias.</p>
     </section>
 
     <section class="page-intro-strip">
       <div class="page-intro-grid">
         <div class="page-intro-card">
-          <span class="page-intro-kicker">Resposta</span>
-          <strong>Menos de 24h</strong>
-          <p>Recebe um retorno rápido com próximos passos e enquadramento.</p>
+          <span class="page-intro-kicker">Produção</span>
+          <strong>Print on demand</strong>
+          <p>Cada peça é impressa quando encomendas. Sem desperdício, sem stock parado.</p>
         </div>
         <div class="page-intro-card">
-          <span class="page-intro-kicker">Processo</span>
-          <strong>Sem custos escondidos</strong>
-          <p>Escopo, revisões e calendário alinhados antes de avançar.</p>
+          <span class="page-intro-kicker">Envio</span>
+          <strong>UE em 5–10 dias</strong>
+          <p>Tracking incluído. Devoluções até 14 dias.</p>
         </div>
         <div class="page-intro-card">
-          <span class="page-intro-kicker">Flexibilidade</span>
-          <strong>Proposta ajustável</strong>
-          <p>Se o projeto não encaixa num pacote, a proposta é ajustada ao caso real.</p>
+          <span class="page-intro-kicker">Pagamento</span>
+          <strong>Cartão · MBWay · ApplePay</strong>
+          <p>Checkout seguro via Stripe.</p>
         </div>
       </div>
     </section>
 
     <section class="section section--inner">
       <div class="cards-grid cards-grid--pricing">
-        <article class="card price-card">
-          <span class="price-card-label">Essential</span>
-          <h3>Para começar com critério</h3>
-          <p class="price"><strong>399 €</strong></p>
-          <p class="price-maint">+ 19 € / mês manutenção opcional</p>
+
+        <!--
+          TEMPLATE PRODUTO — duplicar este article para cada produto novo.
+          Substituir:
+            - data-product-slug → slug interno (ex: tshirt-leic-alumni)
+            - title h3
+            - preço
+            - imagem assets/shop/<slug>.jpg
+            - href Stripe Payment Link (criar no dashboard.stripe.com → Products)
+        -->
+        <article class="card price-card price-card--product" data-product-slug="placeholder-1">
+          <span class="price-card-label">Em breve</span>
+          <div class="product-image-wrapper">
+            <img src="assets/shop/placeholder.svg" alt="Mockup placeholder" loading="lazy" />
+          </div>
+          <h3>Primeiro design</h3>
+          <p class="price"><strong>—</strong></p>
+          <p class="price-maint">Disponível em breve</p>
           <ul>
-            <li>1 a 5 páginas, estrutura focada</li>
-            <li>1 idioma, design feito de raiz</li>
-            <li>Formulário de contacto + botão WhatsApp</li>
-            <li>Versão mobile + SEO on-page</li>
-            <li>Entrega em 1 a 2 semanas</li>
-            <li>1 mês de garantia pós-launch incluído</li>
+            <li>100% algodão, 200gsm</li>
+            <li>Tamanhos XS–3XL</li>
+            <li>Cores: branco, preto</li>
           </ul>
-          <a class="button" href="formulario.html">Pedir Essential</a>
+          <a class="button" href="#" aria-disabled="true" tabindex="-1">Em breve</a>
         </article>
 
-        <article class="card price-card price-card--featured">
-          <span class="price-card-label">Standard · Mais pedido</span>
-          <h3>Site institucional completo</h3>
-          <p class="price"><strong>899 €</strong></p>
-          <p class="price-maint">+ 29 € / mês manutenção opcional</p>
+        <article class="card price-card price-card--product" data-product-slug="placeholder-2">
+          <span class="price-card-label">Em breve</span>
+          <div class="product-image-wrapper">
+            <img src="assets/shop/placeholder.svg" alt="Mockup placeholder" loading="lazy" />
+          </div>
+          <h3>Segundo design</h3>
+          <p class="price"><strong>—</strong></p>
+          <p class="price-maint">Disponível em breve</p>
           <ul>
-            <li>8 a 15 páginas, arquitetura editorial</li>
-            <li>Multi-idioma (até 2 línguas)</li>
-            <li>SEO técnico + Open Graph + sitemap</li>
-            <li>PWA-light (instalável, cache inteligente)</li>
-            <li>2 rondas de revisão</li>
-            <li>Entrega em 3 a 5 semanas</li>
-            <li>1 mês de garantia pós-launch incluído</li>
+            <li>100% algodão, 200gsm</li>
+            <li>Tamanhos XS–3XL</li>
+            <li>Cores: branco, preto</li>
           </ul>
-          <a class="button" href="formulario.html">Pedir Standard</a>
+          <a class="button" href="#" aria-disabled="true" tabindex="-1">Em breve</a>
         </article>
 
-        <article class="card price-card">
-          <span class="price-card-label">Pro</span>
-          <h3>Projetos com integração e ambição</h3>
-          <p class="price">a partir de <strong>2.500 €</strong></p>
-          <p class="price-maint">+ 49 € / mês manutenção opcional</p>
+        <article class="card price-card price-card--product" data-product-slug="placeholder-3">
+          <span class="price-card-label">Em breve</span>
+          <div class="product-image-wrapper">
+            <img src="assets/shop/placeholder.svg" alt="Mockup placeholder" loading="lazy" />
+          </div>
+          <h3>Terceiro design</h3>
+          <p class="price"><strong>—</strong></p>
+          <p class="price-maint">Disponível em breve</p>
           <ul>
-            <li>15+ páginas, multi-idioma (3+)</li>
-            <li>Stack moderno quando justifica (Astro, Next)</li>
-            <li>Animações, integrações, CMS</li>
-            <li>Performance budget rigoroso (Lighthouse ≥ 90)</li>
-            <li>3 rondas de revisão</li>
-            <li>Entrega em 6 a 10 semanas</li>
-            <li>1 mês de garantia pós-launch incluído</li>
+            <li>100% algodão, 200gsm</li>
+            <li>Tamanhos XS–3XL</li>
+            <li>Cores: branco, preto</li>
           </ul>
-          <a class="button" href="formulario.html">Pedir Pro</a>
+          <a class="button" href="#" aria-disabled="true" tabindex="-1">Em breve</a>
         </article>
+
       </div>
 
       <div class="inline-cta">
-        <p>Precisa de mais páginas, loja online, reservas, integrações ou uma estrutura diferente? O valor final é fechado com base no escopo real, sem compromisso na fase inicial.</p>
+        <p>Estes designs vão sendo lançados ao longo das próximas semanas. Subscreve para saber quando saem, ou segue no Instagram.</p>
         <div class="inline-cta-actions">
-          <a class="button button--primary" href="formulario.html">Pedir proposta à medida</a>
-          <a class="button button--ghost" href="formulario.html">Preencher formulário</a>
+          <a class="button button--primary" href="https://instagram.com/baratastudio_shop" target="_blank" rel="noopener noreferrer">@baratastudio_shop</a>
+          <a class="button button--ghost" href="formulario.html">Sugerir design</a>
         </div>
       </div>
     </section>
 
     <section class="process-mini-section">
       <div class="process-mini-shell">
-        <p class="section-label section-label--center">Processo</p>
-        <h2 class="process-mini-title">Como o projeto avança</h2>
-        <p class="process-mini-intro">Antes de qualquer trabalho, o escopo é alinhado com clareza. O objetivo é evitar surpresas e chegar ao launch com critério.</p>
+        <p class="section-label section-label--center">Como funciona</p>
+        <h2 class="process-mini-title">Da escolha à entrega, sem fricção</h2>
+        <p class="process-mini-intro">Escolhes o design, o tamanho e a cor. Pagamento seguro. A peça é impressa sob encomenda e enviada para a tua morada.</p>
         <div class="process-mini-grid">
           <div class="process-mini-step">
-            <h3>1. Contexto</h3>
-            <p>Alinhamento sobre negócio, público, páginas, referências e objetivo principal do site.</p>
+            <h3>1. Escolhe</h3>
+            <p>Design, tamanho e cor. Checkout em 1 minuto.</p>
           </div>
           <div class="process-mini-step">
-            <h3>2. Proposta</h3>
-            <p>Entrega de valor, prazo e estrutura recomendada para avançar sem ambiguidade.</p>
+            <h3>2. Produzimos</h3>
+            <p>Impressão em fornecedor europeu certificado em 3–5 dias úteis.</p>
           </div>
           <div class="process-mini-step">
-            <h3>3. Execução</h3>
-            <p>Design, desenvolvimento, revisão e preparação final para publicação.</p>
+            <h3>3. Chega</h3>
+            <p>Envio com tracking. 5–10 dias para Portugal e UE.</p>
           </div>
         </div>
       </div>
@@ -162,10 +171,10 @@
     <section class="page-cta-band">
       <div class="page-cta-band-inner">
         <p class="section-label">Próximo passo</p>
-        <h2>Se o objetivo está claro, a proposta também pode estar.</h2>
-        <p>Partilhe o contexto do projeto e receba uma orientação inicial sem compromisso.</p>
+        <h2>Tens uma ideia de design para o teu grupo, faculdade ou clube?</h2>
+        <p>Personalizamos peças em pequenas séries para equipas, turmas, eventos ou marcas.</p>
         <div class="page-cta-band-actions">
-          <a class="button button--primary" href="formulario.html">Começar pedido</a>
+          <a class="button button--primary" href="formulario.html">Pedir orçamento</a>
           <a class="button button--ghost" href="faq.html">Ver FAQ</a>
         </div>
       </div>
@@ -188,6 +197,7 @@
       <div class="footer-col">
         <p class="footer-title">Informações</p>
         <div class="footer-contact-line"><a href="precos.html">Preços</a></div>
+        <div class="footer-contact-line"><a href="shop.html">Shop</a></div>
         <div class="footer-contact-line"><a href="faq.html">Perguntas Frequentes</a></div>
         <div class="footer-contact-line"><a href="politica-privacidade.html">Política de Privacidade</a></div>
         <div class="footer-contact-line"><a href="politica-cookies.html">Política de Cookies</a></div>
