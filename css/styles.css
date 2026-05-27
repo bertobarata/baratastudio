@@ -1634,12 +1634,18 @@ h4 { font-size: var(--font-size-h4); }
   color: var(--teal-hover);
 }
 .price {
-  margin: 0 0 1rem;
+  margin: 0 0 0.25rem;
   color: rgba(var(--text-light-rgb), 0.72);
 }
 .price strong {
   color: var(--text-light);
-  font-size: 1.45rem;
+  font-size: 1.85rem;
+}
+.price-maint {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
 }
 .price-card ul {
   list-style: none;
