@@ -63,7 +63,9 @@
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  // Hero content — Static (Animation removed as per request)
+  var mm = gsap.matchMedia();
+
+  mm.add('(min-width: 769px)', function () {
 
   // Phone slide & swap
   var phoneTL = gsap.timeline({
@@ -255,5 +257,7 @@
       scrollTrigger: { trigger: '.final-cta', start: 'top 80%', once: true }
     });
   }
+
+  }); // end gsap.matchMedia (>=769px)
 
 })();
