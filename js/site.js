@@ -157,22 +157,31 @@
       }
     });
 
-    // === Swipe down to close ===
+    // === Swipe down to close — only when at top of menu scroll ===
     var touchStartY = null;
+    var dragging = false;
     menu.addEventListener('touchstart', function (e) {
-      if (e.touches.length === 1) touchStartY = e.touches[0].clientY;
+      if (e.touches.length !== 1) return;
+      // only arm drag if menu scrolled to top
+      if (menu.scrollTop > 0) { touchStartY = null; dragging = false; return; }
+      touchStartY = e.touches[0].clientY;
+      dragging = false;
     }, { passive: true });
     menu.addEventListener('touchmove', function (e) {
       if (touchStartY === null) return;
       var delta = e.touches[0].clientY - touchStartY;
-      if (delta > 0) menu.style.transform = 'translateY(' + delta + 'px)';
+      // only treat as close-drag if pulling DOWN and threshold exceeded
+      if (delta < 12) return;
+      dragging = true;
+      menu.style.transform = 'translateY(' + delta + 'px)';
     }, { passive: true });
     menu.addEventListener('touchend', function (e) {
-      if (touchStartY === null) return;
-      var delta = (e.changedTouches[0].clientY) - touchStartY;
+      var delta = touchStartY !== null ? (e.changedTouches[0].clientY - touchStartY) : 0;
       menu.style.transform = '';
       touchStartY = null;
-      if (delta > 90) {
+      if (!dragging) return;
+      dragging = false;
+      if (delta > 120) {
         closeMenu({ restoreFocus: true });
         syncToggleLabel(false);
       }
