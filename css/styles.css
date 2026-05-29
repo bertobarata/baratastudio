@@ -1888,7 +1888,8 @@ h4 { font-size: var(--font-size-h4); }
     padding: 5rem 1.75rem 2.5rem;
     z-index: 999;
     overflow-y: auto;
-    overscroll-behavior: contain;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
     transition: transform .35s cubic-bezier(.22,.61,.36,1);
     counter-reset: navnum;
     box-sizing: border-box;
