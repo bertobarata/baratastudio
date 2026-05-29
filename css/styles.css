@@ -2095,8 +2095,9 @@ h4 { font-size: var(--font-size-h4); }
   }
   .nav-close-floating[hidden] { display: none !important; }
 
-  /* Lock body scroll when menu open */
+  /* Lock body scroll when menu open + hide cookie banner */
   body.menu-open { overflow: hidden; }
+  body.menu-open #cookie-banner { display: none !important; }
 
   /* Swipe hint dash at top of overlay */
   .top-nav ul.open::before {
