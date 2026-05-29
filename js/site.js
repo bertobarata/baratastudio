@@ -157,35 +157,7 @@
       }
     });
 
-    // === Swipe down to close — only when at top of menu scroll ===
-    var touchStartY = null;
-    var dragging = false;
-    menu.addEventListener('touchstart', function (e) {
-      if (e.touches.length !== 1) return;
-      // only arm drag if menu scrolled to top
-      if (menu.scrollTop > 0) { touchStartY = null; dragging = false; return; }
-      touchStartY = e.touches[0].clientY;
-      dragging = false;
-    }, { passive: true });
-    menu.addEventListener('touchmove', function (e) {
-      if (touchStartY === null) return;
-      var delta = e.touches[0].clientY - touchStartY;
-      // only treat as close-drag if pulling DOWN and threshold exceeded
-      if (delta < 12) return;
-      dragging = true;
-      menu.style.transform = 'translateY(' + delta + 'px)';
-    }, { passive: true });
-    menu.addEventListener('touchend', function (e) {
-      var delta = touchStartY !== null ? (e.changedTouches[0].clientY - touchStartY) : 0;
-      menu.style.transform = '';
-      touchStartY = null;
-      if (!dragging) return;
-      dragging = false;
-      if (delta > 120) {
-        closeMenu({ restoreFocus: true });
-        syncToggleLabel(false);
-      }
-    });
+    // Swipe-to-close removed — close X button + Escape + link tap handle it
 
     document.addEventListener('click', function (e) {
       if (!menu.classList.contains('open')) return;
