@@ -50,6 +50,17 @@
       toggle.textContent = open ? 'Fechar' : 'Menu';
     }
 
+    // === Move close button out of UL to body (avoid li styling interference) ===
+    var existingCloseLi = menu.querySelector('.nav-close-item');
+    if (existingCloseLi) existingCloseLi.remove();
+    var floatingClose = document.createElement('button');
+    floatingClose.type = 'button';
+    floatingClose.className = 'nav-close-floating';
+    floatingClose.setAttribute('aria-label', 'Fechar menu');
+    floatingClose.innerHTML = '&times;';
+    floatingClose.hidden = true;
+    document.body.appendChild(floatingClose);
+
     toggle.addEventListener('click', function () {
       var open = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
@@ -70,17 +81,6 @@
       syncToggleLabel(false);
       floatingClose.hidden = true;
     });
-
-    // === Move close button out of UL to body (avoid li styling interference) ===
-    var existingCloseLi = menu.querySelector('.nav-close-item');
-    if (existingCloseLi) existingCloseLi.remove();
-    var floatingClose = document.createElement('button');
-    floatingClose.type = 'button';
-    floatingClose.className = 'nav-close-floating';
-    floatingClose.setAttribute('aria-label', 'Fechar menu');
-    floatingClose.innerHTML = '&times;';
-    floatingClose.hidden = true;
-    document.body.appendChild(floatingClose);
 
     // === Enhance mobile menu with sections, numbers, secondary CTAs ===
     function enhanceMobileMenu() {
