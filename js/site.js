@@ -45,10 +45,15 @@
       }
     }
 
+    function syncToggleLabel(open) {
+      toggle.textContent = open ? 'Fechar' : 'Menu';
+    }
+
     toggle.addEventListener('click', function () {
       var open = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
       document.body.classList.toggle('menu-open', open);
+      syncToggleLabel(open);
       if (open) {
         var focusable = getFocusable();
         if (focusable[0]) focusable[0].focus();
@@ -62,8 +67,18 @@
     menu.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () {
         closeMenu();
+        syncToggleLabel(false);
       });
     });
+
+    // Close X button inside menu
+    var closeBtn = menu.querySelector('.nav-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        closeMenu({ restoreFocus: true });
+        syncToggleLabel(false);
+      });
+    }
 
     document.addEventListener('click', function (e) {
       if (!menu.classList.contains('open')) return;
@@ -74,9 +89,38 @@
     window.addEventListener('resize', function () {
       if (window.innerWidth > 768 && menu.classList.contains('open')) {
         closeMenu();
+        syncToggleLabel(false);
       }
     });
   }
+
+  // === WhatsApp float: mobile opens wa.me directly, desktop keeps form ===
+  (function () {
+    var waBtn = document.querySelector('.whatsapp-float');
+    if (!waBtn) return;
+    var WA_NUMBER = '351939443377';
+    var WA_TEXT = 'Olá Berto, vi o teu site e tenho interesse em desenvolver um projeto.';
+    var DESKTOP_HREF = waBtn.getAttribute('href');
+    var mq = window.matchMedia('(max-width: 768px)');
+    function applyMode() {
+      if (mq.matches) {
+        waBtn.setAttribute('href', 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT));
+        waBtn.setAttribute('target', '_blank');
+        waBtn.setAttribute('rel', 'noopener noreferrer');
+        waBtn.setAttribute('aria-label', 'Abrir conversa WhatsApp');
+        waBtn.setAttribute('data-tooltip', 'WhatsApp');
+      } else {
+        waBtn.setAttribute('href', DESKTOP_HREF);
+        waBtn.removeAttribute('target');
+        waBtn.removeAttribute('rel');
+        waBtn.setAttribute('aria-label', 'Abrir formulário de contacto');
+        waBtn.setAttribute('data-tooltip', 'Pedir site');
+      }
+    }
+    applyMode();
+    if (mq.addEventListener) mq.addEventListener('change', applyMode);
+    else mq.addListener(applyMode);
+  })();
 
   // === Footer year ===
   var year = document.getElementById('year');

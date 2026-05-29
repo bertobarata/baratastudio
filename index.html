@@ -26,8 +26,8 @@
   <!-- Fonts loaded via @font-face in styles.css -->
 
   <!-- Styles -->
-  <link rel="preload" href="css/styles.css?v=8" as="style" />
-  <link rel="stylesheet" href="css/styles.css?v=8" />
+  <link rel="preload" href="css/styles.css?v=10" as="style" />
+  <link rel="stylesheet" href="css/styles.css?v=10" />
   <link rel="preload" as="image" href="assets/fotos/phone-greenbond.webp" type="image/webp" />
   <link rel="preload" as="image" href="assets/fotos/phone-cnr.webp" type="image/webp" />
   <link rel="preload" as="image" media="(min-width: 769px)" href="assets/fotos/phone-ludy-a.webp" type="image/webp" />
@@ -59,6 +59,7 @@
     <nav class="top-nav" aria-label="Navegação principal">
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-menu">Menu</button>
       <ul id="main-menu">
+        <li class="nav-close-item"><button type="button" class="nav-close" aria-label="Fechar menu">&times;</button></li>
         <li><a href="#services">Serviços</a></li>
         <li><a href="#projects">Projetos</a></li>
         <li><a href="precos.html">Preços</a></li>
@@ -73,37 +74,39 @@
     <!-- ===== HERO ===== -->
     <section class="hero" id="home" aria-label="Introdução">
 
-      <!-- Phone parallax -->
+      <!-- Phone parallax (desktop) / carousel (mobile) -->
       <div class="hero-phones" id="hero-phones" aria-hidden="true">
-        <div class="phone phone--1">
-          <div class="phone-frame">
-            <div class="phone-island"></div>
-            <div class="phone-screen">
-              <img src="assets/fotos/phone-greenbond.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+        <div class="hero-phones-track">
+          <div class="phone phone--1">
+            <div class="phone-frame">
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+                <img src="assets/fotos/phone-greenbond.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="phone phone--2">
-          <div class="phone-frame">
-            <div class="phone-island"></div>
-            <div class="phone-screen">
-              <img src="assets/fotos/phone-cnr.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+          <div class="phone phone--2">
+            <div class="phone-frame">
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+                <img src="assets/fotos/phone-cnr.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="phone phone--3">
-          <div class="phone-frame">
-            <div class="phone-island"></div>
-            <div class="phone-screen">
-              <img src="assets/fotos/phone-ludy-a.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+          <div class="phone phone--3">
+            <div class="phone-frame">
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+                <img src="assets/fotos/phone-ludy-a.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="phone phone--4">
-          <div class="phone-frame">
-            <div class="phone-island"></div>
-            <div class="phone-screen">
-              <img src="assets/fotos/phone-ludy-b.webp" alt="" loading="eager" decoding="async" width="390" height="811" />
+          <div class="phone phone--4">
+            <div class="phone-frame">
+              <div class="phone-island"></div>
+              <div class="phone-screen">
+                <img src="assets/fotos/phone-ludy-b.webp" alt="" loading="eager" decoding="async" width="390" height="811" />
+              </div>
             </div>
           </div>
         </div>
