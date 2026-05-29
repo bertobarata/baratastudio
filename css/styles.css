@@ -2147,51 +2147,61 @@ h4 { font-size: var(--font-size-h4); }
     inset: auto;
     right: auto;
     width: 100%;
-    height: 380px;
+    max-width: 320px;
+    height: 540px;
     margin: 0 auto;
-    max-width: 280px;
-    overflow: hidden;
+    overflow: visible;
     pointer-events: none;
+    isolation: isolate;
   }
   .hero-phones-track {
     position: relative;
     width: 100%;
     height: 100%;
+    display: block;
   }
-  /* Strip phone chrome on mobile — show only screenshot */
+  /* Strip phone chrome on mobile — pure screenshot card */
   .phone-frame {
     background: transparent;
     border: none;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.3);
-    border-radius: 24px;
+    box-shadow:
+      0 30px 60px -15px rgba(0,0,0,0.5),
+      0 18px 36px -18px rgba(0,0,0,0.4),
+      0 0 0 1px rgba(255,255,255,0.04);
+    border-radius: 28px;
     aspect-ratio: 390 / 844;
   }
   .phone-island { display: none; }
   .phone-screen {
     inset: 0;
-    border-radius: 24px;
+    border-radius: 28px;
   }
   .phone {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 50%;
-    width: 220px;
-    --phone-w: 220px;
-    transform: translateX(-50%);
+    width: 240px;
+    --phone-w: 240px;
+    transform: translate(-50%, -50%);
     opacity: 0;
     visibility: visible;
-    animation: cardDeal 16s cubic-bezier(.65, 0, .35, 1) infinite;
+    animation: cardDeal 12s cubic-bezier(.5, 0, .25, 1) infinite;
+    will-change: transform, opacity;
   }
   .phone--1 { animation-delay: 0s; }
-  .phone--2 { animation-delay: 4s; }
-  .phone--3 { animation-delay: 8s; }
-  .phone--4 { animation-delay: 12s; }
+  .phone--2 { animation-delay: 3s; }
+  .phone--3 { animation-delay: 6s; }
+  .phone--4 { animation-delay: 9s; }
   @keyframes cardDeal {
-    0%   { transform: translateX(120%) rotate(8deg); opacity: 0; }
-    6%   { transform: translateX(-50%) rotate(0deg); opacity: 1; }
-    25%  { transform: translateX(-50%) rotate(0deg); opacity: 1; }
-    31%  { transform: translateX(-220%) rotate(-8deg); opacity: 0; }
-    100% { transform: translateX(-220%) rotate(-8deg); opacity: 0; }
+    0%   { transform: translate(60%, -50%) rotate(6deg) scale(.92); opacity: 0; }
+    8%   { transform: translate(-50%, -50%) rotate(0deg) scale(1);    opacity: 1; }
+    25%  { transform: translate(-50%, -50%) rotate(0deg) scale(1);    opacity: 1; }
+    33%  { transform: translate(-160%, -50%) rotate(-6deg) scale(.92); opacity: 0; }
+    100% { transform: translate(-160%, -50%) rotate(-6deg) scale(.92); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .phone { animation: none; opacity: 1; }
+    .phone--2, .phone--3, .phone--4 { display: none; }
   }
 
   /* ===== PROCESS panels — stack flow on mobile (no GSAP) ===== */
@@ -2277,7 +2287,8 @@ h4 { font-size: var(--font-size-h4); }
 }
 
 @media (max-width: 600px) {
-  .hero-phones { max-width: 240px; height: 340px; }
+  .hero-phones { max-width: 280px; height: 500px; }
+  .phone { width: 220px; --phone-w: 220px; }
   .phone, .phone { width: 200px; --phone-w: 200px; }
   .manifesto-headline { font-size: clamp(1.4rem, 7vw, 1.9rem); }
   .footer-columns { grid-template-columns: 1fr; gap: 1.5rem; }
