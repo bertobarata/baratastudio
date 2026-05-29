@@ -20,6 +20,7 @@
       toggle.setAttribute('aria-expanded', 'false');
       document.body.classList.remove('menu-open');
       document.removeEventListener('keydown', trapFocus);
+      if (typeof floatingClose !== 'undefined' && floatingClose) floatingClose.hidden = true;
       if (options && options.restoreFocus) {
         toggle.focus();
       }
@@ -54,6 +55,7 @@
       toggle.setAttribute('aria-expanded', String(open));
       document.body.classList.toggle('menu-open', open);
       syncToggleLabel(open);
+      floatingClose.hidden = !open;
       if (open) {
         var focusable = getFocusable();
         if (focusable[0]) focusable[0].focus();
@@ -63,14 +65,29 @@
       }
     });
 
+    floatingClose.addEventListener('click', function () {
+      closeMenu({ restoreFocus: true });
+      syncToggleLabel(false);
+      floatingClose.hidden = true;
+    });
+
+    // === Move close button out of UL to body (avoid li styling interference) ===
+    var existingCloseLi = menu.querySelector('.nav-close-item');
+    if (existingCloseLi) existingCloseLi.remove();
+    var floatingClose = document.createElement('button');
+    floatingClose.type = 'button';
+    floatingClose.className = 'nav-close-floating';
+    floatingClose.setAttribute('aria-label', 'Fechar menu');
+    floatingClose.innerHTML = '&times;';
+    floatingClose.hidden = true;
+    document.body.appendChild(floatingClose);
+
     // === Enhance mobile menu with sections, numbers, secondary CTAs ===
     function enhanceMobileMenu() {
       if (menu.dataset.enhanced === '1') return;
       menu.dataset.enhanced = '1';
 
-      var items = Array.from(menu.querySelectorAll('li')).filter(function (li) {
-        return !li.classList.contains('nav-close-item');
-      });
+      var items = Array.from(menu.querySelectorAll('li'));
       if (!items.length) return;
 
       items.forEach(function (li) {
@@ -139,15 +156,6 @@
         syncToggleLabel(false);
       }
     });
-
-    // Close X button
-    var closeBtn = menu.querySelector('.nav-close');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', function () {
-        closeMenu({ restoreFocus: true });
-        syncToggleLabel(false);
-      });
-    }
 
     // === Swipe down to close ===
     var touchStartY = null;
