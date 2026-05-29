@@ -2032,6 +2032,42 @@ h4 { font-size: var(--font-size-h4); }
   .footer-contact-line { font-size: .85rem; line-height: 1.6; }
   .footer-bottom small { font-size: .7rem; }
 
+  /* ===== Center text on mobile (except services list) ===== */
+  .manifesto-inner,
+  .bb-depth-copy,
+  .process-layers-header,
+  .presence-header,
+  .presence-card-meta,
+  .services-header,
+  .services-cta,
+  .projects-header,
+  .project-meta,
+  .cta-content,
+  .page-hero,
+  .page-intro-card,
+  .process-mini-shell,
+  .page-cta-band-inner,
+  .footer-top,
+  .footer-col,
+  .footer-bottom { text-align: center; }
+  .section-label,
+  .services-header .section-label,
+  .presence-header .section-label,
+  .projects-header .section-label,
+  .process-layers-header .section-label { justify-content: center; }
+  .services-cta { align-items: center; }
+  .services-cta-actions { justify-content: center; }
+  .footer-contact-line { justify-content: center; }
+  .presence-header,
+  .projects-header,
+  .services-header { margin-left: auto; margin-right: auto; }
+  /* Keep services list left-aligned (user request) */
+  .services-list,
+  .service-item,
+  .service-item-content,
+  .service-content { text-align: left; }
+  .service-tags { justify-content: flex-start; }
+
   /* ===== Other mobile tweaks ===== */
   .contact-form .row { grid-template-columns: 1fr; }
   .hero-ctas { gap: .75rem; flex-direction: column; align-items: stretch; }
