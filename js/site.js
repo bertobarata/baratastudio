@@ -63,15 +63,84 @@
       }
     });
 
-    // Close when clicking a link
-    menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
+    // === Enhance mobile menu with sections, numbers, secondary CTAs ===
+    function enhanceMobileMenu() {
+      if (menu.dataset.enhanced === '1') return;
+      menu.dataset.enhanced = '1';
+
+      var items = Array.from(menu.querySelectorAll('li')).filter(function (li) {
+        return !li.classList.contains('nav-close-item');
+      });
+      if (!items.length) return;
+
+      items.forEach(function (li) {
+        li.classList.add('nav-item');
+        var a = li.querySelector('a');
+        if (a && !a.querySelector('.nav-arrow')) {
+          var ar = document.createElement('span');
+          ar.className = 'nav-arrow';
+          ar.setAttribute('aria-hidden', 'true');
+          ar.textContent = '→';
+          a.appendChild(ar);
+        }
+      });
+
+      var navLabel = document.createElement('li');
+      navLabel.className = 'nav-section-label';
+      navLabel.setAttribute('aria-hidden', 'true');
+      navLabel.innerHTML = '<span>Navegar</span>';
+      items[0].parentNode.insertBefore(navLabel, items[0]);
+
+      var falarLabel = document.createElement('li');
+      falarLabel.className = 'nav-section-label';
+      falarLabel.setAttribute('aria-hidden', 'true');
+      falarLabel.innerHTML = '<span>Falar</span>';
+      menu.appendChild(falarLabel);
+
+      var waText = encodeURIComponent('Olá Berto, vi o teu site e tenho interesse em desenvolver um projeto.');
+      var ctas = [
+        { href: 'formulario.html', label: 'Pedir proposta', cls: 'nav-cta-item', arrow: true },
+        { href: 'https://wa.me/351939443377?text=' + waText, label: 'WhatsApp', cls: 'nav-secondary', external: true },
+        { href: 'mailto:berto.barata77@gmail.com', label: 'berto.barata77@gmail.com', cls: 'nav-secondary' },
+        { href: 'https://instagram.com/berto_barata', label: '@berto_barata', cls: 'nav-secondary', external: true }
+      ];
+      ctas.forEach(function (c) {
+        var li = document.createElement('li');
+        li.className = c.cls;
+        var a = document.createElement('a');
+        a.href = c.href;
+        a.textContent = c.label;
+        if (c.external) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+        if (c.arrow) {
+          var ar = document.createElement('span');
+          ar.className = 'nav-arrow';
+          ar.setAttribute('aria-hidden', 'true');
+          ar.textContent = '→';
+          a.appendChild(document.createTextNode(' '));
+          a.appendChild(ar);
+        }
+        li.appendChild(a);
+        menu.appendChild(li);
+      });
+
+      var footerLi = document.createElement('li');
+      footerLi.className = 'nav-footer-text';
+      footerLi.setAttribute('aria-hidden', 'true');
+      footerLi.textContent = '© Barata Studio · Do briefing ao launch';
+      menu.appendChild(footerLi);
+    }
+    enhanceMobileMenu();
+
+    // === Event delegation: close on any link click ===
+    menu.addEventListener('click', function (e) {
+      var a = e.target.closest('a');
+      if (a && menu.contains(a)) {
         closeMenu();
         syncToggleLabel(false);
-      });
+      }
     });
 
-    // Close X button inside menu
+    // Close X button
     var closeBtn = menu.querySelector('.nav-close');
     if (closeBtn) {
       closeBtn.addEventListener('click', function () {
@@ -80,10 +149,32 @@
       });
     }
 
+    // === Swipe down to close ===
+    var touchStartY = null;
+    menu.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1) touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    menu.addEventListener('touchmove', function (e) {
+      if (touchStartY === null) return;
+      var delta = e.touches[0].clientY - touchStartY;
+      if (delta > 0) menu.style.transform = 'translateY(' + delta + 'px)';
+    }, { passive: true });
+    menu.addEventListener('touchend', function (e) {
+      if (touchStartY === null) return;
+      var delta = (e.changedTouches[0].clientY) - touchStartY;
+      menu.style.transform = '';
+      touchStartY = null;
+      if (delta > 90) {
+        closeMenu({ restoreFocus: true });
+        syncToggleLabel(false);
+      }
+    });
+
     document.addEventListener('click', function (e) {
       if (!menu.classList.contains('open')) return;
       if (menu.contains(e.target) || toggle.contains(e.target)) return;
       closeMenu();
+      syncToggleLabel(false);
     });
 
     window.addEventListener('resize', function () {
