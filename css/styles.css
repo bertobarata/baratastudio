@@ -1833,20 +1833,21 @@ h4 { font-size: var(--font-size-h4); }
 @media (max-width: 768px) {
   :root { --section-spacing: 64px; }
 
-  /* ===== HEADER — transparent, minimal ===== */
+  /* ===== HEADER — transparent, minimal, respects notch ===== */
   .site-header {
     grid-template-columns: 1fr auto;
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border-bottom: none;
-    padding: .75rem 1rem;
+    padding: max(.75rem, calc(.5rem + env(safe-area-inset-top, 0))) max(1rem, env(safe-area-inset-right, 0)) .75rem max(1rem, env(safe-area-inset-left, 0));
   }
   .site-header.scrolled {
     background: rgba(14, 14, 15, 0.85);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    padding: .5rem 1rem;
+    padding-top: max(.5rem, calc(.25rem + env(safe-area-inset-top, 0)));
+    padding-bottom: .5rem;
   }
   .header-monogram { width: 56px; height: 56px; }
   .header-monogram img { width: 36px; height: 36px; }
@@ -1891,6 +1892,10 @@ h4 { font-size: var(--font-size-h4); }
     transition: transform .35s cubic-bezier(.22,.61,.36,1);
     counter-reset: navnum;
     box-sizing: border-box;
+    padding-top: calc(5rem + env(safe-area-inset-top, 0)) !important;
+    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom, 0)) !important;
+    padding-left: max(1.75rem, env(safe-area-inset-left, 0)) !important;
+    padding-right: max(1.75rem, env(safe-area-inset-right, 0)) !important;
   }
   .top-nav ul.open { display: flex; animation: menuFadeIn .3s ease-out; }
   @keyframes menuFadeIn {
@@ -2120,15 +2125,19 @@ h4 { font-size: var(--font-size-h4); }
   }
   .skip-link { padding: .9rem 1.25rem; }
 
-  /* ===== HERO — column layout, copy first, phones below ===== */
+  /* ===== HERO — column layout, copy first, phones below, dvh aware ===== */
   .hero {
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    padding: 5.5rem 1.25rem 2rem;
+    padding-top: calc(5rem + env(safe-area-inset-top, 0));
+    padding-right: max(1.25rem, env(safe-area-inset-right, 0));
+    padding-bottom: max(2rem, env(safe-area-inset-bottom, 0));
+    padding-left: max(1.25rem, env(safe-area-inset-left, 0));
     gap: 2.5rem;
-    min-height: auto;
+    min-height: 100dvh;
   }
+  body { min-height: 100dvh; }
   .hero-content {
     order: 1;
     text-align: center;
