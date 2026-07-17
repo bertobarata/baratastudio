@@ -72,7 +72,7 @@
     scrollTrigger: {
       trigger: '.hero',
       start: 'top top',
-      end: '+=150%', 
+      end: '+=100%',
       pin: true,
       scrub: 1
     }
@@ -102,7 +102,7 @@
       scrollTrigger: {
         trigger: '.process-layers',
         start: 'top top',
-        end: '+=' + (panels.length * 100) + '%',
+        end: '+=' + (panels.length * 50) + '%',
         pin: true,
         scrub: 1.2, // Higher scrub for smoother, rhythmic feel
         anticipatePin: 1

@@ -146,7 +146,13 @@
       footerLi.textContent = '© Barata Studio · Do briefing ao launch';
       menu.appendChild(footerLi);
     }
-    enhanceMobileMenu();
+    // Only build the editorial overlay on mobile — on desktop the base 4-link
+    // nav must stay clean (the injected sections/CTAs/arrows were cluttering it).
+    var mobileMenuMQ = window.matchMedia('(max-width: 768px)');
+    if (mobileMenuMQ.matches) enhanceMobileMenu();
+    mobileMenuMQ.addEventListener('change', function (e) {
+      if (e.matches) enhanceMobileMenu();
+    });
 
     // === Event delegation: close on any link click ===
     menu.addEventListener('click', function (e) {

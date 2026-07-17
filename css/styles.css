@@ -446,6 +446,14 @@ h4 { font-size: var(--font-size-h4); }
 .phone--dup { display: none; }
 .nav-close-item { display: none; }
 
+/* Desktop: the editorial-overlay items are mobile-only. If the menu ever gets
+   enhanced (e.g. after a resize across the breakpoint), keep the top bar clean. */
+.top-nav .nav-section-label,
+.top-nav .nav-secondary,
+.top-nav .nav-cta-item,
+.top-nav .nav-footer-text,
+.top-nav .nav-arrow { display: none; }
+
 /* Vertical channels: Slot 1 (Left of pair) and Slot 2 (Right of pair) */
 .phone--1, .phone--3 {
   left: 0; 
@@ -1197,7 +1205,7 @@ h4 { font-size: var(--font-size-h4); }
   top: 50%;
   right: -80px;
   transform: translateY(-50%);
-  opacity: 0.04;
+  opacity: 0.08;
   pointer-events: none;
 }
 .cta-bb-bg img {

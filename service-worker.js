@@ -5,7 +5,7 @@
  * so old caches are invalidated.
  */
 
-const CACHE_NAME = 'site-cache-v17';
+const CACHE_NAME = 'site-cache-v18';
 const RUNTIME_CACHE = 'site-runtime-v17';
 
 // Critical assets cached on install. Edit this list for your site.
