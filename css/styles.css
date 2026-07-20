@@ -1205,18 +1205,6 @@ h4 { font-size: var(--font-size-h4); }
   position: relative;
   overflow: hidden;
 }
-.cta-bb-bg {
-  position: absolute;
-  top: 50%;
-  right: -80px;
-  transform: translateY(-50%);
-  opacity: 0.16;
-  pointer-events: none;
-}
-.cta-bb-bg img {
-  width: min(50vw, 480px);
-  height: auto;
-}
 .final-cta-inner {
   max-width: var(--site-max-width);
   margin: 0 auto;
