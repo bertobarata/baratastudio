@@ -76,7 +76,10 @@
   /* Text */
   --text-dark:   #16171A;
   --text-light:  #F4F1EA;
-  --text-muted:  #6F7478;
+  /* muted default is tuned for DARK surfaces (≥4.5:1 on #121315 and elevated
+     dark cards). Light sections override it below with a darker grey. */
+  --text-muted:  #828990;
+  --text-muted-on-light: #5B6065;
   --text-subtle: #9CA3A8;
 
   /* Accent state */
@@ -631,6 +634,13 @@ h4 { font-size: var(--font-size-h4); }
 }
 
 /* ===== MANIFESTO ===== */
+/* Light sections: use the darker muted so secondary text keeps ≥4.5:1 on warm bg */
+.manifesto,
+.presence,
+.services,
+.process-summary {
+  --text-muted: var(--text-muted-on-light);
+}
 .manifesto {
   background: var(--bg-warm);
   padding: var(--section-spacing) 1.5rem;
@@ -2505,25 +2515,28 @@ body::before {
   left: 160%;
 }
 
-/* --- Service item — left teal accent bar --- */
+/* --- Service item hover: the number lights teal (no side-stripe accent) --- */
 .service-item {
   position: relative;
 }
-.service-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 12px;
-  bottom: 12px;
-  width: 2px;
-  background: var(--teal);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.35s ease;
-  border-radius: 1px;
+.service-item .service-num {
+  transition: color 0.35s ease;
 }
-.service-item:hover::before {
-  transform: scaleY(1);
+.service-item:hover .service-num {
+  color: var(--teal);
+}
+
+/* Screen-reader-only utility (keeps heading outline intact without visual change) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* --- Lenis smooth scroll --- */
