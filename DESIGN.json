@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-20T00:00:00Z",
+  "title": "Design System: Barata Studio",
+  "extensions": {
+    "colorMeta": {
+      "teal": { "role": "primary", "displayName": "Petróleo", "canonical": "#1A6870", "tonalRamp": ["#0A2A2E", "#0F3A40", "#164F58", "#1A6870", "#2F6B73", "#4F98A3", "#84BAC1", "#C3E0E3"] },
+      "teal-hover": { "role": "primary", "displayName": "Petróleo Light", "canonical": "#4F98A3", "tonalRamp": ["#123236", "#1B4B52", "#2F6B73", "#4F98A3", "#6FB0BA", "#93C6CE", "#BBDDE2", "#E0F1F3"] },
+      "bg-dark": { "role": "neutral", "displayName": "Charcoal", "canonical": "#121315", "tonalRamp": ["#0C0D0E", "#121315", "#191B1F", "#1E2024", "#2A2D32", "#3A3E44", "#6F7478", "#F4F1EA"] },
+      "bg-warm": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#F5F3EE", "tonalRamp": ["#16171A", "#3A3E44", "#5B6065", "#828990", "#B9B6AE", "#E2DED6", "#F5F3EE", "#FBF9F5"] },
+      "text-light": { "role": "neutral", "displayName": "Bone", "canonical": "#F4F1EA", "tonalRamp": ["#2A2B28", "#5B6065", "#828990", "#9CA3A8", "#C9C6BE", "#E2DED6", "#F4F1EA", "#FBF9F5"] },
+      "whatsapp": { "role": "functional", "displayName": "WhatsApp Green", "canonical": "#25D366", "tonalRamp": ["#0B3C1E", "#116A34", "#1DA851", "#25D366", "#4EDD82", "#7DE7A3", "#ACefC3", "#DBF8E4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero title and top-of-section H2s. Hand-drawn Comico." },
+      "body": { "displayName": "Body", "purpose": "All paragraph copy. Zodiak serif, measure 65-75ch." },
+      "label": { "displayName": "Label / Eyebrow", "purpose": "Uppercase section eyebrows and meta, 0.12em tracking." }
+    },
+    "shadows": [
+      { "name": "hover-lift", "value": "0 10px 30px rgba(0,0,0,0.35)", "purpose": "Cards on hover, with 4px translateY and a teal border." },
+      { "name": "accent-lift", "value": "0 8px 24px rgba(26,104,112,0.35)", "purpose": "Primary button hover halo only." },
+      { "name": "featured-glow", "value": "0 16px 40px rgba(26,104,112,0.12)", "purpose": "The single featured price card." },
+      { "name": "sculptural-device", "value": "0 40px 80px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)", "purpose": "Hero phone frames only." }
+    ],
+    "motion": [
+      { "name": "ease-ui", "value": "ease", "purpose": "Default 0.2s color/border/background state transitions." },
+      { "name": "lift", "value": "transform 0.15s ease", "purpose": "1px hover lift on buttons, 4px on cards." },
+      { "name": "scroll-choreography", "value": "GSAP ScrollTrigger, scrub 1-1.2, ease-out", "purpose": "Hero device swap and pinned process panels. Slow, short amplitude." }
+    ],
+    "breakpoints": [
+      { "name": "mobile-overlay", "value": "768px" },
+      { "name": "desktop", "value": "769px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single confident CTA. Petróleo pill, hand-drawn label.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Pedir proposta</a>",
+      "css": ".ds-btn-primary { display:inline-flex; align-items:center; gap:.5rem; background:var(--teal,#1A6870); color:#fff; font-family:'Comico',cursive; font-weight:600; font-size:.9rem; letter-spacing:.03em; padding:.85rem 1.75rem; border:none; border-radius:999px; text-decoration:none; cursor:pointer; transition:background .2s ease, transform .15s ease, box-shadow .2s ease; } .ds-btn-primary:hover { background:var(--teal-metal,#2F6B73); transform:translateY(-1px); box-shadow:0 8px 24px rgba(26,104,112,0.35); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action. Hairline border, recolors to petróleo on hover.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Ver projetos</a>",
+      "css": ".ds-btn-ghost { display:inline-flex; align-items:center; gap:.5rem; background:transparent; color:var(--text-light,#F4F1EA); font-family:'Comico',cursive; font-weight:600; font-size:.9rem; letter-spacing:.03em; padding:.85rem 1.75rem; border:1px solid rgba(244,241,234,0.25); border-radius:999px; text-decoration:none; cursor:pointer; transition:color .2s ease, border-color .2s ease, transform .15s ease; } .ds-btn-ghost:hover { color:var(--teal-hover,#4F98A3); border-color:var(--teal-hover,#4F98A3); transform:translateY(-1px); }"
+    },
+    {
+      "name": "Section Eyebrow",
+      "kind": "chip",
+      "refersTo": "section-label",
+      "description": "Uppercase petróleo-light label above every section heading.",
+      "html": "<p class=\"ds-eyebrow\">Processo</p>",
+      "css": ".ds-eyebrow { display:block; font-family:'Zodiak',serif; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--teal-hover,#4F98A3); margin:0 0 1rem; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat charcoal-elevated surface; lifts with a teal border on hover.",
+      "html": "<article class=\"ds-card\"><h3>Greenbond</h3><p>Plataforma de gestão e tokenização de ativos.</p></article>",
+      "css": ".ds-card { background:var(--bg-dark-hi,#191B1F); color:var(--text-light,#F4F1EA); border:1px solid rgba(255,255,255,0.04); border-radius:12px; padding:1.5rem; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; } .ds-card h3 { font-family:'Comico',cursive; font-weight:400; margin:0 0 .4rem; } .ds-card p { font-family:'Zodiak',serif; color:#828990; margin:0; line-height:1.6; } .ds-card:hover { transform:translateY(-4px); border-color:var(--teal,#1A6870); box-shadow:0 10px 30px rgba(0,0,0,0.35); }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Recessed dark well; focus deepens the fill and turns the border petróleo.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"O teu nome\" />",
+      "css": ".ds-input { width:100%; padding:.65rem .85rem; background:rgba(0,0,0,0.25); border:1px solid rgba(255,255,255,0.1); border-radius:8px; color:var(--text-light,#F4F1EA); font-family:'Zodiak',serif; font-size:1rem; transition:border-color .2s ease, background .2s ease; } .ds-input::placeholder { color:#828990; } .ds-input:focus { outline:none; border-color:var(--teal,#1A6870); background:rgba(0,0,0,0.4); } .ds-input:focus-visible { outline:2px solid var(--teal-hover,#4F98A3); outline-offset:2px; }"
+    },
+    {
+      "name": "Capability Tag",
+      "kind": "chip",
+      "refersTo": "section-label",
+      "description": "Small teal-tinted pill listing a service capability.",
+      "html": "<span class=\"ds-tag\">Mobile-first</span>",
+      "css": ".ds-tag { display:inline-block; font-family:'Zodiak',serif; font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-hover,#4F98A3); background:rgba(26,104,112,0.12); padding:.35rem .7rem; border-radius:999px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Atelier",
+    "overview": "Barata Studio is a one-person web atelier that sells the opposite of a template. The site feels like the workshop of someone who cuts every joint by hand: dark, warm, unhurried, quiet. Petróleo is rationed to almost nothing, motion is slow and short, and the loudest thing on the page is a hand-drawn wordmark that literally looks made à mão. It runs on warm-tinted darks with a few warm off-white breathing rooms; depth comes from tonal layering and slow scroll choreography, not decoration. Design is the product, so craft is the argument.",
+    "keyCharacteristics": [
+      "Warm-tinted darkness: charcoal and off-white, never #000 or #fff.",
+      "Petróleo as a rare guest: teal on ~5% of any screen.",
+      "Hand-drawn headings (Comico) against a serif body (Zodiak).",
+      "Slow, short, few-things-at-once motion. Depth over spectacle.",
+      "Editorial lists and negative space instead of icon-card grids."
+    ],
+    "rules": [
+      { "name": "The 5% Rule", "body": "Petróleo touches at most ~5% of any screen: eyebrows, hover, focus, a single primary button, a progress line. Its rarity is the luxury.", "section": "colors" },
+      { "name": "The No-Pure Rule", "body": "Never #000, never #fff. Every neutral is tinted warm.", "section": "colors" },
+      { "name": "The Surface-Aware Muted Rule", "body": "Secondary text uses text-muted (#828990) on dark and text-muted-on-light (#5B6065) on warm. One grey never serves both surfaces.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Comico for anything titular or interactive; Zodiak for anything read in sentences. Never a third family.", "section": "typography" },
+      { "name": "The Flat-At-Rest Rule", "body": "Surfaces are flat until touched. Shadows appear only on hover or on the hero devices.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep petróleo under ~5% of any screen.",
+      "Do tint every neutral warm; backgrounds charcoal or warm paper, text bone or ink.",
+      "Do set headings and buttons in Comico, body in Zodiak.",
+      "Do use text-muted on dark and text-muted-on-light on warm so secondary text clears 4.5:1.",
+      "Do build depth by stacking charcoal tones; shadows only on hover and hero devices.",
+      "Do favor editorial lists and negative space over icon-in-a-circle card grids.",
+      "Do keep motion slow, short in amplitude, one-thing-at-a-time."
+    ],
+    "donts": [
+      "Don't use #000 or #fff anywhere.",
+      "Don't let the site read as a SaaS template or startup-AI marketing page.",
+      "Don't use decorative glassmorphism or heavy blur.",
+      "Don't use border-left/border-right greater than 1px as a colored accent stripe.",
+      "Don't use gradient text.",
+      "Don't ship the hero-metric template as filler.",
+      "Don't overshoot, bounce, or fly objects around.",
+      "Don't introduce a third typeface or use Comico for body copy."
+    ]
+  }
+}
