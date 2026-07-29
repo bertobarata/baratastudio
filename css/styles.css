@@ -427,15 +427,68 @@ h4 { font-size: var(--font-size-h4); }
   gap: 4rem;
 }
 
-/* Phone parallax hero */
+/* Phone carousel — mobile only (desktop uses .hero-marquee below) */
 .hero-phones {
+  display: none;
+}
+
+/* Vertical marquee showcase — desktop only, continuous autoplay */
+.hero-marquee {
+  display: none;
   position: absolute;
-  right: 8%;
+  right: 6%;
   top: 0;
-  width: 700px; /* Precise width for two 320px phones + gap */
+  width: 640px;
   height: 100vh;
+  gap: 1.5rem;
   pointer-events: none;
   z-index: 1;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+}
+.marquee-col {
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+}
+.marquee-col--b { margin-top: -140px; }
+.marquee-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: marqueeUp 34s linear infinite;
+  will-change: transform;
+}
+.marquee-track--reverse {
+  animation-name: marqueeDown;
+  animation-duration: 40s;
+}
+.marquee-card {
+  flex: none;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55);
+  background: var(--bg-dark-mid);
+}
+.marquee-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@keyframes marqueeUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+@keyframes marqueeDown {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
+}
+@media (min-width: 769px) {
+  .hero-marquee { display: flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
 }
 
 .phone {
@@ -2144,9 +2197,11 @@ h4 { font-size: var(--font-size-h4); }
   .hero-eyebrow { justify-content: center; }
   .hero-trust-tag { justify-content: center; }
   .hero-scroll-hint { display: none; }
+  .hero-marquee { display: none !important; }
 
   /* ===== Hero phones — card-deal carousel (right→center→left) ===== */
   .hero-phones {
+    display: block;
     order: 2;
     position: relative;
     inset: auto;

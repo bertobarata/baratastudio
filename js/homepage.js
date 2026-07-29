@@ -67,29 +67,6 @@
 
   mm.add('(min-width: 769px)', function () {
 
-  // Phone slide & swap
-  var phoneTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: '+=100%',
-      pin: true,
-      scrub: 1
-    }
-  });
-
-  // Outgoing pair (up)
-  phoneTL.to('.phone--1', { y: '-150vh', autoAlpha: 0, ease: 'power1.in' }, 0)
-         .to('.phone--2', { y: '-150vh', autoAlpha: 0, ease: 'power1.in' }, 0.1);
-         
-  // Incoming pair (from bottom to center)
-  phoneTL.fromTo('.phone--3', 
-           { y: '150vh', autoAlpha: 0 }, 
-           { y: '-50%', autoAlpha: 1, ease: 'power2.out' }, 0.3)
-         .fromTo('.phone--4', 
-           { y: '150vh', autoAlpha: 0 }, 
-           { y: '-50%', autoAlpha: 1, ease: 'power2.out' }, 0.4);
-
   // Watermark Parallax
   gsap.to('.watermark--1', { y: -100, rotate: -20, scrollTrigger: { scrub: true } });
   gsap.to('.watermark--2', { y: -150, rotate: 15, scrollTrigger: { scrub: true } });
