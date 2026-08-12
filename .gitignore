@@ -7,3 +7,8 @@ css/styles.purged.css
 analyze_css.js
 .idea/
 .vscode/
+
+# Agent skills installed locally via `npx skills add` (not part of the site)
+.agents/
+.claude/
+skills-lock.json
