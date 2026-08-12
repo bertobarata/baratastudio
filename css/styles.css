@@ -1,10 +1,10 @@
 /* ============================================================
-   styles.css — Barata Studio
+   styles.css - Barata Studio
    ============================================================ */
 
 /* ===== Self-hosted Fonts ===== */
 
-/* Zodiak — variable font, normal style, full weight range 100–900 */
+/* Zodiak - variable font, normal style, full weight range 100–900 */
 @font-face {
   font-family: 'Zodiak';
   src: url('../assets/fonts/Zodiak/Fonts/WEB/fonts/Zodiak-Variable.woff2') format('woff2'),
@@ -15,7 +15,7 @@
   font-display: swap;
 }
 
-/* Zodiak — italic variants (Light 300, Regular 400, Bold 700) */
+/* Zodiak - italic variants (Light 300, Regular 400, Bold 700) */
 @font-face {
   font-family: 'Zodiak';
   src: url('../assets/fonts/Zodiak/Fonts/WEB/fonts/Zodiak-LightItalic.woff2') format('woff2'),
@@ -41,7 +41,7 @@
   font-display: swap;
 }
 
-/* Comico — Regular only (no bold variant exists) */
+/* Comico - Regular only (no bold variant exists) */
 @font-face {
   font-family: 'Comico';
   src: url('../assets/fonts/Comico/Fonts/WEB/fonts/Comico-Regular.woff2') format('woff2'),
@@ -54,13 +54,13 @@
 
 /* ===== Design Tokens ===== */
 :root {
-  /* Brand palette — petróleo (locked 2025-05) */
+  /* Brand palette - petróleo (locked 2025-05) */
   --teal:        #1A6870;  /* acento principal: mais vivo, não negro, não neon   */
   --teal-deep:   #164F58;  /* reserva profunda: sombras, bordes subtis           */
   --teal-metal:  #2F6B73;  /* superfície metálica: hover de fundo, glass stroke  */
   --teal-hover:  #4F98A3;  /* luz de acento: focus ring, highlight, detalhe fino */
 
-  /* RGB companions — permite rgba() sem hardcode */
+  /* RGB companions - permite rgba() sem hardcode */
   --teal-rgb:       26, 104, 112;   /* rgb de --teal        */
   --text-light-rgb: 244, 241, 234;  /* rgb de --text-light  */
 
@@ -86,7 +86,7 @@
   --accent:      var(--teal);
   --accent-hover:var(--teal-hover);
 
-  /* Legacy aliases — keeps other pages rendering fine */
+  /* Legacy aliases - keeps other pages rendering fine */
   --color1:      var(--teal);
   --color2:      var(--teal-hover);
   --color3:      var(--text-light);
@@ -327,6 +327,17 @@ h4 { font-size: var(--font-size-h4); }
   padding: .625rem 2rem;
   box-shadow: 0 1px 0 rgba(255,255,255,0.05);
 }
+/* Invisible probe injected by homepage.js: leaving the viewport flips the
+   header into its scrolled state without a scroll listener. */
+.header-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 60px;
+  pointer-events: none;
+  visibility: hidden;
+}
 .header-brand {
   display: flex;
   align-items: center;
@@ -427,12 +438,12 @@ h4 { font-size: var(--font-size-h4); }
   gap: 4rem;
 }
 
-/* Phone carousel — mobile only (desktop uses .hero-marquee below) */
+/* Phone carousel - mobile only (desktop uses .hero-marquee below) */
 .hero-phones {
   display: none;
 }
 
-/* Vertical marquee showcase — desktop only, continuous autoplay */
+/* Vertical marquee showcase - desktop only, continuous autoplay */
 .hero-marquee {
   display: none;
   position: absolute;
@@ -565,14 +576,6 @@ h4 { font-size: var(--font-size-h4); }
   object-fit: cover;
   object-position: top center;
   display: block;
-}
-
-/* Custom cursor */
-.cursor-dot {
-  z-index: 100001;
-}
-.cursor-ring {
-  z-index: 100000;
 }
 
 /* Final CTA Enrichment */
@@ -1040,15 +1043,6 @@ h4 { font-size: var(--font-size-h4); }
   padding: 2.2rem 0;
   color: var(--text-dark);
 }
-.service-num {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: var(--tracking-wide);
-  color: var(--text-subtle);
-  flex-shrink: 0;
-  min-width: 2.5rem;
-  margin-top: 0.35rem;
-}
 .service-content { flex: 1; }
 .service-content h3 {
   font-size: 1.25rem;
@@ -1412,7 +1406,7 @@ h4 { font-size: var(--font-size-h4); }
 
 /* ===== SHARED COMPONENTS (forms, FAQ, cards) ===== */
 
-/* Cards — other pages */
+/* Cards - other pages */
 .cards-grid {
   display: grid;
   gap: var(--grid-gap);
@@ -1435,7 +1429,7 @@ h4 { font-size: var(--font-size-h4); }
 .card h3 { margin: 0 0 .4rem 0; font-size: 1.35rem; color: var(--text-light); }
 .card p { color: var(--text-muted); margin: 0; }
 
-/* Contact section — other pages */
+/* Contact section - other pages */
 .contact-methods {
   display: flex;
   flex-direction: column;
@@ -1637,7 +1631,7 @@ h4 { font-size: var(--font-size-h4); }
 .page-title { color: var(--teal-hover); }
 .page-subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
 .section-label--center {
-  justify-content: center;
+  text-align: center;
 }
 .page-intro-strip {
   padding: 0 1.5rem 2rem;
@@ -1897,7 +1891,7 @@ h4 { font-size: var(--font-size-h4); }
 @media (max-width: 768px) {
   :root { --section-spacing: 64px; }
 
-  /* ===== HEADER — transparent, minimal, respects notch ===== */
+  /* ===== HEADER - transparent, minimal, respects notch ===== */
   .site-header {
     grid-template-columns: 1fr auto;
     background: transparent;
@@ -1992,7 +1986,7 @@ h4 { font-size: var(--font-size-h4); }
     background: linear-gradient(90deg, rgba(26,104,112,.5), transparent);
   }
 
-  /* Primary nav items — serif, big, numbered */
+  /* Primary nav items - serif, big, numbered */
   .nav-item {
     counter-increment: navnum;
     border-bottom: 1px solid rgba(255,255,255,.05);
@@ -2174,7 +2168,7 @@ h4 { font-size: var(--font-size-h4); }
   }
   .skip-link { padding: .9rem 1.25rem; }
 
-  /* ===== HERO — column layout, copy first, phones below, dvh aware ===== */
+  /* ===== HERO - column layout, copy first, phones below, dvh aware ===== */
   .hero {
     flex-direction: column;
     justify-content: center;
@@ -2199,7 +2193,7 @@ h4 { font-size: var(--font-size-h4); }
   .hero-scroll-hint { display: none; }
   .hero-marquee { display: none !important; }
 
-  /* ===== Hero phones — card-deal carousel (right→center→left) ===== */
+  /* ===== Hero phones - card-deal carousel (right→center→left) ===== */
   .hero-phones {
     display: block;
     order: 2;
@@ -2220,7 +2214,7 @@ h4 { font-size: var(--font-size-h4); }
     height: 100%;
     display: block;
   }
-  /* Strip phone chrome on mobile — pure screenshot card */
+  /* Strip phone chrome on mobile - pure screenshot card */
   .phone-frame {
     background: transparent;
     border: none;
@@ -2264,7 +2258,7 @@ h4 { font-size: var(--font-size-h4); }
     .phone--2, .phone--3, .phone--4 { display: none; }
   }
 
-  /* ===== PROCESS panels — stack flow on mobile (no GSAP) ===== */
+  /* ===== PROCESS panels - stack flow on mobile (no GSAP) ===== */
   .process-layers-sticky { position: static; height: auto; }
   .process-panels {
     position: static;
@@ -2323,7 +2317,7 @@ h4 { font-size: var(--font-size-h4); }
   .services-header .section-label,
   .presence-header .section-label,
   .projects-header .section-label,
-  .process-layers-header .section-label { justify-content: center; }
+  .process-layers-header .section-label { text-align: center; }
   .services-cta { align-items: center; }
   .services-cta-actions { justify-content: center; }
   .footer-contact-line { justify-content: center; }
@@ -2389,66 +2383,6 @@ body::before {
   z-index: 99990;
 }
 
-/* --- Custom cursor (pointer devices only) --- */
-@media (pointer: fine) {
-  body { cursor: none; }
-  a, button, [role="button"], .project-card, label[for], summary { cursor: none; }
-}
-.cursor-dot,
-.cursor-ring {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  border-radius: 50%;
-}
-@media (pointer: fine) {
-  .cursor-dot {
-    display: block;
-    width: 5px;
-    height: 5px;
-    background: var(--teal-hover);
-    z-index: 99999;
-    will-change: left, top;
-  }
-  .cursor-ring {
-    display: block;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(79, 152, 163, 0.4);
-    background: transparent;
-    z-index: 99998;
-    will-change: left, top;
-    transition: width 0.3s ease, height 0.3s ease,
-                border-color 0.3s ease, background 0.3s ease;
-  }
-  .cursor-ring.is-hovered {
-    width: 60px;
-    height: 60px;
-    border-color: rgba(79, 152, 163, 0.65);
-    background: rgba(26, 104, 112, 0.05);
-  }
-}
-
-/* --- Section label — teal dot accent --- */
-.section-label {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-}
-.section-label::before {
-  content: '';
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: 0.55;
-  flex-shrink: 0;
-}
-
 /* --- Hero line-mask reveal --- */
 .hero-line {
   display: block;
@@ -2465,7 +2399,7 @@ body::before {
 .hero-content.revealed .hero-line:nth-child(2) .hero-line-inner {
   transition-delay: 0.1s;
 }
-/* Eyebrow, body, CTAs — staggered fades */
+/* Eyebrow, body, CTAs - staggered fades */
 .hero-eyebrow {
   opacity: 0;
   transform: translateY(10px);
@@ -2532,7 +2466,7 @@ body::before {
   to   { transform: translateX(-100%); }
 }
 
-/* --- Project card — teal gradient reveal on hover --- */
+/* --- Project card - teal gradient reveal on hover --- */
 .project-img-wrap {
   position: relative;
 }
@@ -2549,7 +2483,7 @@ body::before {
   opacity: 1;
 }
 
-/* --- Button — shine sweep on hover --- */
+/* --- Button - shine sweep on hover --- */
 .button--primary {
   position: relative;
   overflow: hidden;
@@ -2570,14 +2504,14 @@ body::before {
   left: 160%;
 }
 
-/* --- Service item hover: the number lights teal (no side-stripe accent) --- */
+/* --- Service item hover: the title lights teal (no side-stripe accent) --- */
 .service-item {
   position: relative;
 }
-.service-item .service-num {
+.service-item .service-content h3 {
   transition: color 0.35s ease;
 }
-.service-item:hover .service-num {
+.service-item:hover .service-content h3 {
   color: var(--teal);
 }
 
@@ -2622,15 +2556,8 @@ html.lenis body {
   .marquee-content {
     animation: none;
   }
-  .cursor-dot,
-  .cursor-ring {
-    display: none !important;
-  }
   body::before {
     display: none;
-  }
-  .section-label {
-    display: block;
   }
   .phone {
     animation: none !important;
@@ -2676,15 +2603,6 @@ html.lenis body {
   opacity: 1;
   transform: translateY(0);
 }
-.trust-dot {
-  width: 6px;
-  height: 6px;
-  background: #22c55e;
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
-}
-
 /* Project Testimonials */
 .project-quote {
   margin-top: 1.25rem;

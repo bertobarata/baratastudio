@@ -1,7 +1,7 @@
 /**
  * Cookie Consent Banner
  * Shows a notice on the first visit and stores the choice in localStorage.
- * Only essential cookies are used — no tracking by default.
+ * Only essential cookies are used - no tracking by default.
  */
 (function () {
   'use strict';

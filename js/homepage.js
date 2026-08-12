@@ -14,17 +14,18 @@
   }
 
   // ===== Header scroll state =====
+  // A 60px sentinel at the top of the document drives the header state via
+  // IntersectionObserver. Scroll event listeners are banned (jank + no rAF batching).
   var header = document.getElementById('site-header');
-  if (header) {
-    var onScroll = function () {
-      if (window.scrollY > 60) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+  if (header && 'IntersectionObserver' in window) {
+    var sentinel = document.createElement('div');
+    sentinel.className = 'header-sentinel';
+    sentinel.setAttribute('aria-hidden', 'true');
+    document.body.insertBefore(sentinel, document.body.firstChild);
+
+    new IntersectionObserver(function (entries) {
+      header.classList.toggle('scrolled', !entries[0].isIntersecting);
+    }, { threshold: 0 }).observe(sentinel);
   }
 
   // ===== Hero content reveal =====
@@ -51,7 +52,7 @@
     revealEls.forEach(function (el) { revealObs.observe(el); });
   }
 
-  // ===== Process panels — Managed via GSAP below =====
+  // ===== Process panels - Managed via GSAP below =====
   var processPanels = document.querySelectorAll('.process-panel');
   var processFill = document.getElementById('process-fill');
 
@@ -121,7 +122,7 @@
     });
   }
 
-  // Manifesto — staggered lines
+  // Manifesto - staggered lines
   var manifestoCopy = document.querySelector('.manifesto-inner');
   if (manifestoCopy) {
     gsap.from('.manifesto-inner > *', {
@@ -138,7 +139,7 @@
     });
   }
 
-  // BB Depth section — layers animate in with rotation
+  // BB Depth section - layers animate in with rotation
   var depthSection = document.querySelector('.bb-depth');
   if (depthSection) {
     gsap.from('.depth-layer--1', {
@@ -176,7 +177,7 @@
     });
   }
 
-  // Services list — stagger items
+  // Services list - stagger items
   var serviceItems = document.querySelectorAll('.service-item');
   if (serviceItems.length) {
     gsap.from('.service-item', {

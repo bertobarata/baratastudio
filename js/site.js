@@ -1,5 +1,5 @@
 /**
- * site.js — small UX helpers shared by every page.
+ * site.js - small UX helpers shared by every page.
  *  - Mobile nav toggle
  *  - Auto-fill <span id="year"></span> in the footer
  *  - Active link highlight in the top nav
@@ -146,7 +146,7 @@
       footerLi.textContent = '© Barata Studio · Do briefing ao launch';
       menu.appendChild(footerLi);
     }
-    // Only build the editorial overlay on mobile — on desktop the base 4-link
+    // Only build the editorial overlay on mobile - on desktop the base 4-link
     // nav must stay clean (the injected sections/CTAs/arrows were cluttering it).
     var mobileMenuMQ = window.matchMedia('(max-width: 768px)');
     if (mobileMenuMQ.matches) enhanceMobileMenu();
@@ -163,7 +163,7 @@
       }
     });
 
-    // Swipe-to-close removed — close X button + Escape + link tap handle it
+    // Swipe-to-close removed - close X button + Escape + link tap handle it
 
     document.addEventListener('click', function (e) {
       if (!menu.classList.contains('open')) return;
@@ -272,41 +272,5 @@
       navigator.serviceWorker.register('service-worker.js').catch(function () { /* ignore */ });
     });
   }
-
-  // === Custom cursor (pointer devices only) ===
-  (function () {
-    var dot  = document.getElementById('cursor-dot');
-    var ring = document.getElementById('cursor-ring');
-    if (!dot || !ring) return;
-
-    var mX = 0, mY = 0, rX = 0, rY = 0;
-
-    document.addEventListener('mousemove', function (e) {
-      mX = e.clientX;
-      mY = e.clientY;
-      dot.style.left = mX + 'px';
-      dot.style.top  = mY + 'px';
-    });
-
-    (function tick() {
-      rX += (mX - rX) * 0.1;
-      rY += (mY - rY) * 0.1;
-      ring.style.left = rX + 'px';
-      ring.style.top  = rY + 'px';
-      requestAnimationFrame(tick);
-    })();
-
-    document.querySelectorAll('a, button, .project-card, .process-panel, [role="button"]').forEach(function (el) {
-      el.addEventListener('mouseenter', function () { ring.classList.add('is-hovered'); });
-      el.addEventListener('mouseleave', function () { ring.classList.remove('is-hovered'); });
-    });
-
-    document.documentElement.addEventListener('mouseleave', function () {
-      dot.style.opacity = '0'; ring.style.opacity = '0';
-    });
-    document.documentElement.addEventListener('mouseenter', function () {
-      dot.style.opacity = '1'; ring.style.opacity = '1';
-    });
-  })();
 
 })();

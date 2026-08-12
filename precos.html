@@ -19,17 +19,56 @@
   <link rel="apple-touch-icon" href="assets/logos/logo-claro-transparent.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="canonical" href="https://baratastudio.com/precos.html" />
-  <link rel="stylesheet" href="css/styles.css?v=24" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Desenvolvimento de websites personalizados",
+    "url": "https://baratastudio.com/precos.html",
+    "provider": { "@id": "https://baratastudio.com/#studio" },
+    "areaServed": { "@type": "Country", "name": "Portugal" },
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Essential",
+        "description": "Para começar com critério.",
+        "price": "300",
+        "priceCurrency": "EUR",
+        "url": "https://baratastudio.com/precos.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Standard",
+        "description": "Site institucional completo.",
+        "price": "550",
+        "priceCurrency": "EUR",
+        "url": "https://baratastudio.com/precos.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro",
+        "description": "Projetos com integração e ambição.",
+        "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "minPrice": "800",
+          "priceCurrency": "EUR"
+        },
+        "url": "https://baratastudio.com/precos.html"
+      }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="css/styles.css?v=25" />
 </head>
 <body class="page-inner page-pricing">
 
-  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
   <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
 
   <header class="site-header" id="site-header">
-    <a href="index.html" class="header-brand" aria-label="Barata Studio — página inicial">
+    <a href="index.html" class="header-brand" aria-label="Barata Studio - página inicial">
       <span class="header-monogram">
         <img src="assets/logos/logo-claro-transparent.png" alt="Barata Studio" />
       </span>
@@ -179,7 +218,7 @@
 
   <footer class="site-footer">
     <div class="footer-top">
-      <a href="index.html" class="footer-brand" aria-label="Barata Studio — página inicial">
+      <a href="index.html" class="footer-brand" aria-label="Barata Studio - página inicial">
         <img src="assets/logos/logo-claro-transparent.png" alt="BB" class="footer-bb" />
         <span class="footer-wordmark">Barata Studio</span>
       </a>

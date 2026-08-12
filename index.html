@@ -22,6 +22,45 @@
 
   <link rel="canonical" href="https://baratastudio.com/" />
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://baratastudio.com/#studio",
+    "name": "Barata Studio",
+    "slogan": "Do briefing ao launch: web feita à mão.",
+    "description": "Websites personalizados para negócios que precisam de parecer credíveis, claros e bem resolvidos logo no primeiro contacto.",
+    "url": "https://baratastudio.com/",
+    "logo": "https://baratastudio.com/assets/logos/logo-claro-transparent.png",
+    "image": "https://baratastudio.com/assets/og/og-default.png",
+    "email": "berto.barata77@gmail.com",
+    "telephone": "+351939443377",
+    "priceRange": "300 € - 800 €",
+    "founder": {
+      "@type": "Person",
+      "name": "Berto Barata"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Portugal"
+    },
+    "sameAs": [
+      "https://instagram.com/berto_barata"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Serviços",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Websites Institucionais" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing Pages" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Redesign de Sites" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Identidade Digital Base" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Manutenção e Evolução" } }
+      ]
+    }
+  }
+  </script>
+
   <!-- Icons & PWA -->
   <link rel="icon" href="assets/logos/logo-mark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/logos/logo-claro-transparent.png" />
@@ -30,8 +69,8 @@
   <!-- Fonts loaded via @font-face in styles.css -->
 
   <!-- Styles -->
-  <link rel="preload" href="css/styles.css?v=24" as="style" />
-  <link rel="stylesheet" href="css/styles.css?v=24" />
+  <link rel="preload" href="css/styles.css?v=25" as="style" />
+  <link rel="stylesheet" href="css/styles.css?v=25" />
   <link rel="preload" as="image" href="assets/fotos/phone-greenbond.webp" type="image/webp" />
   <link rel="preload" as="image" href="assets/fotos/phone-cnr.webp" type="image/webp" />
   <link rel="preload" as="image" media="(min-width: 769px)" href="assets/fotos/phone-ludy-a.webp" type="image/webp" />
@@ -46,15 +85,11 @@
     <div class="site-watermark watermark--3"><img src="assets/logos/logo-escuro-transparent.svg" alt="" /></div>
   </div>
 
-  <!-- Custom cursor -->
-  <div class="cursor-dot"  id="cursor-dot"  aria-hidden="true"></div>
-  <div class="cursor-ring" id="cursor-ring" aria-hidden="true"></div>
-
   <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
 
   <!-- ===== FLOATING HEADER ===== -->
   <header class="site-header" id="site-header">
-    <a href="#home" class="header-brand" aria-label="Barata Studio — Ir para o topo">
+    <a href="#home" class="header-brand" aria-label="Barata Studio - Ir para o topo">
       <span class="header-monogram">
         <img src="assets/logos/logo-claro-transparent.png" alt="Barata Studio" />
       </span>
@@ -152,7 +187,7 @@
           <a class="button button--primary" href="formulario.html">Pedir proposta</a>
           <a class="button button--ghost" href="#projects">Ver projetos</a>
         </div>
-        <p class="hero-trust-tag"><span class="trust-dot"></span> Resposta em menos de 24h · processo claro · implementação à medida</p>
+        <p class="hero-trust-tag">Resposta em menos de 24h · processo claro e implementação à medida</p>
       </div>
 
       <div class="hero-scroll-hint" aria-hidden="true">
@@ -302,13 +337,11 @@
     <section class="services" id="services" aria-label="Serviços">
       <div class="services-inner">
         <div class="services-header">
-          <p class="section-label">Serviços</p>
           <h2>Serviços</h2>
         </div>
         <ul class="services-list">
           <li class="service-item">
             <div class="service-item-content">
-              <span class="service-num">01</span>
               <div class="service-content">
                 <h3>Websites Institucionais</h3>
                 <p>Estruturas completas para negócios que precisam de credibilidade, clareza e uma presença digital adulta.</p>
@@ -323,7 +356,6 @@
           </li>
           <li class="service-item">
             <div class="service-item-content">
-              <span class="service-num">02</span>
               <div class="service-content">
                 <h3>Landing Pages</h3>
                 <p>Páginas orientadas a contacto, campanhas ou validação de oferta, com foco em mensagem e decisão.</p>
@@ -337,7 +369,6 @@
           </li>
           <li class="service-item">
             <div class="service-item-content">
-              <span class="service-num">03</span>
               <div class="service-content">
                 <h3>Redesign de Sites</h3>
                 <p>Revisão estrutural, visual e técnica para deixar para trás sites genéricos ou desatualizados.</p>
@@ -351,7 +382,6 @@
           </li>
           <li class="service-item">
             <div class="service-item-content">
-              <span class="service-num">04</span>
               <div class="service-content">
                 <h3>Identidade Digital Base</h3>
                 <p>Base visual para o ambiente digital: tipografia, paleta, componentes e direção consistente entre páginas.</p>
@@ -365,7 +395,6 @@
           </li>
           <li class="service-item">
             <div class="service-item-content">
-              <span class="service-num">05</span>
               <div class="service-content">
                 <h3>Manutenção &amp; Evolução</h3>
                 <p>Suporte contínuo para ajustes, evolução e pequenas melhorias depois do lançamento.</p>
@@ -400,7 +429,7 @@
             <div class="project-img-wrap">
               <a href="https://greenbond.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Greenbond (novo separador)">
                 <img src="assets/projects/greenbond.webp"
-                     alt="Plataforma Greenbond — interface limpa e institucional para gestão de ativos Web3"
+                     alt="Plataforma Greenbond - interface limpa e institucional para gestão de ativos Web3"
                      loading="lazy" />
               </a>
             </div>
@@ -416,14 +445,14 @@
             <div class="project-img-wrap">
               <a href="https://ludyartes.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Ludy Artes (novo separador)">
                 <img src="assets/projects/ludyartes.webp"
-                     alt="Ludy Artes — website e-commerce com foco em detalhe e personalização"
+                     alt="Ludy Artes - website e-commerce com foco em detalhe e personalização"
                      loading="lazy" />
               </a>
             </div>
             <div class="project-meta">
               <span class="project-sector">E-commerce · Personalização</span>
               <h3 class="project-title">Ludy Artes · Loja Online</h3>
-              <p class="project-brief">Loja de agendas feitas à medida — do pedido à entrega, com identidade própria.</p>
+              <p class="project-brief">Loja de agendas feitas à medida - do pedido à entrega, com identidade própria.</p>
               <blockquote class="project-quote">Conseguimos sentir o que é uma Ludy Artes só de entrar na página, tal como imaginei para a marca.</blockquote>
               <a href="https://ludyartes.pt" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
             </div>
@@ -432,7 +461,7 @@
             <div class="project-img-wrap">
               <a href="https://caonarua.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Cão na Rua (novo separador)">
                 <img src="assets/projects/cnr.webp"
-                     alt="Cão na Rua — design mobile-first que comunica filosofia e cuidado animal"
+                     alt="Cão na Rua - design mobile-first que comunica filosofia e cuidado animal"
                      loading="lazy" />
               </a>
             </div>
@@ -448,14 +477,14 @@
             <div class="project-img-wrap">
               <a href="https://gentlelaughter.com" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Gentle Laughter (novo separador)">
                 <img src="assets/projects/gentlelaughter.webp"
-                     alt="Gentle Laughter — website premium para produção e coordenação de eventos"
+                     alt="Gentle Laughter - website premium para produção e coordenação de eventos"
                      loading="lazy" />
               </a>
             </div>
             <div class="project-meta">
               <span class="project-sector">Eventos · Produção Premium</span>
               <h3 class="project-title">Gentle Laughter · Site Institucional</h3>
-              <p class="project-brief">Produção, agenciamento e coordenação de eventos em Lisboa — com rigor, presença e personalidade.</p>
+              <p class="project-brief">Produção, agenciamento e coordenação de eventos em Lisboa - com rigor, presença e personalidade.</p>
               <blockquote class="project-quote">O site 'soa' exatamente à Gentle Laughter: transmite simplicidade, confiança e profissionalismo.</blockquote>
               <div class="project-link-row">
                 <a href="https://gentlelaughter.com" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
@@ -467,14 +496,14 @@
             <div class="project-img-wrap">
               <a href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Barbearia Supra (novo separador)">
                 <img src="assets/projects/barbeariasupra.webp"
-                     alt="Barbearia Supra — site institucional com identidade vintage para barbearia em Lisboa"
+                     alt="Barbearia Supra - site institucional com identidade vintage para barbearia em Lisboa"
                      loading="lazy" />
               </a>
             </div>
             <div class="project-meta">
               <span class="project-sector">Serviços · Barbearia</span>
               <h3 class="project-title">Barbearia Supra · Site Institucional</h3>
-              <p class="project-brief">Presença digital para barbearia em São Domingos de Benfica, Lisboa — marcações diretas por telefone e WhatsApp.</p>
+              <p class="project-brief">Presença digital para barbearia em São Domingos de Benfica, Lisboa - marcações diretas por telefone e WhatsApp.</p>
               <a href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
             </div>
           </article>
@@ -482,7 +511,7 @@
             <div class="project-img-wrap">
               <a href="https://bertobarata.github.io/queen-bee-hair/" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Queen Bee Hair (novo separador)">
                 <img src="assets/projects/queenbeehair.webp"
-                     alt="Queen Bee Hair — website claro para especialista em extensões de cabelo"
+                     alt="Queen Bee Hair - website claro para especialista em extensões de cabelo"
                      loading="lazy" />
               </a>
             </div>
@@ -501,7 +530,7 @@
     <section class="final-cta" id="contact" aria-label="Contacto">
       <div class="final-cta-inner">
         <div class="cta-content">
-          <p class="section-label" style="justify-content: center; margin-bottom: 1.5rem;">Vamos conversar?</p>
+          <p class="section-label section-label--center" style="margin-bottom: 1.5rem;">Vamos conversar?</p>
           <h2>Quando a presença digital pede mais do que um template.</h2>
           <p class="cta-body">Se precisa de um site mais credível, mais claro e menos genérico, o próximo passo é partilhar o contexto do projeto. A resposta chega em menos de 24 horas.</p>
           
@@ -543,7 +572,7 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-top">
-      <a href="#home" class="footer-brand" aria-label="Barata Studio — Ir para o topo">
+      <a href="#home" class="footer-brand" aria-label="Barata Studio - Ir para o topo">
         <img src="assets/logos/logo-claro-transparent.png" alt="BB" class="footer-bb" />
         <span class="footer-wordmark">Barata Studio</span>
       </a>
