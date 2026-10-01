@@ -5,7 +5,7 @@
  * so old caches are invalidated.
  */
 
-const CACHE_NAME = 'site-cache-v26';
+const CACHE_NAME = 'site-cache-v27';
 const RUNTIME_CACHE = 'site-runtime-v18';
 
 // Critical assets cached on install. Edit this list for your site.
@@ -19,8 +19,8 @@ const PRECACHE_ASSETS = [
   'manifest.json',
   'assets/fonts/web/comico.woff2',
   'assets/fonts/web/zodiak-var.woff2',
-  'assets/fonts/web/jbmono-400.woff2',
-  'assets/fonts/web/jbmono-500.woff2',
+  'assets/fonts/web/jbmono-nf-400.woff2',
+  'assets/fonts/web/jbmono-nf-500.woff2',
   // 'assets/logos/logo.png',
   // 'assets/fotos/hero.jpg',
 ];

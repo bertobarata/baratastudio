@@ -1,163 +1,330 @@
 /**
- * home.js - interactive terminal in the hero.
- * Progressive enhancement: the HTML already shows a static session.
- * All output is built with textContent / createElement. Nothing typed by the
+ * home.js - the hero terminal, a tiny shell over the site.
+ *
+ *   ls [-l] [dir]   list sections (or the projects inside projetos/)
+ *   cd <dir>        open a section, a page or a project
+ *   pwd, whoami, ajuda/help, clear (Ctrl+L)
+ *
+ * Mouse and touch work too: every folder in the output is clickable and the
+ * shortcut chips run real commands. Tab completes, arrow keys walk the history.
+ *
+ * Progressive enhancement: the HTML already shows an `ls -l` with real links.
+ * All output is built with createElement/textContent. Nothing typed by the
  * visitor is ever inserted as HTML.
  */
 (function () {
   'use strict';
 
+  var term = document.getElementById('terminal');
   var out = document.getElementById('term-out');
   var form = document.getElementById('term-form');
   var input = document.getElementById('term-input');
-  var chips = document.getElementById('term-chips');
-  if (!out || !form || !input) return;
+  var pathEl = document.getElementById('term-path');
+  var titleEl = document.getElementById('term-title');
+  if (!term || !out || !form || !input) return;
 
-  form.hidden = false;
-  if (chips) chips.hidden = false;
 
-  var LINKS = {
-    email: 'mailto:berto.barata77@gmail.com',
-    whatsapp: 'https://wa.me/351939443377?text=' + encodeURIComponent('Olá Berto, vi o teu site e tenho interesse em desenvolver um projeto.'),
-    instagram: 'https://instagram.com/berto_barata',
-    form: 'formulario.html',
-    pessoal: 'https://bertobarata.com'
-  };
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ICON = { dir: ' ', open: ' ', link: '', home: ' ' };
 
-  var PROJECTS = [
-    ['valejas-ac', 'https://valejasac.pt'],
-    ['greenbond', 'https://greenbond.pt'],
-    ['ludy-artes', 'https://ludyartes.pt'],
-    ['cao-na-rua', '#projects'],
-    ['gentle-laughter', '#projects'],
-    ['barbearia-supra', 'https://bertobarata.github.io/barbearia-supra/'],
-    ['queen-bee-hair', 'https://bertobarata.github.io/queen-bee-hair/']
-  ];
-
-  /* A line is an array of parts: plain strings or [text, href]. */
-  var COMMANDS = {
-    ajuda: function () {
-      return [
-        ['comandos disponíveis:'],
-        ['  servicos   o que faço'],
-        ['  projetos   trabalho publicado'],
-        ['  processo   do briefing ao launch'],
-        ['  contacto   falar comigo'],
-        ['  sobre      quem está por trás'],
-        ['  abrir N    abrir o projeto N da lista'],
-        ['  clear      limpar o ecrã']
-      ];
-    },
-    servicos: function () {
-      return [
-        ['Websites Institucionais'],
-        ['Landing Pages'],
-        ['Redesign de Sites'],
-        ['Identidade Digital Base'],
-        ['Manutenção & Evolução'],
-        [['ver detalhe →', '#services']]
-      ];
-    },
-    projetos: function () {
-      return PROJECTS.map(function (p, i) { return [(i + 1) + '  ', [p[0], p[1]]]; }).concat([['escreve «abrir 1» para ver o primeiro']]);
-    },
-    processo: function () {
-      return [
-        ['briefing → design → build → launch'],
-        [['ver os passos →', '#process-layers']]
-      ];
-    },
-    contacto: function () {
-      return [
-        ['email      ', [ 'berto.barata77@gmail.com', LINKS.email ]],
-        ['whatsapp   ', [ 'abrir conversa', LINKS.whatsapp ]],
-        ['instagram  ', [ '@berto_barata', LINKS.instagram ]],
-        ['formulário ', [ 'pedir proposta', LINKS.form ]],
-        ['resposta em menos de 24h']
-      ];
-    },
-    sobre: function () {
-      return [
-        ['Barata Studio é o estúdio de Berto Barata.'],
-        ['Websites à medida, sem templates.'],
-        ['pessoal   ', [ 'bertobarata.com', LINKS.pessoal ]]
-      ];
+  /* ---------- the file system ---------- */
+  var FS = {
+    children: {
+      projetos: {
+        target: '#projects', desc: 'trabalho publicado',
+        children: {
+          'valejas-ac': { url: 'https://valejasac.pt', desc: 'clube de futsal, loja e área da Direção' },
+          'greenbond': { url: 'https://greenbond.pt', desc: 'plataforma para o sector público' },
+          'ludy-artes': { url: 'https://ludyartes.pt', desc: 'loja de agendas personalizadas' },
+          'cao-na-rua': { url: 'https://caonarua.pt', desc: 'creche canina em Sintra' },
+          'gentle-laughter': { url: 'https://gentlelaughter.com', desc: 'produção de eventos' },
+          'barbearia-supra': { url: 'https://bertobarata.github.io/barbearia-supra/', desc: 'barbearia em Lisboa' },
+          'queen-bee-hair': { url: 'https://bertobarata.github.io/queen-bee-hair/', desc: 'extensões de cabelo' }
+        }
+      },
+      servicos: { target: '#services', desc: 'o que faço' },
+      processo: { target: '#process-layers', desc: 'do briefing ao launch' },
+      sobre: { target: '#manifesto', desc: 'quem está por trás' },
+      faq: { target: 'faq.html', desc: 'perguntas frequentes' },
+      contacto: { target: 'formulario.html', desc: 'pedir proposta' }
     }
   };
+
+  // Words people will try instead of the folder names.
+  var ALIASES = {
+    portfolio: 'projetos', trabalho: 'projetos', trabalhos: 'projetos', projects: 'projetos', work: 'projetos', projeto: 'projetos',
+    servico: 'servicos', services: 'servicos',
+    process: 'processo',
+    info: 'sobre', 'sobre-mim': 'sobre', sobremim: 'sobre', about: 'sobre', 'about-me': 'sobre', eu: 'sobre',
+    perguntas: 'faq', ajuda: 'faq',
+    contactos: 'contacto', contact: 'contacto', contato: 'contacto', proposta: 'contacto', orcamento: 'contacto'
+  };
+
+  var cwd = []; // path segments from ~
+
+  function norm(s) {
+    return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  }
+
+  function nodeAt(path) {
+    var n = FS;
+    for (var i = 0; i < path.length; i++) {
+      if (!n.children || !n.children[path[i]]) return null;
+      n = n.children[path[i]];
+    }
+    return n;
+  }
+
+  function childName(node, word) {
+    if (!node || !node.children) return null;
+    var w = norm(word);
+    if (node.children[w]) return w;
+    if (node === FS && ALIASES[w]) return ALIASES[w];
+    return null;
+  }
+
+  // Resolve "projetos/valejas-ac", "../faq", "~/sobre" to a path array, or null.
+  function resolve(arg) {
+    var a = (arg || '').trim();
+    var path = cwd.slice();
+    if (a === '' || a === '~' || a === '/') return [];
+    if (a.charAt(0) === '~' || a.charAt(0) === '/') { path = []; a = a.replace(/^~\/?|^\//, ''); }
+    var parts = a.split('/').filter(Boolean);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (p === '.') continue;
+      if (p === '..') { path.pop(); continue; }
+      var name = childName(nodeAt(path), p);
+      if (!name) return null;
+      path.push(name);
+    }
+    return path;
+  }
+
+  function pretty(path) { return '~' + (path.length ? '/' + path.join('/') : ''); }
+
+  function setCwd(path) {
+    cwd = path;
+    if (pathEl) pathEl.textContent = pretty(cwd);
+    if (titleEl) titleEl.textContent = 'berto@barata-studio: ' + pretty(cwd);
+  }
+
+  /* ---------- output ---------- */
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function print(parts, cls) {
+    var p = el('p', 'term-line' + (cls ? ' ' + cls : ''));
+    (Array.isArray(parts) ? parts : [parts]).forEach(function (part) {
+      p.appendChild(typeof part === 'string' ? document.createTextNode(part) : part);
+    });
+    out.appendChild(p);
+    return p;
+  }
+
+  function promptEcho(cmd) {
+    out.appendChild(el('div', 'term-gap'));
+    var p = el('p', 'term-line term-cmd');
+    p.appendChild(el('span', 'tp-user', 'berto@barata-studio:'));
+    p.appendChild(el('span', 'tp-path', pretty(cwd)));
+    p.appendChild(document.createTextNode('$ ' + cmd));
+    out.appendChild(p);
+  }
+
+  // A folder you can click: runs `cd <path>`.
+  function dirButton(label, cdArg, external) {
+    var b = el('button', 'term-dir' + (external ? ' term-dir--ext' : ''));
+    b.type = 'button';
+    b.setAttribute('data-cmd', 'cd ' + cdArg);
+    b.appendChild(el('span', 'term-icon', external ? '' : ICON.dir));
+    b.appendChild(document.createTextNode(label));
+    if (external) b.appendChild(el('span', 'term-icon term-icon--after', ' ' + ICON.link));
+    b.setAttribute('aria-label', (external ? 'Abrir ' : 'Ir para ') + label.replace(/\/$/, ''));
+    return b;
+  }
+
+  function scrollDown() { out.scrollTop = out.scrollHeight; }
+
+  /* ---------- navigation ---------- */
+  function go(target) {
+    if (target.charAt(0) === '#') {
+      var dest = document.querySelector(target);
+      if (!dest) return;
+      dest.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' });
+      var heading = dest.querySelector('h2, h1') || dest;
+      heading.setAttribute('tabindex', '-1');
+      heading.focus({ preventScroll: true });
+      return;
+    }
+    setTimeout(function () { window.location.href = target; }, REDUCED ? 0 : 420);
+  }
+
+  /* ---------- commands ---------- */
+  var COMMANDS = {
+    ajuda: function () {
+      [
+        ['ls', 'lista as secções'],
+        ['ls -l', 'lista com descrição'],
+        ['cd projetos', 'abre uma secção (ou clica numa pasta)'],
+        ['cd ..', 'volta atrás'],
+        ['pwd', 'onde estás'],
+        ['whoami', 'quem fez isto'],
+        ['clear', 'limpa o ecrã (Ctrl+L)']
+      ].forEach(function (row) {
+        print([el('span', 'term-key', (row[0] + '            ').slice(0, 13)), row[1]]);
+      });
+      print('Tab completa nomes. As setas repetem comandos anteriores.', 'term-dim');
+    },
+    ls: function (args) {
+      var long = args.some(function (a) { return /^-\w*l/.test(a); });
+      var target = args.filter(function (a) { return a.charAt(0) !== '-'; })[0];
+      var path = target ? resolve(target) : cwd;
+      if (!path) return print('ls: ' + target + ': pasta não encontrada', 'term-err');
+      var node = nodeAt(path);
+      if (node.url) return print([dirButton(path[path.length - 1], pretty(path), true)]);
+      if (!node.children) {
+        print(node.desc, 'term-dim');
+        return print('Esta secção não tem subpastas. Usa «cd ..» para voltar.', 'term-dim');
+      }
+      var names = Object.keys(node.children);
+      if (long) {
+        names.forEach(function (n) {
+          var child = node.children[n];
+          var cdArg = pretty(path.concat(n));
+          var label = child.url ? n : n + '/';
+          var row = print([dirButton(label, cdArg, !!child.url)]);
+          row.classList.add('term-row');
+          row.appendChild(el('span', 'term-desc', child.desc));
+        });
+      } else {
+        var row = print([], 'term-grid');
+        names.forEach(function (n) {
+          var child = node.children[n];
+          row.appendChild(dirButton(child.url ? n : n + '/', pretty(path.concat(n)), !!child.url));
+        });
+      }
+    },
+    cd: function (args) {
+      var arg = args[0];
+      var path = resolve(arg);
+      if (!path) {
+        return print('cd: ' + arg + ': pasta não encontrada. Escreve «ls» para ver o que existe.', 'term-err');
+      }
+      if (path.length === 0) {
+        setCwd([]);
+        print([ICON.home + 'de volta ao início'], 'term-ok');
+        go('#home');
+        return;
+      }
+      var node = nodeAt(path);
+      if (node.url) {
+        print(['a abrir ' + path[path.length - 1] + ' num novo separador ', el('span', 'term-icon', ICON.link)], 'term-ok');
+        window.open(node.url, '_blank', 'noopener');
+        return;
+      }
+      setCwd(path);
+      if (node.target.charAt(0) === '#') {
+        print([ICON.open + pretty(path)], 'term-ok');
+        if (node.children) print('Escreve «ls» para ver o que há aqui dentro.', 'term-dim');
+      } else {
+        print([ICON.open + 'a abrir ' + node.target + '…'], 'term-ok');
+      }
+      go(node.target);
+    },
+    pwd: function () { print('/home/berto' + (cwd.length ? '/' + cwd.join('/') : '')); },
+    whoami: function () {
+      var a = el('a', null, 'bertobarata.com');
+      a.href = 'https://bertobarata.com'; a.target = '_blank'; a.rel = 'noopener noreferrer';
+      print('Berto Barata · Barata Studio, websites feitos à mão');
+      print(['pessoal: ', a]);
+    },
+    clear: function () { out.textContent = ''; }
+  };
   COMMANDS.help = COMMANDS.ajuda;
-  COMMANDS.ls = COMMANDS.projetos;
-  COMMANDS.contactos = COMMANDS.contacto;
-  COMMANDS['serviços'] = COMMANDS.servicos;
-  COMMANDS['serviço'] = COMMANDS.servicos;
+  COMMANDS.dir = COMMANDS.ls;
+  COMMANDS.ll = function (args) { COMMANDS.ls(['-l'].concat(args)); };
 
   var history = [];
   var hIndex = 0;
 
-  function line(parts, cls) {
-    var p = document.createElement('p');
-    p.className = 'term-line' + (cls ? ' ' + cls : '');
-    parts.forEach(function (part) {
-      if (typeof part === 'string') {
-        p.appendChild(document.createTextNode(part));
-      } else {
-        var a = document.createElement('a');
-        a.textContent = part[0];
-        a.href = part[1];
-        if (/^https?:/.test(part[1])) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
-        p.appendChild(a);
-      }
-    });
-    return p;
-  }
-
-  function gap() {
-    var d = document.createElement('div');
-    d.className = 'term-gap';
-    return d;
-  }
-
   function run(raw) {
-    var cmd = raw.trim().toLowerCase().replace(/\s+/g, ' ');
-    if (!cmd) return;
+    var line = raw.trim().replace(/\s+/g, ' ');
+    if (!line) return;
+    var words = line.split(' ');
+    var cmd = norm(words[0]);
+    var args = words.slice(1);
 
-    if (cmd === 'clear' || cmd === 'limpar') {
-      out.textContent = '';
-      return;
-    }
+    input.placeholder = ''; // the suggestion has done its job
+    if (cmd === 'clear' || cmd === 'cls') { COMMANDS.clear(); return; }
+    promptEcho(line);
 
-    out.appendChild(gap());
-    out.appendChild(line([raw.trim()], 'term-cmd'));
-
-    var open = cmd.match(/^abrir\s+(\S+)$/);
-    var fn = Object.prototype.hasOwnProperty.call(COMMANDS, cmd) ? COMMANDS[cmd] : null;
-    if (fn) {
-      fn().forEach(function (parts) { out.appendChild(line(parts)); });
-    } else if (open) {
-      var key = open[1];
-      var hit = PROJECTS.filter(function (p, i) { return String(i + 1) === key || p[0] === key; })[0];
-      if (hit) {
-        out.appendChild(line(['a abrir ', [hit[0], hit[1]]], 'term-dim'));
-        if (/^https?:/.test(hit[1])) window.open(hit[1], '_blank', 'noopener');
-        else location.hash = hit[1];
-      } else {
-        out.appendChild(line(['projeto não encontrado. Escreve «projetos» para ver a lista.'], 'term-dim'));
-      }
+    if (Object.prototype.hasOwnProperty.call(COMMANDS, cmd)) {
+      COMMANDS[cmd](args);
+    } else if (cmd === 'cd..') {
+      COMMANDS.cd(['..']);
+    } else if (resolve(words[0])) {
+      // Typed a folder name without `cd`: be kind and open it.
+      print('dica: da próxima vez escreve «cd ' + words[0] + '»', 'term-dim');
+      COMMANDS.cd([words[0]]);
     } else {
-      out.appendChild(line(['comando não encontrado. Escreve «ajuda».'], 'term-dim'));
+      print(words[0] + ': comando não encontrado. Escreve «ls» ou «ajuda».', 'term-err');
     }
-    out.scrollTop = out.scrollHeight;
+    scrollDown();
   }
 
+  /* ---------- tab completion ---------- */
+  function complete() {
+    var v = input.value;
+    var words = v.split(' ');
+    if (words.length === 1) {
+      var cmds = Object.keys(COMMANDS).filter(function (c) { return c.indexOf(norm(words[0])) === 0; });
+      if (cmds.length === 1) { input.value = cmds[0] + ' '; return true; }
+      if (cmds.length > 1) { promptEcho(v); print(cmds.join('   '), 'term-dim'); scrollDown(); return true; }
+      return false;
+    }
+    var partial = words[words.length - 1];
+    var slash = partial.lastIndexOf('/');
+    var base = slash >= 0 ? partial.slice(0, slash + 1) : '';
+    var stem = partial.slice(slash + 1);
+    var dirPath = base ? resolve(base) : cwd;
+    var node = dirPath && nodeAt(dirPath);
+    if (!node || !node.children) return false;
+    var hits = Object.keys(node.children).filter(function (n) { return n.indexOf(norm(stem)) === 0; });
+    if (hits.length === 1) {
+      var child = node.children[hits[0]];
+      words[words.length - 1] = base + hits[0] + (child.children ? '/' : '');
+      input.value = words.join(' ');
+      return true;
+    }
+    if (hits.length > 1) {
+      promptEcho(v);
+      print(hits.map(function (h) { return h + (node.children[h].children ? '/' : ''); }).join('   '), 'term-dim');
+      scrollDown();
+      return true;
+    }
+    return false;
+  }
+
+  /* ---------- events ---------- */
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    stopDemo(false);
     var v = input.value;
-    if (v.trim()) { history.push(v); hIndex = history.length; }
-    run(v);
+    if (v.trim()) { history.push(v.trim()); hIndex = history.length; }
     input.value = '';
+    run(v);
   });
 
   input.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowUp' && history.length) {
+    stopDemo(true);
+    if (e.key === 'Tab' && !e.shiftKey && input.value.trim()) {
+      // Only take Tab when there is something to complete; otherwise it moves focus as usual.
+      if (complete()) e.preventDefault();
+    } else if (e.key === 'ArrowUp' && history.length) {
       e.preventDefault();
       hIndex = Math.max(0, hIndex - 1);
       input.value = history[hIndex] || '';
@@ -165,14 +332,76 @@
       e.preventDefault();
       hIndex = Math.min(history.length, hIndex + 1);
       input.value = history[hIndex] || '';
+    } else if (e.ctrlKey && (e.key === 'l' || e.key === 'L')) {
+      e.preventDefault();
+      COMMANDS.clear();
+    } else if (e.ctrlKey && (e.key === 'c' || e.key === 'C') && !window.getSelection().toString()) {
+      e.preventDefault();
+      promptEcho(input.value + '^C');
+      input.value = '';
+      scrollDown();
     }
   });
 
-  if (chips) {
-    chips.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-cmd]');
-      if (!btn) return;
-      run(btn.getAttribute('data-cmd'));
-    });
+  // Folders in the output and the shortcut chips run real commands.
+  term.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-cmd]');
+    if (btn) {
+      e.preventDefault(); // chips are links so they still work without JavaScript
+      stopDemo(true);
+      var cmd = btn.getAttribute('data-cmd');
+      history.push(cmd); hIndex = history.length;
+      run(cmd);
+      return;
+    }
+    // Clicking empty terminal space focuses the prompt, like a real terminal.
+    if (!e.target.closest('a, button, input') && !window.getSelection().toString()) {
+      input.focus({ preventScroll: true });
+    }
+  });
+
+  /* ---------- first impression ----------
+   The `ls -l` is already in the HTML (so the terminal paints at once and never
+   shifts). The demo only ghost-types a suggestion in the prompt, without running it. */
+  var demoTimer = null;
+  var demoDone = false;
+  var SUGGESTION = 'cd projetos';
+  var PLACEHOLDER = 'experimenta: cd projetos';
+  // Stop the ghost typing as soon as the visitor does anything.
+  // clearText: wipe the half-typed suggestion (on a key press or a click), never on submit.
+  function stopDemo(clearText) {
+    if (demoDone) return;
+    if (demoTimer) { clearTimeout(demoTimer); demoTimer = null; }
+    if (clearText && !input.dataset.user) input.value = '';
+    input.placeholder = PLACEHOLDER;
+    demoDone = true;
+  }
+  function demo() {
+    if (demoDone) return;
+    if (REDUCED) { stopDemo(true); return; }
+    var i = 0;
+    var back = false;
+    (function step() {
+      if (demoDone) return;
+      if (!back) {
+        input.value = SUGGESTION.slice(0, ++i);
+        if (i === SUGGESTION.length) { back = true; demoTimer = setTimeout(step, 1400); return; }
+        demoTimer = setTimeout(step, i === 1 ? 700 : 95);
+      } else {
+        input.value = SUGGESTION.slice(0, --i);
+        if (i === 0) { stopDemo(true); return; }
+        demoTimer = setTimeout(step, 35);
+      }
+    })();
+  }
+  input.addEventListener('input', function () { input.dataset.user = '1'; });
+
+  if ('IntersectionObserver' in window) {
+    var seen = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { seen.disconnect(); demo(); }
+    }, { threshold: 0.4 });
+    seen.observe(term);
+  } else {
+    demo();
   }
 })();

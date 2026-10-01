@@ -74,8 +74,9 @@
   <!-- Styles -->
   <link rel="preload" href="assets/fonts/web/comico.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/web/zodiak-var.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="css/styles.css?v=33" as="style" />
-  <link rel="stylesheet" href="css/styles.css?v=33" />
+  <link rel="preload" href="assets/fonts/web/jbmono-nf-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="css/styles.css?v=38" as="style" />
+  <link rel="stylesheet" href="css/styles.css?v=38" />
 </head>
 <body class="page-home">
 
@@ -120,34 +121,37 @@
         </div>
 
         <div class="hero-terminal">
-          <div class="term" id="terminal" role="region" aria-label="Terminal interativo do Barata Studio">
+          <div class="term term--shell" id="terminal" role="region" aria-label="Terminal do Barata Studio: escreva ls para ver as secções e cd para abrir uma">
             <div class="term-bar" aria-hidden="true">
               <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-              <span class="term-title">berto@barata-studio: ~</span>
+              <span class="term-title" id="term-title">berto@barata-studio: ~</span>
             </div>
             <div class="term-body">
               <div class="term-out" id="term-out" role="log" aria-live="polite" aria-label="Resultado dos comandos" tabindex="0">
-                <p class="term-line term-cmd">barata --sobre</p>
-                <p class="term-line">Barata Studio · websites feitos à mão por Berto Barata</p>
-                <p class="term-line term-dim">resposta em menos de 24h</p>
+                <p class="term-line term-dim">Barata Studio · websites feitos à mão por Berto Barata. Resposta em menos de 24h.</p>
                 <div class="term-gap"></div>
-                <p class="term-line term-cmd">ls projetos/</p>
-                <p class="term-line"><a href="https://valejasac.pt" target="_blank" rel="noopener noreferrer">valejas-ac</a>  <a href="https://greenbond.pt" target="_blank" rel="noopener noreferrer">greenbond</a>  <a href="https://ludyartes.pt" target="_blank" rel="noopener noreferrer">ludy-artes</a>  <a href="#projects">+4</a></p>
+                <p class="term-line term-cmd"><span class="tp-user">berto@barata-studio:</span><span class="tp-path">~</span>$ ls -l</p>
+                <p class="term-line term-row"><a class="term-dir" href="#projects" data-cmd="cd ~/projetos"><span class="term-icon" aria-hidden="true"> </span>projetos/</a><span class="term-desc">trabalho publicado</span></p>
+                <p class="term-line term-row"><a class="term-dir" href="#services" data-cmd="cd ~/servicos"><span class="term-icon" aria-hidden="true"> </span>servicos/</a><span class="term-desc">o que faço</span></p>
+                <p class="term-line term-row"><a class="term-dir" href="#process-layers" data-cmd="cd ~/processo"><span class="term-icon" aria-hidden="true"> </span>processo/</a><span class="term-desc">do briefing ao launch</span></p>
+                <p class="term-line term-row"><a class="term-dir" href="#manifesto" data-cmd="cd ~/sobre"><span class="term-icon" aria-hidden="true"> </span>sobre/</a><span class="term-desc">quem está por trás</span></p>
+                <p class="term-line term-row"><a class="term-dir" href="faq.html" data-cmd="cd ~/faq"><span class="term-icon" aria-hidden="true"> </span>faq/</a><span class="term-desc">perguntas frequentes</span></p>
+                <p class="term-line term-row"><a class="term-dir" href="formulario.html" data-cmd="cd ~/contacto"><span class="term-icon" aria-hidden="true"> </span>contacto/</a><span class="term-desc">pedir proposta</span></p>
               </div>
-              <div class="term-chips" id="term-chips" hidden>
-                <button type="button" class="term-chip" data-cmd="servicos">servicos</button>
-                <button type="button" class="term-chip" data-cmd="projetos">projetos</button>
-                <button type="button" class="term-chip" data-cmd="processo">processo</button>
-                <button type="button" class="term-chip" data-cmd="contacto">contacto</button>
-                <button type="button" class="term-chip" data-cmd="ajuda">ajuda</button>
-              </div>
-              <form class="term-form" id="term-form" hidden autocomplete="off">
-                <label for="term-input" class="sr-only">Comando</label>
-                <span class="term-prompt" aria-hidden="true">$</span>
-                <input class="term-input" id="term-input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="escreve «ajuda»" />
+              <form class="term-form" id="term-form" action="#terminal" autocomplete="off">
+                <label for="term-input" class="term-prompt"><span class="tp-user">berto@barata-studio:</span><span class="tp-path" id="term-path">~</span>$</label>
+                <input class="term-input" id="term-input" type="text" inputmode="text" enterkeyhint="go" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="term-hint" />
               </form>
+              <div class="term-chips" id="term-chips" aria-label="Atalhos de comandos">
+                <a class="term-chip" href="#terminal" data-cmd="ls">ls</a>
+                <a class="term-chip" href="#projects" data-cmd="cd projetos">cd projetos</a>
+                <a class="term-chip" href="#services" data-cmd="cd servicos">cd servicos</a>
+                <a class="term-chip" href="formulario.html" data-cmd="cd contacto">cd contacto</a>
+                <a class="term-chip" href="faq.html" data-cmd="ajuda">ajuda</a>
+              </div>
             </div>
           </div>
+          <p class="term-hint" id="term-hint">Escreva <kbd>ls</kbd> para ver as pastas e <kbd>cd projetos</kbd> para abrir uma. Também pode clicar nas pastas e nos atalhos. <kbd>Tab</kbd> completa nomes, <kbd>↑</kbd> repete o último comando.</p>
         </div>
       </div>
     </section>
@@ -536,8 +540,8 @@
     </div>
   </footer>
 
-  <script src="js/site.js" defer></script>
-  <script src="js/home.js" defer></script>
+  <script src="js/site.js?v=2" defer></script>
+  <script src="js/home.js?v=7" defer></script>
   <script src="js/cookie-consent.js" defer></script>
 </body>
 </html>
