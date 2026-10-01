@@ -127,7 +127,7 @@ Layout is a 1180px wrap with a 12-col feel, left-aligned and asymmetric. Every s
 
 - **Comico** (display): H1 and H2, logo wordmark, buttons, big numbers. All-caps by design, so never for anything longer than a headline. Served as a 50 KB Latin subset without contextual alternates, preloaded, `font-display: optional`.
 - **Zodiak** (body): paragraphs, H3s, FAQ questions, form text. Measure capped at 58 to 68ch.
-- **JetBrains Mono** (labels and terminal): section labels (`// LABEL`, max 3 per page), nav links, tags, terminal. Minimum 12px.
+- **JetBrains Mono Nerd Font Mono** (labels and terminal, 17 KB subsets with the few icons used): section labels (`// LABEL`, max 3 per page), nav links, tags, terminal. Minimum 12px.
 - Scale ratio stays at or above 1.25 between steps; fluid `clamp()` for headings. The hero H1 must sit on two lines at desktop.
 
 ## 4. Elevation: Glass, Panels and Shadows
@@ -140,7 +140,8 @@ Layout is a 1180px wrap with a 12-col feel, left-aligned and asymmetric. Every s
 ## 5. Components
 
 - **Buttons**: pill, 48px tall, Comico label, one line (`white-space: nowrap`). Primary petróleo; ghost on panel. `scale(0.97)` on press. One label per intent across the site: "Pedir proposta" (form), "Ver projetos", "Falar no WhatsApp".
-- **Terminal**: window with title bar (traffic-light dots only on the hero terminal), output region is a focusable `role="log"`, chips for each command (44px on touch), input at 16px on touch so iOS does not zoom. Commands: ajuda, servicos, projetos, processo, contacto, sobre, abrir N, clear.
+- **Hero terminal (main focus)**: a tiny shell over the site in **frosted ice** (translucent pale-green glass, matte grain, green light behind it, dark green ink; every text colour 4.6:1 or better). `ls` / `ls -l` lists folders (projetos, servicos, processo, sobre, faq, contacto), `cd <pasta>` opens the section or page on Enter, `cd projetos` then `ls` lists the client sites and `cd <site>` opens it in a new tab; `cd ..`, `pwd`, `whoami`, `ajuda`, `clear`/Ctrl+L, Tab completion, history on the arrow keys, friendly aliases (portfolio, info, sobre-mim...). Every folder in the output and every shortcut chip is clickable; the chips are links, so they work without JavaScript. The `ls -l` is in the HTML (fixed-height output, no layout shift); on load the prompt only ghost-types "cd projetos" as a hint. Soft grey instructions sit under the window. Font: JetBrains Mono Nerd Font Mono (folder and link icons).
+- **Process terminal**: dark solid window (`term-solid`), no dots, read-only log.
 - **Project plate**: panel with 10px padding around a real screenshot (16:10, 12px inner radius), caption below (sector in mono, title in Zodiak 650, brief, link).
 - **Proof rows**: number in Comico (moderate size) + label in mono, beside the project and claim. Not metric cards.
 - **Forms**: label above input (mono caps), 48px fields, 12px radius, inline error under each field announced through `aria-describedby`, a status line after the submit button, busy state while WhatsApp opens.
