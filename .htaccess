@@ -74,3 +74,6 @@
 <IfModule mod_http2.c>
   H2Push on
 </IfModule>
+
+# Old pricing page: retired 2026-10, send to home
+Redirect 301 /precos.html /

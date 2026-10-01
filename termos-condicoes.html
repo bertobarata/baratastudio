@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <script>document.documentElement.classList.add('js')</script>
   <meta name="theme-color" content="#1A6870" />
 
   <title>Termos e Condições — Barata Studio</title>
@@ -18,7 +20,9 @@
   <link rel="apple-touch-icon" href="assets/logos/logo-claro-transparent.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="canonical" href="https://baratastudio.com/termos-condicoes.html" />
-  <link rel="stylesheet" href="css/styles.css?v=26" />
+  <link rel="preload" href="assets/fonts/web/comico.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/web/zodiak-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/styles.css?v=33" />
 </head>
 <body class="page-inner page-legal">
 
@@ -27,9 +31,7 @@
 
   <header class="site-header" id="site-header">
     <a href="index.html" class="header-brand" aria-label="Barata Studio - página inicial">
-      <span class="header-monogram">
-        <img src="assets/logos/logo-claro-transparent.png" alt="Barata Studio" />
-      </span>
+      <span class="header-monogram" role="img" aria-label="Barata Studio"></span>
       <span class="header-wordmark">Barata Studio</span>
     </a>
     <nav class="top-nav" aria-label="Navegação principal">
@@ -37,12 +39,11 @@
       <ul id="main-menu">
         <li class="nav-close-item"><button type="button" class="nav-close" aria-label="Fechar menu">&times;</button></li>
         <li><a href="index.html">Início</a></li>
-        <li><a href="precos.html">Preços</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="formulario.html">Contacto</a></li>
       </ul>
     </nav>
-    <a class="header-cta button button--primary" href="formulario.html">Falar sobre o projeto</a>
+    <a class="header-cta button button--primary" href="formulario.html">Pedir proposta</a>
   </header>
 
   <main id="main-content">
@@ -64,7 +65,7 @@
         <p>O envio de formulário ou mensagem não constitui, por si só, aceitação automática de prestação de serviços. Qualquer projeto depende de análise, proposta e confirmação expressa.</p>
 
         <h2>4. Informação comercial</h2>
-        <p>Preços, prazos e descrições apresentados no site são indicativos e podem variar de acordo com o escopo real de cada projeto.</p>
+        <p>Prazos e descrições apresentados no site são indicativos e podem variar de acordo com o escopo real de cada projeto.</p>
 
         <h2>5. Limitação de responsabilidade</h2>
         <p>O Barata Studio procura manter a informação atualizada, mas não garante ausência absoluta de erros tipográficos, técnicos ou omissões ocasionais.</p>
@@ -75,7 +76,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <a href="index.html" class="footer-brand" aria-label="Barata Studio - página inicial">
-        <img src="assets/logos/logo-claro-transparent.png" alt="BB" class="footer-bb" />
+        <span class="footer-bb" role="img" aria-label="BB"></span>
         <span class="footer-wordmark">Barata Studio</span>
       </a>
       <p class="footer-tagline">Do briefing ao launch: web feita à mão.</p>
@@ -83,7 +84,6 @@
     <div class="footer-columns">
       <div class="footer-col">
         <p class="footer-title">Informações</p>
-        <div class="footer-contact-line"><a href="precos.html">Preços</a></div>
         <div class="footer-contact-line"><a href="faq.html">Perguntas Frequentes</a></div>
         <div class="footer-contact-line"><a href="politica-privacidade.html">Política de Privacidade</a></div>
         <div class="footer-contact-line"><a href="politica-cookies.html">Política de Cookies</a></div>
@@ -91,18 +91,16 @@
       </div>
       <div class="footer-col">
         <p class="footer-title">Contactos</p>
-        <div class="footer-contact-line"><a href="formulario.html">Pedir site via formulário</a></div>
+        <div class="footer-contact-line"><a href="formulario.html">Pedir proposta</a></div>
         <div class="footer-contact-line"><a href="mailto:berto.barata77@gmail.com">berto.barata77@gmail.com</a></div>
         <div class="footer-contact-line"><a href="https://instagram.com/berto_barata" target="_blank" rel="noopener noreferrer">@berto_barata</a></div>
+        <div class="footer-contact-line"><a href="https://bertobarata.com" target="_blank" rel="noopener noreferrer">bertobarata.com</a></div>
       </div>
     </div>
     <div class="footer-bottom">
       <small>© <span id="year"></span> Barata Studio · Do briefing ao launch: web feita à mão.</small>
     </div>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="js/lenis-init.js" defer></script>
   <script src="js/site.js" defer></script>
   <script src="js/cookie-consent.js" defer></script>
 </body>

@@ -2,218 +2,160 @@
 name: Barata Studio
 description: "Do briefing ao launch: web feita à mão."
 colors:
-  teal: "#1A6870"
-  teal-deep: "#164F58"
-  teal-metal: "#2F6B73"
-  teal-hover: "#4F98A3"
-  bg-warm: "#F5F3EE"
-  bg-warm-hi: "#FBF9F5"
-  bg-dark: "#121315"
-  bg-dark-hi: "#191B1F"
-  bg-dark-mid: "#1E2024"
-  text-dark: "#16171A"
-  text-light: "#F4F1EA"
-  text-muted: "#828990"
-  text-muted-on-light: "#5B6065"
-  text-subtle: "#9CA3A8"
-  whatsapp: "#25D366"
+  paper: "oklch(0.962 0.014 88)"
+  paper-hi: "oklch(0.985 0.01 90)"
+  ink: "oklch(0.21 0.03 215)"
+  ink-2: "oklch(0.42 0.025 215)"
+  teal: "oklch(0.47 0.075 208)"
+  teal-deep: "oklch(0.34 0.06 212)"
+  teal-lit: "oklch(0.8 0.1 195)"
+  sand: "oklch(0.87 0.07 82)"
+  ok: "oklch(0.8 0.12 155)"
+  term: "oklch(0.2 0.026 215 / 0.84)"
+  term-solid: "oklch(0.22 0.026 215 / 0.94)"
+  term-ink: "oklch(0.93 0.012 90)"
+  term-dim: "oklch(0.72 0.02 215)"
+  glass: "oklch(0.99 0.012 90 / 0.5)"
+  glass-strong: "oklch(0.99 0.012 90 / 0.74)"
+  panel: "oklch(0.99 0.012 90 / 0.68)"
+  hair: "oklch(0.25 0.03 215 / 0.14)"
+  whatsapp: "oklch(0.62 0.17 150)"
 typography:
   display:
-    fontFamily: "Comico, cursive"
-    fontSize: "clamp(2.25rem, 5vw, 4rem)"
+    fontFamily: "Comico, Zodiak, serif"
+    fontSize: "clamp(2.5rem, 6.3vw, 5.6rem)"
     fontWeight: 400
-    lineHeight: 1.02
-    letterSpacing: "0.01em"
+    lineHeight: 0.98
+    letterSpacing: "0.005em"
   headline:
-    fontFamily: "Comico, cursive"
-    fontSize: "clamp(1.75rem, 3.5vw, 3rem)"
+    fontFamily: "Comico, Zodiak, serif"
+    fontSize: "clamp(2.2rem, 5vw, 4rem)"
     fontWeight: 400
-    lineHeight: 1.1
-    letterSpacing: "0.01em"
+    lineHeight: 1.05
+    letterSpacing: "0.005em"
   title:
-    fontFamily: "Comico, cursive"
-    fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)"
-    fontWeight: 400
+    fontFamily: "Zodiak, Georgia, serif"
+    fontSize: "clamp(1.2rem, 2.2vw, 1.55rem)"
+    fontWeight: 650
     lineHeight: 1.2
+    letterSpacing: "-0.01em"
   body:
-    fontFamily: "Zodiak, serif"
-    fontSize: "1rem"
+    fontFamily: "Zodiak, Georgia, serif"
+    fontSize: "1.0625rem"
     fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "0.01em"
+    lineHeight: 1.65
+    letterSpacing: "normal"
   label:
-    fontFamily: "Zodiak, serif"
-    fontSize: "0.72rem"
-    fontWeight: 600
-    letterSpacing: "0.12em"
+    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontSize: "0.78rem"
+    fontWeight: 500
+    lineHeight: 1.4
+    letterSpacing: "0.1em"
+  terminal:
+    fontFamily: "JetBrains Mono, ui-monospace, monospace"
+    fontSize: "0.84rem"
+    fontWeight: 400
+    lineHeight: 1.7
+    letterSpacing: "normal"
 rounded:
-  input: "8px"
-  md: "12px"
-  lg: "20px"
+  sm: "12px"
+  lg: "22px"
+  xl: "28px"
   pill: "999px"
 spacing:
-  card: "24px"
-  gutter: "32px"
-  section: "120px"
+  gutter: "clamp(1rem, 4vw, 2rem)"
+  section: "clamp(3.5rem, 9vw, 8rem)"
+  wrap: "1180px"
 components:
   button-primary:
     backgroundColor: "{colors.teal}"
-    textColor: "#FFFFFF"
-    typography: "{typography.label}"
+    textColor: "{colors.paper-hi}"
+    typography: "{typography.display}"
     rounded: "{rounded.pill}"
-    padding: "0.85rem 1.75rem"
+    padding: "0.95rem 1.7rem"
+    height: "48px"
   button-primary-hover:
-    backgroundColor: "{colors.teal-metal}"
-    textColor: "#FFFFFF"
+    backgroundColor: "{colors.teal-deep}"
+    textColor: "{colors.paper-hi}"
   button-ghost:
-    backgroundColor: "transparent"
-    textColor: "{colors.text-light}"
+    backgroundColor: "{colors.panel}"
+    textColor: "{colors.ink}"
     rounded: "{rounded.pill}"
-    padding: "0.85rem 1.75rem"
-  card:
-    backgroundColor: "{colors.bg-dark-hi}"
-    textColor: "{colors.text-light}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.card}"
+    padding: "0.95rem 1.7rem"
+    height: "48px"
+  terminal:
+    backgroundColor: "{colors.term-solid}"
+    textColor: "{colors.term-ink}"
+    typography: "{typography.terminal}"
+    rounded: "{rounded.lg}"
+  terminal-chip:
+    textColor: "{colors.term-ink}"
+    rounded: "{rounded.pill}"
+    height: "36px"
   input:
-    backgroundColor: "#00000040"
-    textColor: "{colors.text-light}"
-    rounded: "{rounded.input}"
-    padding: "0.65rem 0.85rem"
-  section-label:
-    textColor: "{colors.teal-hover}"
+    backgroundColor: "{colors.paper-hi}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.sm}"
+    padding: "0.8rem 0.95rem"
+    height: "48px"
+  panel:
+    backgroundColor: "{colors.panel}"
+    rounded: "{rounded.lg}"
+  tag:
+    backgroundColor: "{colors.panel}"
+    textColor: "{colors.ink-2}"
     typography: "{typography.label}"
+    rounded: "{rounded.pill}"
 ---
 
 # Design System: Barata Studio
 
-## 1. Overview
+## 1. Overview: The Glass Workbench
 
-**Creative North Star: "The Quiet Atelier"**
+Light, warm paper with a soft aurora of petróleo, sand and sky behind everything; frosted glass and dark terminal windows sit on top. The handmade side comes from the Comico wordmark and headlines; the technical side from JetBrains Mono labels and an interactive terminal in the hero. It is a light-only site by decision (the visitor is a business owner reading in daylight, comparing studios); there is no dark mode.
 
-Barata Studio is a one-person web atelier that sells the opposite of a template. The site has to feel like the workshop of someone who cuts every joint by hand: dark, warm, unhurried, and confident enough to stay quiet. Nothing shouts. The petróleo (teal) accent is rationed to almost nothing, motion is slow and short, and the loudest thing on the page is a hand-drawn wordmark that literally looks made à mão. The tagline is the whole brief: "Do briefing ao launch: web feita à mão."
+Layout is a 1180px wrap with a 12-col feel, left-aligned and asymmetric. Every section uses a different layout family: hero (full-width headline, then copy + terminal), stacked manifesto, mark + copy split, full-width process log, typeset proof rows, service list, project plates, drenched CTA. No more than two consecutive two-column sections.
 
-The system runs predominantly on warm-tinted darks (`#121315` charcoal, never pure black) with a few bright editorial breathing rooms in warm off-white (`#F5F3EE`, never pure white). Depth comes from tonal layering of dark surfaces and slow GSAP scroll choreography, not from decoration. This is a brand register: on this site the design *is* the product, so craft is the argument.
+## 2. Colors: Paper, Ink and Petróleo
 
-It explicitly rejects the SaaS-template look, "startup AI" aesthetics (neon purples/blues, glow-on-black), generic glassmorphism, and any effect that reads as a tech demo rather than a studio in control of form, rhythm, and detail.
+- **Paper** `oklch(0.962 0.014 88)` is the page; never pure white. **Ink** `oklch(0.21 0.03 215)` for text (15.8:1), **Ink-2** for secondary copy (7.5:1 on paper, 5:1 on the darkest aurora area).
+- **Petróleo** (`teal`) is the single accent: buttons, links, focus rings. **Teal-deep** for small mono labels (10:1), the final CTA block and hovers. **Teal-lit** only on dark surfaces (terminal, CTA).
+- Terminal surfaces: `term` (blurred, hero only) and `term-solid` (everywhere else). Terminal text 9.4:1, dim text 4.7:1.
+- Strategy: Restrained on the page, one Drenched block (final CTA). WhatsApp green only on the floating button.
 
-**Key Characteristics:**
-- Warm-tinted darkness: charcoal and off-white, never `#000` or `#fff`.
-- Petróleo as a rare guest: teal appears on ~5% of any screen (eyebrows, hover, focus, small interface detail).
-- Hand-drawn headings against a serif body: the pairing is the identity.
-- Slow, short, few-things-at-once motion. Depth over spectacle.
-- Editorial lists and generous negative space instead of icon-card grids.
+## 3. Typography: Handmade Display, Readable Body
 
-## 2. Colors
+- **Comico** (display): H1 and H2, logo wordmark, buttons, big numbers. All-caps by design, so never for anything longer than a headline. Served as a 50 KB Latin subset without contextual alternates, preloaded, `font-display: optional`.
+- **Zodiak** (body): paragraphs, H3s, FAQ questions, form text. Measure capped at 58 to 68ch.
+- **JetBrains Mono** (labels and terminal): section labels (`// LABEL`, max 3 per page), nav links, tags, terminal. Minimum 12px.
+- Scale ratio stays at or above 1.25 between steps; fluid `clamp()` for headings. The hero H1 must sit on two lines at desktop.
 
-A warm neutral system, dark-dominant, with a single petróleo accent held in reserve and one functional WhatsApp green.
+## 4. Elevation: Glass, Panels and Shadows
 
-### Primary
-- **Petróleo** (`#1A6870`): The one accent. Primary buttons, focus/active states, the featured price card border, the service-number hover, progress fills. Alive but never neon.
-- **Petróleo Deep** (`#164F58`): Reserved for subtle shadows, deep borders, and the radial glow behind the OG/hero atmosphere.
-- **Petróleo Metal** (`#2F6B73`): Primary-button hover surface; a metallic half-step up from the base teal.
-- **Petróleo Light** (`#4F98A3`): The luminous edge of the accent. Section eyebrows (`.section-label`), focus rings, hover text on ghost buttons, links, small motion highlights. This is the teal you actually *read*.
-
-### Neutral (warm)
-- **Warm Paper** (`#F5F3EE`): Light-section background (manifesto, presence, services, process summary) and inner-page canvas. The editorial breathing rooms.
-- **Warm Paper Elevated** (`#FBF9F5`): Raised light surfaces on the warm sections.
-- **Charcoal** (`#121315`): The dominant background. Warm-tinted near-black.
-- **Charcoal Elevated** (`#191B1F`): Cards and the scrolled header surface.
-- **Charcoal Mid** (`#1E2024`): The third tonal step for nested dark surfaces and image wells.
-- **Ink** (`#16171A`): Text on warm surfaces.
-- **Bone** (`#F4F1EA`): Primary text on dark surfaces. Warm off-white.
-- **Muted (on dark)** (`#828990`): Secondary text on charcoal. Tuned to clear ≥4.5:1 on `#121315` and elevated cards.
-- **Muted (on light)** (`#5B6065`): Secondary text on warm paper. The darker sibling that keeps ≥4.5:1 on `#F5F3EE`.
-- **Subtle** (`#9CA3A8`): The lightest greyed text, for the least important labels on dark.
-
-### Functional
-- **WhatsApp Green** (`#25D366`): Only the floating WhatsApp/contact affordance. Never decorative, never brand.
-
-### Named Rules
-**The 5% Rule.** Petróleo touches at most ~5% of any screen: eyebrows, hover, focus, a single primary button, a progress line. Its rarity is the luxury. If teal starts to dominate a section, the section is wrong.
-
-**The No-Pure Rule.** Never `#000`, never `#fff`. Every neutral is tinted warm. Backgrounds are charcoal or warm paper; text is bone or ink.
-
-**The Surface-Aware Muted Rule.** Secondary text uses `text-muted` (#828990) on dark and `text-muted-on-light` (#5B6065) on warm. One grey never serves both surfaces: the dark needs a lighter muted, the light needs a darker one, both to hold 4.5:1.
-
-## 3. Typography
-
-**Display Font:** Comico (self-hosted, with `cursive` fallback)
-**Body Font:** Zodiak (self-hosted variable serif, with `serif` fallback)
-
-**Character:** Comico is a hand-drawn marker face: it is the literal rendering of "web feita à mão" and carries every heading and button. Zodiak is a refined editorial serif that grounds the hand-drawn headings with adult, readable body copy. The tension between the two, playful mark plus serious text, is the entire type identity. Luxury here comes from restraint: few scales, generous tracking on labels, no third font.
-
-### Hierarchy
-- **Display** (Comico 400, `clamp(2.25rem, 5vw, 4rem)`, line-height 1.02): Hero title and top-of-section H2s. Set in near-uppercase hand-drawn letterforms.
-- **Headline** (Comico 400, `clamp(1.75rem, 3.5vw, 3rem)`, line-height 1.1): Section headings (manifesto, projects, services, CTA).
-- **Title** (Comico 400, `clamp(1.25rem, 2.5vw, 1.75rem)`, line-height 1.2): Card titles, panel titles, price-plan names.
-- **Body** (Zodiak 400, `1rem`, line-height 1.6, tracking 0.01em): All paragraph copy. Keep measure at 65–75ch on wide layouts.
-- **Label** (Zodiak 600, `0.72rem`, tracking `0.12em`, uppercase): Section eyebrows (`.section-label`), meta sectors, kicker text. Petróleo Light on dark, muted on light.
-
-### Named Rules
-**The Two-Voice Rule.** Comico for anything titular or interactive (headings, buttons, numbers). Zodiak for anything you read in sentences. Never a third family; never Comico for body; never Zodiak for a button.
-
-**The Few-Scales Rule.** The luxury is contention: four heading steps and one body size. Do not invent intermediate sizes; use weight, case, and the fixed clamp steps.
-
-## 4. Elevation
-
-Flat by default, dark-tonal by construction. Depth is built by stacking warm-charcoal tones (`#121315` to `#191B1F` to `#1E2024`), not by casting shadows on resting surfaces. Shadows appear only as a response to state (hover) or on the sculptural hero phone mockups, and they are always wide, soft, and low-opacity, never hard drop shadows.
-
-### Shadow Vocabulary
-- **Hover lift** (`box-shadow: 0 10px 30px rgba(0,0,0,0.35)`): Cards on hover, paired with a 4px translateY and a teal border.
-- **Accent lift** (`box-shadow: 0 8px 24px rgba(26,104,112,0.35)`): Primary button on hover only. A soft petróleo halo.
-- **Featured glow** (`box-shadow: 0 16px 40px rgba(26,104,112,0.12)`): The single featured price card, a barely-there teal elevation.
-- **Sculptural device** (`box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4)`): The hero phone frames only. Deep, cinematic, layered.
-
-### Named Rules
-**The Flat-At-Rest Rule.** Surfaces are flat until touched. If a card has a shadow when nobody is hovering it, remove it and let the tonal step carry the depth.
+- **Real blur** (`backdrop-filter`) only on four things: the header (on a pseudo-element, so the mobile menu is not trapped inside it), the hero terminal, the mobile menu overlay and the cookie banner. Everything else is a **panel**: same translucent colour, no blur (cheap on phones).
+- Shadows are tinted with the ink hue, never black: `--shadow-glass` (inset highlight + long soft drop) for glass, `--shadow-soft` for panels.
+- `prefers-reduced-transparency` removes all blur and makes surfaces solid.
+- z-index scale: float 90, header 100, overlay controls 120, toast 150, skip link 200.
 
 ## 5. Components
 
-### Buttons
-- **Shape:** Full pill (`border-radius: 999px`). Type set in Comico 600, tracking 0.03em, padding `0.85rem 1.75rem`.
-- **Primary:** Petróleo (`#1A6870`) fill, white text. Hover shifts to Petróleo Metal (`#2F6B73`), lifts 1px, gains the accent halo shadow.
-- **Ghost:** Transparent with a 1px `rgba(bone, 0.25)` border and bone text. Hover recolors border and text to Petróleo Light and lifts 1px. Variants `--ghost-dark` (warm surfaces, ink text) and `--ghost-light` mirror this on their backgrounds.
-
-### Chips (service + project tags)
-- **Style:** Small teal-tinted pills with Petróleo Light label text, uppercase, for capability tags (`DESIGN À MEDIDA`, `MOBILE-FIRST`). Quiet, informational, never primary.
-
-### Cards / Containers
-- **Corner Style:** 12px (`--radius`); large containers 20px (`--radius-lg`).
-- **Background:** Charcoal Elevated (`#191B1F`) on dark sections.
-- **Border:** Hairline `rgba(255,255,255,0.04)` at rest.
-- **Shadow Strategy:** None at rest; Hover lift + teal border on hover (see Elevation).
-- **Internal Padding:** 24px (`1.5rem`).
-- **Featured price card:** Petróleo-tinted border + Featured glow to single it out. No other card competes.
-
-### Inputs / Fields
-- **Style:** Recessed wells: `rgba(0,0,0,0.25)` fill, 1px `rgba(255,255,255,0.1)` border, 8px radius, bone text.
-- **Focus:** Border shifts to Petróleo (`#1A6870`) and the fill deepens to `rgba(0,0,0,0.4)`. No outline glow; the border shift is the signal. A visible `:focus-visible` ring exists globally for keyboard users.
-
-### Navigation
-- **Style:** Floating, near-invisible header: brand monogram left, four plain links center (Serviços, Projetos, Preços, FAQ) in Bone at 60% opacity, one pill CTA right. On scroll the header compacts and gains a hairline top shadow.
-- **Mobile:** The four links become a full-screen editorial overlay (numbered items, sections Navegar/Falar, secondary CTAs, single 220ms fade-in). The overlay build is mobile-only (`max-width: 768px`); the desktop bar never inherits it.
-
-### Signature Component: the BB hero devices
-Sculptural phone mockups (`--phone-w: 320px`) with deep multi-layer shadows, a notch island, and GSAP scroll-driven swap on desktop / a card-deal marquee on mobile. This is the one place spectacle is allowed, and even here motion stays slow.
+- **Buttons**: pill, 48px tall, Comico label, one line (`white-space: nowrap`). Primary petróleo; ghost on panel. `scale(0.97)` on press. One label per intent across the site: "Pedir proposta" (form), "Ver projetos", "Falar no WhatsApp".
+- **Terminal**: window with title bar (traffic-light dots only on the hero terminal), output region is a focusable `role="log"`, chips for each command (44px on touch), input at 16px on touch so iOS does not zoom. Commands: ajuda, servicos, projetos, processo, contacto, sobre, abrir N, clear.
+- **Project plate**: panel with 10px padding around a real screenshot (16:10, 12px inner radius), caption below (sector in mono, title in Zodiak 650, brief, link).
+- **Proof rows**: number in Comico (moderate size) + label in mono, beside the project and claim. Not metric cards.
+- **Forms**: label above input (mono caps), 48px fields, 12px radius, inline error under each field announced through `aria-describedby`, a status line after the submit button, busy state while WhatsApp opens.
+- **Header**: floating pill, logo mask (colour from CSS), mono nav, CTA. Mobile: "Menu" opens a full-screen frosted overlay.
 
 ## 6. Do's and Don'ts
 
-### Do:
-- **Do** keep petróleo under ~5% of any screen: eyebrows, hover, focus, one primary button, progress lines.
-- **Do** tint every neutral warm. Backgrounds charcoal (`#121315`) or warm paper (`#F5F3EE`); text bone (`#F4F1EA`) or ink (`#16171A`).
-- **Do** set headings and buttons in Comico, body in Zodiak. Two voices, no third.
-- **Do** use `text-muted` on dark and `text-muted-on-light` on warm so secondary text always clears 4.5:1.
-- **Do** build depth by stacking charcoal tones; let shadows appear only on hover and on the hero devices.
-- **Do** favor editorial lists and negative space over icon-in-a-circle card grids.
-- **Do** keep motion slow, short in amplitude, one-thing-at-a-time (GSAP ScrollTrigger, ease-out, no bounce).
+**Do**
+- Keep the hero visible without JavaScript; entrance motion is CSS only, scroll reveal only below the fold.
+- Use the radius scale: pill / 28 / 22 / 12. Use tokens for every colour.
+- Give every touch target at least 44px on coarse pointers.
+- Show real work (screenshots) and real, verifiable numbers.
 
-### Don't:
-- **Don't** use `#000` or `#fff` anywhere.
-- **Don't** let the site read as a SaaS template or "startup AI" marketing page (no neon purples/blues, no glow-on-black).
-- **Don't** use decorative glassmorphism or heavy blur; depth comes from tone, not frosted panels.
-- **Don't** use `border-left`/`border-right` greater than 1px as a colored accent stripe on cards, list items, or callouts. Light the leading number or tint the background instead.
-- **Don't** use gradient text (`background-clip: text`); emphasize with weight, size, or the solid petróleo.
-- **Don't** ship the hero-metric template (big number, small label, gradient) as filler. The two impact figures earn their place only because they carry real, labeled proof.
-- **Don't** overshoot, bounce, or fly objects around. If motion feels like a demo, it is wrong.
-- **Don't** introduce a third typeface or use Comico for body copy.
+**Don't**
+- No prices anywhere: every project is quoted individually.
+- No more than 3 mono section labels per page; no numbered eyebrows.
+- No blur on lists of cards; no decorative dots outside the hero terminal; no infinite animations.
+- No em dashes in copy; no new CTA labels for the same intent; no dark sections other than the terminal windows and the final CTA.
