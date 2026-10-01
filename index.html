@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#1A6870" />
+  <meta name="color-scheme" content="light" />
+  <script>document.documentElement.classList.add('js')</script>
+  <meta name="theme-color" content="#F3F1EA" />
 
   <title>Barata Studio — Websites Personalizados &amp; Web Design em Portugal</title>
   <meta name="description" content="Websites personalizados para negócios que precisam de parecer credíveis, claros e bem resolvidos logo no primeiro contacto." />
@@ -35,17 +37,18 @@
     "image": "https://baratastudio.com/assets/og/og-default.png",
     "email": "berto.barata77@gmail.com",
     "telephone": "+351939443377",
-    "priceRange": "300 € - 800 €",
     "founder": {
       "@type": "Person",
-      "name": "Berto Barata"
+      "name": "Berto Barata",
+      "url": "https://bertobarata.com"
     },
     "areaServed": {
       "@type": "Country",
       "name": "Portugal"
     },
     "sameAs": [
-      "https://instagram.com/berto_barata"
+      "https://instagram.com/berto_barata",
+      "https://bertobarata.com"
     ],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
@@ -69,30 +72,19 @@
   <!-- Fonts loaded via @font-face in styles.css -->
 
   <!-- Styles -->
-  <link rel="preload" href="css/styles.css?v=26" as="style" />
-  <link rel="stylesheet" href="css/styles.css?v=26" />
-  <link rel="preload" as="image" href="assets/fotos/phone-greenbond.webp" type="image/webp" />
-  <link rel="preload" as="image" href="assets/fotos/phone-cnr.webp" type="image/webp" />
-  <link rel="preload" as="image" media="(min-width: 769px)" href="assets/fotos/phone-ludy-a.webp" type="image/webp" />
-  <link rel="preload" as="image" media="(min-width: 769px)" href="assets/fotos/phone-gentle.webp" type="image/webp" />
+  <link rel="preload" href="assets/fonts/web/comico.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/web/zodiak-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="css/styles.css?v=33" as="style" />
+  <link rel="stylesheet" href="css/styles.css?v=33" />
 </head>
 <body class="page-home">
-
-  <!-- Background Watermarks -->
-  <div class="site-watermark-container" aria-hidden="true">
-    <div class="site-watermark watermark--1"><img src="assets/logos/logo-escuro-transparent.svg" alt="" /></div>
-    <div class="site-watermark watermark--2"><img src="assets/logos/logo-escuro-transparent.svg" alt="" /></div>
-    <div class="site-watermark watermark--3"><img src="assets/logos/logo-escuro-transparent.svg" alt="" /></div>
-  </div>
 
   <a href="#main-content" class="skip-link">Saltar para o conteúdo</a>
 
   <!-- ===== FLOATING HEADER ===== -->
   <header class="site-header" id="site-header">
     <a href="#home" class="header-brand" aria-label="Barata Studio - Ir para o topo">
-      <span class="header-monogram">
-        <img src="assets/logos/logo-claro-transparent.png" alt="Barata Studio" />
-      </span>
+      <span class="header-monogram" role="img" aria-label="Barata Studio"></span>
       <span class="header-wordmark">Barata Studio</span>
     </a>
     <nav class="top-nav" aria-label="Navegação principal">
@@ -101,194 +93,120 @@
         <li class="nav-close-item"><button type="button" class="nav-close" aria-label="Fechar menu">&times;</button></li>
         <li><a href="#services">Serviços</a></li>
         <li><a href="#projects">Projetos</a></li>
-        <li><a href="precos.html">Preços</a></li>
         <li><a href="faq.html">FAQ</a></li>
       </ul>
     </nav>
-    <a class="header-cta button button--primary" href="formulario.html">Falar sobre o projeto</a>
+    <a class="header-cta button button--primary" href="formulario.html">Pedir proposta</a>
   </header>
 
   <main id="main-content">
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="home" aria-label="Introdução">
+      <div class="hero-grid">
+        <div class="hero-head">
+          <p class="hero-eyebrow">Barata Studio</p>
+          <h1 class="hero-title">
+            <span class="hero-line">Do briefing ao launch:</span>
+            <span class="hero-line">web feita à mão.</span>
+          </h1>
+        </div>
+        <div class="hero-copy">
+          <p class="hero-body">Websites personalizados para negócios que precisam de parecer credíveis, claros e bem resolvidos logo no primeiro contacto.</p>
+          <div class="hero-ctas">
+            <a class="button button--primary" href="formulario.html">Pedir proposta</a>
+            <a class="button button--ghost" href="#projects">Ver projetos</a>
+          </div>
+        </div>
 
-      <!-- Phone carousel (mobile only, card-deal effect) -->
-      <div class="hero-phones" id="hero-phones" aria-hidden="true">
-        <div class="hero-phones-track">
-          <div class="phone phone--1">
-            <div class="phone-frame">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <img src="assets/fotos/phone-greenbond.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
-              </div>
+        <div class="hero-terminal">
+          <div class="term" id="terminal" role="region" aria-label="Terminal interativo do Barata Studio">
+            <div class="term-bar" aria-hidden="true">
+              <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+              <span class="term-title">berto@barata-studio: ~</span>
             </div>
-          </div>
-          <div class="phone phone--2">
-            <div class="phone-frame">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <img src="assets/fotos/phone-cnr.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+            <div class="term-body">
+              <div class="term-out" id="term-out" role="log" aria-live="polite" aria-label="Resultado dos comandos" tabindex="0">
+                <p class="term-line term-cmd">barata --sobre</p>
+                <p class="term-line">Barata Studio · websites feitos à mão por Berto Barata</p>
+                <p class="term-line term-dim">resposta em menos de 24h</p>
+                <div class="term-gap"></div>
+                <p class="term-line term-cmd">ls projetos/</p>
+                <p class="term-line"><a href="https://valejasac.pt" target="_blank" rel="noopener noreferrer">valejas-ac</a>  <a href="https://greenbond.pt" target="_blank" rel="noopener noreferrer">greenbond</a>  <a href="https://ludyartes.pt" target="_blank" rel="noopener noreferrer">ludy-artes</a>  <a href="#projects">+4</a></p>
               </div>
-            </div>
-          </div>
-          <div class="phone phone--3">
-            <div class="phone-frame">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <img src="assets/fotos/phone-ludy-a.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
+              <div class="term-chips" id="term-chips" hidden>
+                <button type="button" class="term-chip" data-cmd="servicos">servicos</button>
+                <button type="button" class="term-chip" data-cmd="projetos">projetos</button>
+                <button type="button" class="term-chip" data-cmd="processo">processo</button>
+                <button type="button" class="term-chip" data-cmd="contacto">contacto</button>
+                <button type="button" class="term-chip" data-cmd="ajuda">ajuda</button>
               </div>
-            </div>
-          </div>
-          <div class="phone phone--4">
-            <div class="phone-frame">
-              <div class="phone-island"></div>
-              <div class="phone-screen">
-                <img src="assets/fotos/phone-gentle.webp" alt="" loading="eager" decoding="async" width="390" height="848" />
-              </div>
+              <form class="term-form" id="term-form" hidden autocomplete="off">
+                <label for="term-input" class="sr-only">Comando</label>
+                <span class="term-prompt" aria-hidden="true">$</span>
+                <input class="term-input" id="term-input" type="text" inputmode="text" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="escreve «ajuda»" />
+              </form>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Vertical marquee showcase (desktop only, continuous autoplay) -->
-      <div class="hero-marquee" id="hero-marquee" aria-hidden="true">
-        <div class="marquee-col">
-          <div class="marquee-track">
-            <div class="marquee-card"><img src="assets/projects/greenbond.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/barbeariasupra.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/ludyartes.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/greenbond.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/barbeariasupra.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/ludyartes.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-          </div>
-        </div>
-        <div class="marquee-col marquee-col--b">
-          <div class="marquee-track marquee-track--reverse">
-            <div class="marquee-card"><img src="assets/projects/queenbeehair.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/gentlelaughter.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/cnr.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/queenbeehair.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/gentlelaughter.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-            <div class="marquee-card"><img src="assets/projects/cnr.webp" alt="" loading="eager" decoding="async" width="1200" height="750" /></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero copy -->
-      <div class="hero-content" id="hero-content">
-        <p class="hero-eyebrow">Barata Studio</p>
-        <h1 class="hero-title">
-          <span class="hero-line"><span class="hero-line-inner">Do briefing ao launch:</span></span>
-          <span class="hero-line"><span class="hero-line-inner">web feita à mão.</span></span>
-        </h1>
-        <p class="hero-body">Websites personalizados para negócios que precisam de parecer credíveis, claros e bem resolvidos logo no primeiro contacto.</p>
-        <div class="hero-ctas">
-          <a class="button button--primary" href="formulario.html">Pedir proposta</a>
-          <a class="button button--ghost" href="#projects">Ver projetos</a>
-        </div>
-        <p class="hero-trust-tag">Resposta em menos de 24h · processo claro e implementação à medida</p>
-      </div>
-
-      <div class="hero-scroll-hint" aria-hidden="true">
-        <div class="scroll-line"></div>
-      </div>
-
     </section>
 
     <!-- ===== MANIFESTO ===== -->
     <section class="manifesto" id="manifesto">
       <div class="manifesto-inner">
-        <p class="section-label">Posicionamento</p>
         <h2 class="manifesto-headline">Sem fórmulas prontas.<br>Sem sites com aspeto de template.</h2>
         <p class="manifesto-body">Cada projeto é pensado de raiz, desenhado com intenção e construído para refletir a identidade do cliente com clareza, sofisticação e utilidade real.</p>
       </div>
     </section>
 
-    <!-- ===== MARQUEE BAND ===== -->
-    <div class="marquee-band" aria-hidden="true">
-      <div class="marquee-track">
-        <div class="marquee-content">
-          <span>Websites à medida</span><span class="marquee-dot">·</span>
-          <span>Design com intenção</span><span class="marquee-dot">·</span>
-          <span>Web feita à mão</span><span class="marquee-dot">·</span>
-          <span>Sem templates</span><span class="marquee-dot">·</span>
-          <span>Do briefing ao launch</span><span class="marquee-dot">·</span>
-          <span>Craft, não código</span><span class="marquee-dot">·</span>
+    <!-- ===== IDENTITY ===== -->
+    <section class="identity" id="bb-depth" aria-label="Identidade da marca">
+      <div class="identity-inner">
+        <div class="identity-mark" aria-hidden="true">
+          <span class="mark-glyph"></span>
         </div>
-        <div class="marquee-content" aria-hidden="true">
-          <span>Websites à medida</span><span class="marquee-dot">·</span>
-          <span>Design com intenção</span><span class="marquee-dot">·</span>
-          <span>Web feita à mão</span><span class="marquee-dot">·</span>
-          <span>Sem templates</span><span class="marquee-dot">·</span>
-          <span>Do briefing ao launch</span><span class="marquee-dot">·</span>
-          <span>Craft, não código</span><span class="marquee-dot">·</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== BB SCULPTURAL DEPTH ===== -->
-    <section class="bb-depth" id="bb-depth" aria-label="Identidade da marca">
-      <div class="bb-depth-inner">
-        <div class="bb-depth-visual" id="bb-depth-visual" aria-hidden="true">
-          <div class="depth-layer depth-layer--1">
-            <img src="assets/logos/logo-escuro-transparent.png" alt="" loading="lazy" />
-          </div>
-          <div class="depth-layer depth-layer--2">
-            <img src="assets/logos/logo-escuro-transparent.png" alt="" loading="lazy" />
-          </div>
-          <div class="depth-layer depth-layer--3">
-            <img src="assets/logos/logo-escuro-transparent.png" alt="" loading="lazy" />
-          </div>
-        </div>
-        <div class="bb-depth-copy" id="bb-depth-copy">
-          <p class="section-label">Identidade</p>
+        <div class="identity-copy">
           <h2>Uma identidade construída com intenção.</h2>
           <p>Minimalista na forma,<br>detalhada na execução.</p>
         </div>
       </div>
     </section>
 
-    <!-- ===== PROCESS LAYERS ===== -->
-    <section class="process-layers" id="process-layers" aria-label="Processo de trabalho">
-      <div class="process-layers-sticky">
-        <div class="process-layers-header">
-          <p class="section-label section-label--light">Processo</p>
+    <!-- ===== PROCESS ===== -->
+    <section class="process" id="process-layers" aria-label="Processo de trabalho">
+      <div class="process-inner">
+        <div class="process-head">
+          <p class="section-label">Processo</p>
           <h2>Web feita à mão.</h2>
         </div>
-        <div class="process-panels" id="process-panels">
-          <div class="process-panel" data-step="0">
-            <div class="panel-glass">
-              <span class="panel-num">01</span>
-              <h3 class="panel-title">Briefing</h3>
-              <p class="panel-desc">Entender a marca, o negócio e o objetivo do site. Sem pressupostos, com perguntas certas.</p>
-            </div>
+        <div class="term process-term">
+          <div class="term-bar" aria-hidden="true">
+            <span class="term-title">barata processo --passos</span>
           </div>
-          <div class="process-panel" data-step="1">
-            <div class="panel-glass">
-              <span class="panel-num">02</span>
-              <h3 class="panel-title">Design</h3>
-              <p class="panel-desc">Transformar intenção em direção visual clara. Cada detalhe tem uma razão de existir.</p>
-            </div>
-          </div>
-          <div class="process-panel" data-step="2">
-            <div class="panel-glass">
-              <span class="panel-num">03</span>
-              <h3 class="panel-title">Build</h3>
-              <p class="panel-desc">Desenvolver uma experiência limpa, rápida e cuidada. Código à medida, sem atalhos.</p>
-            </div>
-          </div>
-          <div class="process-panel" data-step="3">
-            <div class="panel-glass">
-              <span class="panel-num">04</span>
-              <h3 class="panel-title">Launch</h3>
-              <p class="panel-desc">Entregar um site pronto para ser usado, mostrado e evoluído. Do briefing ao launch.</p>
-            </div>
-          </div>
-        </div>
-        <div class="process-nav" aria-hidden="true">
-          <div class="process-nav-track">
-            <div class="process-nav-fill" id="process-fill"></div>
+          <div class="term-body">
+            <ol class="process-steps">
+              <li class="process-step">
+                <h3 class="panel-title">briefing</h3>
+                <p class="panel-desc">Entender a marca, o negócio e o objetivo do site. Sem pressupostos, com perguntas certas.</p>
+                <span class="panel-ok" aria-hidden="true">ok</span>
+              </li>
+              <li class="process-step">
+                <h3 class="panel-title">design</h3>
+                <p class="panel-desc">Transformar intenção em direção visual clara. Cada detalhe tem uma razão de existir.</p>
+                <span class="panel-ok" aria-hidden="true">ok</span>
+              </li>
+              <li class="process-step">
+                <h3 class="panel-title">build</h3>
+                <p class="panel-desc">Desenvolver uma experiência limpa, rápida e cuidada. Código à medida, sem atalhos.</p>
+                <span class="panel-ok" aria-hidden="true">ok</span>
+              </li>
+              <li class="process-step">
+                <h3 class="panel-title">launch</h3>
+                <p class="panel-desc">Entregar um site pronto para ser usado, mostrado e evoluído. Do briefing ao launch.</p>
+                <span class="panel-ok" aria-hidden="true">ok</span>
+              </li>
+            </ol>
           </div>
         </div>
       </div>
@@ -298,7 +216,6 @@
     <section class="presence" id="presence" aria-label="Histórias de sucesso">
       <div class="presence-inner">
         <div class="presence-header">
-          <p class="section-label">Impacto</p>
           <h2>Do conceito ao resultado real.</h2>
           <p class="presence-subtitle">Resultados concretos, desempenho sólido e presença digital ajustada ao contexto de cada negócio.</p>
         </div>
@@ -307,7 +224,7 @@
             <div class="presence-card-visual">
               <div class="impact-metric">
                 <span class="metric-value">100/100</span>
-                <span class="metric-label">Performance Google</span>
+                <span class="metric-label">Acessibilidade Google</span>
               </div>
             </div>
             <div class="presence-card-meta">
@@ -410,8 +327,7 @@
         <div class="services-cta">
           <p>Se já sabe o que precisa, o próximo passo é simples: alinhamos escopo, prioridade e prazo.</p>
           <div class="services-cta-actions">
-            <a class="button button--primary" href="precos.html">Ver preços base</a>
-            <a class="button button--ghost button--ghost-dark" href="formulario.html">Pedir proposta</a>
+            <a class="button button--primary" href="formulario.html">Pedir proposta</a>
           </div>
         </div>
       </div>
@@ -452,7 +368,7 @@
               <a href="https://greenbond.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Greenbond (novo separador)">
                 <img src="assets/projects/greenbond.webp"
                      alt="Plataforma Greenbond - interface limpa e institucional para gestão de ativos Web3"
-                     loading="lazy" />
+                     width="1200" height="750" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="project-meta">
@@ -468,7 +384,7 @@
               <a href="https://ludyartes.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Ludy Artes (novo separador)">
                 <img src="assets/projects/ludyartes.webp"
                      alt="Ludy Artes - website e-commerce com foco em detalhe e personalização"
-                     loading="lazy" />
+                     width="1200" height="750" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="project-meta">
@@ -484,7 +400,7 @@
               <a href="https://caonarua.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Cão na Rua (novo separador)">
                 <img src="assets/projects/cnr.webp"
                      alt="Cão na Rua - design mobile-first que comunica filosofia e cuidado animal"
-                     loading="lazy" />
+                     width="1200" height="750" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="project-meta">
@@ -500,7 +416,7 @@
               <a href="https://gentlelaughter.com" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Gentle Laughter (novo separador)">
                 <img src="assets/projects/gentlelaughter.webp"
                      alt="Gentle Laughter - website premium para produção e coordenação de eventos"
-                     loading="lazy" />
+                     width="1200" height="750" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="project-meta">
@@ -519,7 +435,7 @@
               <a href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Barbearia Supra (novo separador)">
                 <img src="assets/projects/barbeariasupra.webp"
                      alt="Barbearia Supra - site institucional com identidade vintage para barbearia em Lisboa"
-                     loading="lazy" />
+                     width="1200" height="750" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="project-meta">
@@ -534,7 +450,7 @@
               <a href="https://bertobarata.github.io/queen-bee-hair/" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Queen Bee Hair (novo separador)">
                 <img src="assets/projects/queenbeehair.webp"
                      alt="Queen Bee Hair - website claro para especialista em extensões de cabelo"
-                     loading="lazy" />
+                     width="1200" height="750" loading="lazy" decoding="async" />
               </a>
             </div>
             <div class="project-meta">
@@ -552,7 +468,6 @@
     <section class="final-cta" id="contact" aria-label="Contacto">
       <div class="final-cta-inner">
         <div class="cta-content">
-          <p class="section-label section-label--center" style="margin-bottom: 1.5rem;">Vamos conversar?</p>
           <h2>Quando a presença digital pede mais do que um template.</h2>
           <p class="cta-body">Se precisa de um site mais credível, mais claro e menos genérico, o próximo passo é partilhar o contexto do projeto. A resposta chega em menos de 24 horas.</p>
           
@@ -563,7 +478,7 @@
             </div>
             <div class="cta-info-item">
               <span class="info-label">WhatsApp</span>
-              <a href="formulario.html" class="info-value">Abrir formulário</a>
+              <a href="https://wa.me/351939443377?text=Ol%C3%A1%20Berto%2C%20vi%20o%20teu%20site%20e%20tenho%20interesse%20em%20desenvolver%20um%20projeto." target="_blank" rel="noopener noreferrer" class="info-value">Abrir conversa</a>
             </div>
             <div class="cta-info-item">
               <span class="info-label">Instagram</span>
@@ -572,8 +487,8 @@
           </div>
 
           <div class="cta-actions">
-            <a class="button button--primary" href="formulario.html">Começar um projeto</a>
-            <a class="button button--ghost button--ghost-light" href="formulario.html">Preencher formulário</a>
+            <a class="button button--primary" href="formulario.html">Pedir proposta</a>
+            <a class="button button--ghost button--ghost-light" href="https://wa.me/351939443377?text=Ol%C3%A1%20Berto%2C%20vi%20o%20teu%20site%20e%20tenho%20interesse%20em%20desenvolver%20um%20projeto." target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
           </div>
         </div>
       </div>
@@ -585,7 +500,7 @@
   <a href="formulario.html"
      class="whatsapp-float"
      aria-label="Abrir formulário de contacto"
-     data-tooltip="Pedir site">
+     data-tooltip="Pedir proposta">
     <svg viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.967-.94 1.164-.173.198-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
@@ -595,7 +510,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <a href="#home" class="footer-brand" aria-label="Barata Studio - Ir para o topo">
-        <img src="assets/logos/logo-claro-transparent.png" alt="BB" class="footer-bb" />
+        <span class="footer-bb" role="img" aria-label="BB"></span>
         <span class="footer-wordmark">Barata Studio</span>
       </a>
       <p class="footer-tagline">Do briefing ao launch: web feita à mão.</p>
@@ -603,7 +518,6 @@
     <div class="footer-columns">
       <div class="footer-col">
         <p class="footer-title">Informações</p>
-        <div class="footer-contact-line"><a href="precos.html">Preços</a></div>
         <div class="footer-contact-line"><a href="faq.html">Perguntas Frequentes</a></div>
         <div class="footer-contact-line"><a href="politica-privacidade.html">Política de Privacidade</a></div>
         <div class="footer-contact-line"><a href="politica-cookies.html">Política de Cookies</a></div>
@@ -611,9 +525,10 @@
       </div>
       <div class="footer-col">
         <p class="footer-title">Contactos</p>
-        <div class="footer-contact-line"><a href="formulario.html">Pedir site via formulário</a></div>
+        <div class="footer-contact-line"><a href="formulario.html">Pedir proposta</a></div>
         <div class="footer-contact-line"><a href="mailto:berto.barata77@gmail.com">berto.barata77@gmail.com</a></div>
         <div class="footer-contact-line"><a href="https://instagram.com/berto_barata" target="_blank" rel="noopener noreferrer">@berto_barata</a></div>
+        <div class="footer-contact-line"><a href="https://bertobarata.com" target="_blank" rel="noopener noreferrer">bertobarata.com</a></div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -621,15 +536,8 @@
     </div>
   </footer>
 
-  <!-- Lenis smooth scroll -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
   <script src="js/site.js" defer></script>
-  <script src="js/homepage.js" defer></script>
+  <script src="js/home.js" defer></script>
   <script src="js/cookie-consent.js" defer></script>
 </body>
 </html>

@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <script>document.documentElement.classList.add('js')</script>
   <meta name="theme-color" content="#1A6870" />
 
   <title>Política de Privacidade — Meet Tracker</title>
@@ -18,7 +20,9 @@
   <link rel="apple-touch-icon" href="assets/logos/logo-claro-transparent.png" />
   <link rel="manifest" href="manifest.json" />
   <link rel="canonical" href="https://baratastudio.com/mettracker-privacidade.html" />
-  <link rel="stylesheet" href="css/styles.css?v=26" />
+  <link rel="preload" href="assets/fonts/web/comico.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/web/zodiak-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/styles.css?v=33" />
 </head>
 <body class="page-inner page-legal">
 
@@ -27,9 +31,7 @@
 
   <header class="site-header" id="site-header">
     <a href="index.html" class="header-brand" aria-label="Barata Studio - página inicial">
-      <span class="header-monogram">
-        <img src="assets/logos/logo-claro-transparent.png" alt="Barata Studio" />
-      </span>
+      <span class="header-monogram" role="img" aria-label="Barata Studio"></span>
       <span class="header-wordmark">Barata Studio</span>
     </a>
     <nav class="top-nav" aria-label="Navegação principal">
@@ -37,12 +39,11 @@
       <ul id="main-menu">
         <li class="nav-close-item"><button type="button" class="nav-close" aria-label="Fechar menu">&times;</button></li>
         <li><a href="index.html">Início</a></li>
-        <li><a href="precos.html">Preços</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="formulario.html">Contacto</a></li>
       </ul>
     </nav>
-    <a class="header-cta button button--primary" href="formulario.html">Falar sobre o projeto</a>
+    <a class="header-cta button button--primary" href="formulario.html">Pedir proposta</a>
   </header>
 
   <main id="main-content">
@@ -64,7 +65,7 @@
         <p>Não foi designado Encarregado de Proteção de Dados, por não se verificar nenhuma das situações do artigo 37.º do RGPD.</p>
 
         <h2>3. Que dados existem e onde ficam</h2>
-        <p>A aplicação guarda os números de atividade comercial que o próprio utilizador escreve — contactos efetuados, reuniões marcadas e realizadas, pesquisas, referências, contratos fechados e valores associados — mais as preferências de objetivos e de lembretes.</p>
+        <p>A aplicação guarda os números de atividade comercial que o próprio utilizador escreve (contactos efetuados, reuniões marcadas e realizadas, pesquisas, referências, contratos fechados e valores associados), mais as preferências de objetivos e de lembretes.</p>
         <p>Estes dados são gravados em duas localizações, ambas sob controlo exclusivo do utilizador:</p>
         <ul>
           <li><strong>No dispositivo</strong>, na área reservada da aplicação.</li>
@@ -77,7 +78,7 @@
 
         <h2>5. Partilha com terceiros</h2>
         <p>Nenhuma. A aplicação não envia dados para o programador, nem para anunciantes, nem para serviços de análise. Não há subcontratantes.</p>
-        <p>A única saída de dados da aplicação é iniciada pelo próprio utilizador: a exportação para ficheiro CSV e a cópia do texto do relatório semanal. O destino desses ficheiros — email, mensagem, outra aplicação — é escolhido pelo utilizador no momento e fica fora do alcance desta aplicação.</p>
+        <p>A única saída de dados da aplicação é iniciada pelo próprio utilizador: a exportação para ficheiro CSV e a cópia do texto do relatório semanal. O destino desses ficheiros (email, mensagem, outra aplicação) é escolhido pelo utilizador no momento e fica fora do alcance desta aplicação.</p>
 
         <h2>6. Notificações</h2>
         <p>Os lembretes são notificações locais, agendadas e mostradas pelo próprio iPhone. Não há servidor de notificações, nem token enviado para lado nenhum. Podem ser desligadas nas definições da aplicação ou nas do sistema.</p>
@@ -92,7 +93,7 @@
 
         <h2>8. Direitos</h2>
         <p>Os direitos de acesso, retificação, apagamento, limitação, portabilidade e oposição (artigos 15.º a 22.º do RGPD) exercem-se, neste caso, diretamente na aplicação e nas definições do iCloud, por serem esses os únicos sítios onde os dados existem.</p>
-        <p>Ainda assim, qualquer questão sobre esta política pode ser enviada para <a href="mailto:berto.barata77@gmail.com">berto.barata77@gmail.com</a>. Havendo motivo de queixa, a autoridade de controlo competente é a Comissão Nacional de Proteção de Dados (CNPD), Av. D. Carlos I, 134, 1.º, 1200-651 Lisboa — <a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">www.cnpd.pt</a>.</p>
+        <p>Ainda assim, qualquer questão sobre esta política pode ser enviada para <a href="mailto:berto.barata77@gmail.com">berto.barata77@gmail.com</a>. Havendo motivo de queixa, a autoridade de controlo competente é a Comissão Nacional de Proteção de Dados (CNPD), Av. D. Carlos I, 134, 1.º, 1200-651 Lisboa (<a href="https://www.cnpd.pt" target="_blank" rel="noopener noreferrer">www.cnpd.pt</a>).</p>
 
         <h2>9. Crianças</h2>
         <p>A aplicação destina-se a adultos em contexto de atividade profissional e não é dirigida a menores.</p>
@@ -108,7 +109,7 @@
   <footer class="site-footer">
     <div class="footer-top">
       <a href="index.html" class="footer-brand" aria-label="Barata Studio - página inicial">
-        <img src="assets/logos/logo-claro-transparent.png" alt="BB" class="footer-bb" />
+        <span class="footer-bb" role="img" aria-label="BB"></span>
         <span class="footer-wordmark">Barata Studio</span>
       </a>
       <p class="footer-tagline">Do briefing ao launch: web feita à mão.</p>
@@ -116,7 +117,6 @@
     <div class="footer-columns">
       <div class="footer-col">
         <p class="footer-title">Informações</p>
-        <div class="footer-contact-line"><a href="precos.html">Preços</a></div>
         <div class="footer-contact-line"><a href="faq.html">Perguntas Frequentes</a></div>
         <div class="footer-contact-line"><a href="politica-privacidade.html">Política de Privacidade</a></div>
         <div class="footer-contact-line"><a href="politica-cookies.html">Política de Cookies</a></div>
@@ -124,18 +124,16 @@
       </div>
       <div class="footer-col">
         <p class="footer-title">Contactos</p>
-        <div class="footer-contact-line"><a href="formulario.html">Pedir site via formulário</a></div>
+        <div class="footer-contact-line"><a href="formulario.html">Pedir proposta</a></div>
         <div class="footer-contact-line"><a href="mailto:berto.barata77@gmail.com">berto.barata77@gmail.com</a></div>
         <div class="footer-contact-line"><a href="https://instagram.com/berto_barata" target="_blank" rel="noopener noreferrer">@berto_barata</a></div>
+        <div class="footer-contact-line"><a href="https://bertobarata.com" target="_blank" rel="noopener noreferrer">bertobarata.com</a></div>
       </div>
     </div>
     <div class="footer-bottom">
       <small>© <span id="year"></span> Barata Studio · Do briefing ao launch: web feita à mão.</small>
     </div>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-  <script src="js/lenis-init.js" defer></script>
   <script src="js/site.js" defer></script>
   <script src="js/cookie-consent.js" defer></script>
 </body>
