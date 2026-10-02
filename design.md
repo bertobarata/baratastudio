@@ -112,7 +112,7 @@ components:
 
 ## 1. Overview: The Glass Workbench
 
-Light, warm paper with a soft aurora of petróleo, sand and sky behind everything; frosted glass and dark terminal windows sit on top. The handmade side comes from the Comico wordmark and headlines; the technical side from JetBrains Mono labels and an interactive terminal in the hero. It is a light-only site by decision (the visitor is a business owner reading in daylight, comparing studios); there is no dark mode.
+Light, warm paper with a soft aurora of petróleo, sand and sky behind everything; frosted glass and dark terminal windows sit on top. The handmade side comes from the Comico wordmark and headlines; the technical side from JetBrains Mono labels and an interactive terminal in the hero. Light by default, with an automatic night mode (`prefers-color-scheme: dark`): same tokens re-valued, glass kept as smoked glass, the terminals turn into dark green ice, the final CTA stays a petroleo block. Every text colour stays at 5:1 or better in both modes.
 
 Layout is a 1180px wrap with a 12-col feel, left-aligned and asymmetric. Every section uses a different layout family: hero (full-width headline, then copy + terminal), stacked manifesto, mark + copy split, full-width process log, typeset proof rows, service list, project plates, drenched CTA. No more than two consecutive two-column sections.
 

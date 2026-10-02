@@ -115,6 +115,41 @@
   --section-y: clamp(3.5rem, 9vw, 8rem);
 }
 
+/* ===== Night mode: follows the system (iOS/macOS "Automatic" switches at sunset) =====
+   Same system, darker materials. Glass stays glass: smoked, not flat. */
+:root { color-scheme: light dark; }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: oklch(0.17 0.016 215);
+    --paper-hi: oklch(0.21 0.018 215);
+    --ink: oklch(0.94 0.012 90);
+    --ink-2: oklch(0.76 0.015 215);
+    --teal: oklch(0.74 0.1 198);
+    --teal-deep: oklch(0.84 0.08 195);
+    --teal-lit: oklch(0.82 0.1 195);
+    --sand: oklch(0.86 0.07 82);
+
+    --glass: oklch(0.24 0.02 215 / 0.52);
+    --glass-strong: oklch(0.22 0.02 215 / 0.76);
+    --panel: oklch(0.23 0.02 215 / 0.62);
+    --glass-edge: oklch(0.95 0.01 215 / 0.11);
+    --hair: oklch(0.95 0.01 215 / 0.12);
+    --teal-wash: oklch(0.74 0.1 198 / 0.14);
+    --shadow-glass: 0 1px 0 oklch(0.95 0.01 215 / 0.08) inset, 0 28px 60px -30px oklch(0.05 0.02 215 / 0.8);
+    --shadow-soft: 0 1px 0 oklch(0.95 0.01 215 / 0.06) inset, 0 18px 40px -28px oklch(0.05 0.02 215 / 0.7);
+
+    --ice-ink: oklch(0.93 0.03 160);
+    --ice-dim: oklch(0.74 0.03 165);
+    --ice-green: oklch(0.82 0.13 158);
+    --ice-path: oklch(0.82 0.08 200);
+    --ice-err: oklch(0.75 0.13 30);
+    --ice-line: oklch(0.9 0.04 165 / 0.14);
+    --ice-wash: oklch(0.72 0.12 158 / 0.16);
+    --hint: oklch(0.66 0.015 215);
+  }
+}
+
+
 /* ===== Base ===== */
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-text-size-adjust: 100%; }
@@ -846,4 +881,58 @@ main { display: block; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; }
   .js [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ===== Night mode: component overrides (must come after the base rules) ===== */
+@media (prefers-color-scheme: dark) {
+  body::before {
+    background:
+      radial-gradient(52vmax 46vmax at 88% -8%, oklch(0.42 0.08 205 / 0.5), transparent 62%),
+      radial-gradient(46vmax 40vmax at -6% 34%, oklch(0.36 0.05 70 / 0.38), transparent 60%),
+      radial-gradient(54vmax 44vmax at 62% 108%, oklch(0.36 0.06 240 / 0.45), transparent 62%),
+      var(--paper);
+  }
+  body::after { opacity: 0.4; }
+  /* Smoked green ice */
+  .term--shell {
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
+      linear-gradient(155deg, oklch(0.32 0.05 160 / 0.58), oklch(0.24 0.04 178 / 0.5));
+    border-color: oklch(0.85 0.06 165 / 0.18);
+    box-shadow: 0 1px 0 oklch(0.9 0.05 165 / 0.12) inset, 0 40px 80px -36px oklch(0.05 0.03 170 / 0.85);
+  }
+  .hero-terminal::before, .ice-glow::before {
+    background:
+      radial-gradient(closest-side at 28% 45%, oklch(0.55 0.13 158 / 0.45), transparent),
+      radial-gradient(closest-side at 76% 60%, oklch(0.5 0.1 195 / 0.42), transparent),
+      radial-gradient(closest-side at 52% 22%, oklch(0.6 0.1 130 / 0.3), transparent);
+  }
+  .term--shell .term-chip { background: oklch(0.9 0.04 165 / 0.06); }
+  .term--shell .term-line a { text-decoration-color: oklch(0.82 0.13 158 / 0.4); }
+  .app-icon--glyph { background: linear-gradient(155deg, oklch(0.32 0.05 160), oklch(0.24 0.04 178)); }
+  .app-status--live { border-color: oklch(0.82 0.13 158 / 0.35); }
+  /* Final CTA keeps its drenched petroleo block with light text */
+  .final-cta-inner {
+    background:
+      radial-gradient(40rem 26rem at 90% 0%, oklch(0.5 0.1 200 / 0.5), transparent 65%),
+      radial-gradient(30rem 22rem at 0% 100%, oklch(0.32 0.07 215 / 0.7), transparent 70%),
+      oklch(0.3 0.06 212);
+    color: oklch(0.96 0.01 90);
+  }
+  .final-cta h2 { color: oklch(0.97 0.01 90); }
+  .final-cta .button--primary { background: oklch(0.96 0.01 90); color: oklch(0.3 0.06 212); }
+  .final-cta .button--ghost-light { color: oklch(0.96 0.01 90); }
+  .button--primary, .button { color: oklch(0.18 0.02 215); }
+  .button--ghost, .button.secondary { color: var(--ink); }
+  .contact-form input:not([type=checkbox]), .contact-form select, .contact-form textarea { background: oklch(0.2 0.018 215 / 0.85); }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: oklch(0.66 0.015 215); }
+  .field-error { color: oklch(0.78 0.12 30); }
+  .contact-form [aria-invalid="true"] { border-color: oklch(0.7 0.14 30); }
+  #cookie-banner { background: oklch(0.22 0.02 215 / 0.94); }
+  .cookie-btn--primary { color: oklch(0.18 0.02 215); }
+  .project-img-wrap { background: oklch(0.25 0.02 215 / 0.7); }
+}
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  .top-nav ul { background: oklch(0.17 0.016 215 / 0.9); }
+  .nav-cta-item a { color: oklch(0.18 0.02 215); }
 }

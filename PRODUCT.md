@@ -46,7 +46,7 @@ Voice: quiet confidence, no hype, no urgency theater. Plain Portuguese, honest a
 
 ## Theme
 
-Light-only by decision (2026-10-01): the visitor is a business owner reading in daylight, comparing studios. No dark mode; `color-scheme: light`. Dark surfaces exist only as terminal windows and the final CTA block.
+Light by default, with an automatic night mode since 2026-10-02 (follows `prefers-color-scheme`, so iOS/macOS "Automatic" switch it at sunset). Night mode keeps the glass: smoked dark panels, the terminal becomes dark green ice, the final CTA stays a petroleo block.
 
 ## Accessibility & Inclusion
 
