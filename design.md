@@ -132,7 +132,7 @@ Layout is a 1180px wrap with a 12-col feel, left-aligned and asymmetric. Every s
 
 ## 4. Elevation: Glass, Panels and Shadows
 
-- **Real blur** (`backdrop-filter`) only on four things: the header (on a pseudo-element, so the mobile menu is not trapped inside it), the hero terminal, the mobile menu overlay and the cookie banner. Everything else is a **panel**: same translucent colour, no blur (cheap on phones).
+- **Real blur** (`backdrop-filter`) only on five things: the header (on a pseudo-element, so the mobile menu is not trapped inside it), the hero and process terminals, the mobile menu overlay and the cookie banner. Everything else is a **panel**: same translucent colour, no blur (cheap on phones).
 - Shadows are tinted with the ink hue, never black: `--shadow-glass` (inset highlight + long soft drop) for glass, `--shadow-soft` for panels.
 - `prefers-reduced-transparency` removes all blur and makes surfaces solid.
 - z-index scale: float 90, header 100, overlay controls 120, toast 150, skip link 200.
@@ -141,11 +141,12 @@ Layout is a 1180px wrap with a 12-col feel, left-aligned and asymmetric. Every s
 
 - **Buttons**: pill, 48px tall, Comico label, one line (`white-space: nowrap`). Primary petróleo; ghost on panel. `scale(0.97)` on press. One label per intent across the site: "Pedir proposta" (form), "Ver projetos", "Falar no WhatsApp".
 - **Hero terminal (main focus)**: a tiny shell over the site in **frosted ice** (translucent pale-green glass, matte grain, green light behind it, dark green ink; every text colour 4.6:1 or better). `ls` / `ls -l` lists folders (projetos, servicos, processo, sobre, faq, contacto), `cd <pasta>` opens the section or page on Enter, `cd projetos` then `ls` lists the client sites and `cd <site>` opens it in a new tab; `cd ..`, `pwd`, `whoami`, `ajuda`, `clear`/Ctrl+L, Tab completion, history on the arrow keys, friendly aliases (portfolio, info, sobre-mim...). Every folder in the output and every shortcut chip is clickable; the chips are links, so they work without JavaScript. The `ls -l` is in the HTML (fixed-height output, no layout shift); on load the prompt only ghost-types "cd projetos" as a hint. Soft grey instructions sit under the window. Font: JetBrains Mono Nerd Font Mono (folder and link icons).
-- **Process terminal**: dark solid window (`term-solid`), no dots, read-only log.
+- **Process terminal**: same frosted ice as the hero (green glow behind it via `.ice-glow`), no dots, read-only log.
 - **Project plate**: panel with 10px padding around a real screenshot (16:10, 12px inner radius), caption below (sector in mono, title in Zodiak 650, brief, link).
 - **Proof rows**: number in Comico (moderate size) + label in mono, beside the project and claim. Not metric cards.
 - **Forms**: label above input (mono caps), 48px fields, 12px radius, inline error under each field announced through `aria-describedby`, a status line after the submit button, busy state while WhatsApp opens.
-- **Header**: floating pill, logo mask (colour from CSS), mono nav, CTA. Mobile: "Menu" opens a full-screen frosted overlay.
+- **Header**: floating pill, official BB + wordmark as CSS masks, mono nav, CTA.
+- **Icons**: app-style tile (paper background, petroleo BB, 22% radius) in `assets/icons/` for favicon, Apple touch icon and manifest. Share image `assets/og/og-default.jpg` (1200×630, 70 KB). Mobile: "Menu" opens a full-screen frosted overlay.
 
 ## 6. Do's and Don'ts
 
