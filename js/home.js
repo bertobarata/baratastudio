@@ -42,6 +42,15 @@
           'queen-bee-hair': { url: 'https://bertobarata.github.io/queen-bee-hair/', desc: 'extensões de cabelo' }
         }
       },
+      apps: {
+        target: '#apps', desc: 'projetos em desenvolvimento',
+        children: {
+          'meet-tracker': { url: 'https://apps.apple.com/pt/app/meet-tracker/id6813061781', desc: 'app iOS, na App Store' },
+          'tvde': { url: 'https://apptvde.store', desc: 'app para o exame TVDE, em desenvolvimento' },
+          'fine-rag': { desc: 'protótipo privado: perguntas sobre fichas FINE, a correr localmente' },
+          'bertobarata.com': { url: 'https://bertobarata.com', desc: 'portfólio pessoal' }
+        }
+      },
       servicos: { target: '#services', desc: 'o que faço' },
       processo: { target: '#process-layers', desc: 'do briefing ao launch' },
       sobre: { target: '#manifesto', desc: 'quem está por trás' },
@@ -52,7 +61,7 @@
 
   // Words people will try instead of the folder names.
   var ALIASES = {
-    portfolio: 'projetos', trabalho: 'projetos', trabalhos: 'projetos', projects: 'projetos', work: 'projetos', projeto: 'projetos',
+    portfolio: 'projetos', aplicacoes: 'apps', app: 'apps', 'em-desenvolvimento': 'apps', lab: 'apps', labs: 'apps', trabalho: 'projetos', trabalhos: 'projetos', projects: 'projetos', work: 'projetos', projeto: 'projetos',
     servico: 'servicos', services: 'servicos',
     process: 'processo',
     info: 'sobre', 'sobre-mim': 'sobre', sobremim: 'sobre', about: 'sobre', 'about-me': 'sobre', eu: 'sobre',
@@ -195,7 +204,7 @@
         names.forEach(function (n) {
           var child = node.children[n];
           var cdArg = pretty(path.concat(n));
-          var label = child.url ? n : n + '/';
+          var label = child.children || child.target ? n + '/' : n;
           var row = print([dirButton(label, cdArg, !!child.url)]);
           row.classList.add('term-row');
           row.appendChild(el('span', 'term-desc', child.desc));
@@ -204,7 +213,7 @@
         var row = print([], 'term-grid');
         names.forEach(function (n) {
           var child = node.children[n];
-          row.appendChild(dirButton(child.url ? n : n + '/', pretty(path.concat(n)), !!child.url));
+          row.appendChild(dirButton(child.children || child.target ? n + '/' : n, pretty(path.concat(n)), !!child.url));
         });
       }
     },
@@ -221,6 +230,11 @@
         return;
       }
       var node = nodeAt(path);
+      if (!node.url && !node.target && !node.children) {
+        print(path[path.length - 1] + ': ' + node.desc, 'term-dim');
+        print('Ainda sem página pública.', 'term-dim');
+        return;
+      }
       if (node.url) {
         print(['a abrir ' + path[path.length - 1] + ' num novo separador ', el('span', 'term-icon', ICON.link)], 'term-ok');
         window.open(node.url, '_blank', 'noopener');

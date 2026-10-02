@@ -77,8 +77,8 @@
   <link rel="preload" href="assets/fonts/web/comico.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/web/zodiak-var.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/web/jbmono-nf-400.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="css/styles.css?v=44" as="style" />
-  <link rel="stylesheet" href="css/styles.css?v=44" />
+  <link rel="preload" href="css/styles.css?v=45" as="style" />
+  <link rel="stylesheet" href="css/styles.css?v=45" />
 </head>
 <body class="page-home">
 
@@ -134,6 +134,7 @@
                 <div class="term-gap"></div>
                 <p class="term-line term-cmd"><span class="tp-user">berto@barata-studio:</span><span class="tp-path">~</span>$ ls -l</p>
                 <p class="term-line term-row"><a class="term-dir" href="#projects" data-cmd="cd ~/projetos"><span class="term-icon" aria-hidden="true"> </span>projetos/</a><span class="term-desc">trabalho publicado</span></p>
+                <p class="term-line term-row"><a class="term-dir" href="#apps" data-cmd="cd ~/apps"><span class="term-icon" aria-hidden="true"> </span>apps/</a><span class="term-desc">em desenvolvimento</span></p>
                 <p class="term-line term-row"><a class="term-dir" href="#services" data-cmd="cd ~/servicos"><span class="term-icon" aria-hidden="true"> </span>servicos/</a><span class="term-desc">o que faço</span></p>
                 <p class="term-line term-row"><a class="term-dir" href="#process-layers" data-cmd="cd ~/processo"><span class="term-icon" aria-hidden="true"> </span>processo/</a><span class="term-desc">do briefing ao launch</span></p>
                 <p class="term-line term-row"><a class="term-dir" href="#manifesto" data-cmd="cd ~/sobre"><span class="term-icon" aria-hidden="true"> </span>sobre/</a><span class="term-desc">quem está por trás</span></p>
@@ -310,7 +311,7 @@
           <p class="section-label">Trabalho</p>
           <h2>Projetos selecionados</h2>
         </div>
-        <div class="projects-grid">
+        <div class="projects-grid projects-grid--featured">
           <article class="project-card project-card--featured">
             <div class="project-img-wrap">
               <a href="https://valejasac.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Valejas Atlético Clube (novo separador)">
@@ -333,7 +334,7 @@
               <a href="https://valejasac.pt" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
             </div>
           </article>
-          <article class="project-card">
+          <article class="project-card project-card--featured project-card--rev">
             <div class="project-img-wrap">
               <a href="https://greenbond.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Greenbond (novo separador)">
                 <img src="assets/projects/greenbond.webp"
@@ -350,6 +351,8 @@
               <a href="https://greenbond.pt" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
             </div>
           </article>
+        </div>
+        <div class="projects-grid projects-grid--three">
           <article class="project-card">
             <div class="project-img-wrap">
               <a href="https://ludyartes.pt" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Ludy Artes (novo separador)">
@@ -402,37 +405,82 @@
               </div>
             </div>
           </article>
-          <article class="project-card">
-            <div class="project-img-wrap">
-              <a href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Barbearia Supra (novo separador)">
-                <img src="assets/projects/barbeariasupra.webp"
-                     alt="Barbearia Supra - site institucional com identidade vintage para barbearia em Lisboa"
-                     width="1200" height="750" loading="lazy" decoding="async" />
-              </a>
-            </div>
-            <div class="project-meta">
-              <span class="project-sector">Serviços · Barbearia</span>
-              <h3 class="project-title">Barbearia Supra · Site Institucional</h3>
-              <p class="project-brief">Presença digital para barbearia em São Domingos de Benfica, Lisboa - marcações diretas por telefone e WhatsApp.</p>
-              <a href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
-            </div>
-          </article>
-          <article class="project-card">
-            <div class="project-img-wrap">
-              <a href="https://bertobarata.github.io/queen-bee-hair/" target="_blank" rel="noopener noreferrer" class="project-img-link" aria-label="Abrir o site Queen Bee Hair (novo separador)">
-                <img src="assets/projects/queenbeehair.webp"
-                     alt="Queen Bee Hair - website claro para especialista em extensões de cabelo"
-                     width="1200" height="750" loading="lazy" decoding="async" />
-              </a>
-            </div>
-            <div class="project-meta">
+        </div>
+        <div class="projects-more">
+          <h3 class="projects-more-title">Outros projetos</h3>
+          <ul class="projects-compact-list">
+          <li class="project-compact">
+            <a class="project-compact-thumb" href="https://bertobarata.github.io/queen-bee-hair/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="assets/projects/queenbeehair.webp" alt="" width="1200" height="750" loading="lazy" decoding="async" />
+            </a>
+            <div class="project-compact-meta">
               <span class="project-sector">Beleza · Extensões de Cabelo</span>
               <h3 class="project-title">Queen Bee Hair · Site Institucional</h3>
               <p class="project-brief">Redesign claro e confiante para especialista em extensões de cabelo em Benfica, Lisboa.</p>
               <a href="https://bertobarata.github.io/queen-bee-hair/" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
             </div>
-          </article>
+          </li>
+          <li class="project-compact">
+            <a class="project-compact-thumb" href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+              <img src="assets/projects/barbeariasupra.webp" alt="" width="1200" height="750" loading="lazy" decoding="async" />
+            </a>
+            <div class="project-compact-meta">
+              <span class="project-sector">Serviços · Barbearia</span>
+              <h3 class="project-title">Barbearia Supra · Site Institucional</h3>
+              <p class="project-brief">Presença digital para barbearia em São Domingos de Benfica, Lisboa - marcações diretas por telefone e WhatsApp.</p>
+              <a href="https://bertobarata.github.io/barbearia-supra/" target="_blank" rel="noopener noreferrer" class="project-link">Ver projeto →</a>
+            </div>
+          </li>
+          </ul>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== IN DEVELOPMENT ===== -->
+    <section class="apps" id="apps" aria-label="Projetos em desenvolvimento">
+      <div class="apps-inner">
+        <h2>Em desenvolvimento</h2>
+        <p class="apps-intro">Apps e projetos próprios, desenhados e programados por mim. Alguns já estão públicos, outros ainda em construção.</p>
+        <ul class="apps-list">
+          <li class="app-item">
+            <img class="app-icon" src="assets/projects/meet-tracker-icon.webp" alt="" width="192" height="192" loading="lazy" decoding="async" />
+            <div class="app-body">
+              <div class="app-head"><h3>Meet Tracker</h3><span class="app-status app-status--live">Na App Store</span></div>
+              <p>App para iPhone que regista a atividade comercial do dia (contactos, reuniões e objetivos) e gera o relatório semanal. Sem contas: os dados ficam no iPhone e no iCloud de cada pessoa.</p>
+              <p class="app-stack">SwiftUI · SwiftData · CloudKit</p>
+              <div class="app-links">
+                <a class="project-link" href="https://apps.apple.com/pt/app/meet-tracker/id6813061781" target="_blank" rel="noopener noreferrer">Ver na App Store →</a>
+                <a class="project-link" href="mettracker.html">Suporte →</a>
+              </div>
+            </div>
+          </li>
+          <li class="app-item">
+            <img class="app-icon" src="assets/projects/tvde-icon.webp" alt="" width="192" height="192" loading="lazy" decoding="async" />
+            <div class="app-body">
+              <div class="app-head"><h3>App TVDE</h3><span class="app-status">Em desenvolvimento</span></div>
+              <p>Preparação para o exame de motorista TVDE: 653 perguntas com explicações, sinais de trânsito e revisão por repetição espaçada.</p>
+              <p class="app-stack">iOS e Android</p>
+              <div class="app-links"><a class="project-link" href="https://apptvde.store" target="_blank" rel="noopener noreferrer">Ver site →</a></div>
+            </div>
+          </li>
+          <li class="app-item">
+            <span class="app-icon app-icon--glyph" aria-hidden="true">&#xF1C9;</span>
+            <div class="app-body">
+              <div class="app-head"><h3>FINE RAG</h3><span class="app-status app-status--proto">Protótipo</span></div>
+              <p>Assistente que responde a perguntas sobre fichas FINE de crédito habitação a partir dos próprios PDFs, a correr no computador, sem enviar dados para fora.</p>
+              <p class="app-stack">Next.js · Ollama · LanceDB</p>
+            </div>
+          </li>
+          <li class="app-item">
+            <img class="app-icon app-icon--shot" src="assets/projects/bertobarata.webp" alt="" width="960" height="600" loading="lazy" decoding="async" />
+            <div class="app-body">
+              <div class="app-head"><h3>bertobarata.com</h3><span class="app-status">Em evolução</span></div>
+              <p>O meu portfólio pessoal: quem sou, o percurso e o trabalho, num site com tipografia em matriz de pontos.</p>
+              <p class="app-stack">Astro</p>
+              <div class="app-links"><a class="project-link" href="https://bertobarata.com" target="_blank" rel="noopener noreferrer">Ver site →</a></div>
+            </div>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -507,8 +555,8 @@
     </div>
   </footer>
 
-  <script src="js/site.js?v=3" defer></script>
-  <script src="js/home.js?v=7" defer></script>
+  <script src="js/site.js?v=4" defer></script>
+  <script src="js/home.js?v=8" defer></script>
   <script src="js/cookie-consent.js" defer></script>
 </body>
 </html>
