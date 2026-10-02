@@ -109,7 +109,7 @@
     { id: 'process', target: '#process-layers',
       name: { pt: 'processo', en: 'process', fr: 'processus', es: 'proceso' },
       desc: { pt: 'do briefing ao launch', en: 'from briefing to launch', fr: 'du brief au lancement', es: 'del briefing al lanzamiento' } },
-    { id: 'about', target: '#manifesto',
+    { id: 'about', target: '#sobre',
       name: { pt: 'sobre', en: 'about', fr: 'a-propos', es: 'sobre-mi' },
       desc: { pt: 'quem está por trás', en: 'who is behind it', fr: 'qui est derrière', es: 'quién está detrás' } },
     { id: 'faq', target: 'faq.html',
