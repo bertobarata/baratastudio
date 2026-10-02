@@ -742,6 +742,13 @@ main { display: block; }
   .footer-columns { grid-template-columns: 1fr; }
 }
 
+/* ===== Homepage on desktop: no header bar, the hero terminal is the menu ===== */
+@media (min-width: 769px) {
+  .page-home .site-header { display: none; }
+  .page-home .hero { padding-top: clamp(2.5rem, 5vw, 4.5rem); }
+  html:has(body.page-home) { scroll-padding-top: 1.5rem; }
+}
+
 /* ===== Mobile: everything centred (code stays left-aligned) ===== */
 @media (max-width: 768px) {
   .site-header { display: grid; grid-template-columns: 1fr auto 1fr; padding-left: 0.5rem; }
