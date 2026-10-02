@@ -294,8 +294,8 @@ body::after {
 
 /* ===== Layout helpers ===== */
 main { display: block; }
-.manifesto, .identity, .process, .presence, .services, .projects { padding: var(--section-y) var(--gutter); }
-.manifesto-inner, .identity-inner, .process-inner, .presence-inner, .services-inner, .projects-inner, .final-cta-inner { max-width: var(--wrap); margin-inline: auto; }
+.manifesto, .identity, .process, .services, .projects { padding: var(--section-y) var(--gutter); }
+.manifesto-inner, .identity-inner, .process-inner, .services-inner, .projects-inner, .final-cta-inner { max-width: var(--wrap); margin-inline: auto; }
 
 /* ===== Entrance (CSS only, so the hero never depends on JS to be visible) ===== */
 @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
@@ -460,17 +460,6 @@ main { display: block; }
 .panel-desc { margin: 0; color: var(--term-ink); font-family: var(--font-body); font-size: 1.02rem; line-height: 1.5; max-width: 60ch; }
 .panel-ok { color: var(--ok); font-size: 0.8rem; }
 
-/* ===== Presence / proof (typeset rows, not metric cards) ===== */
-.presence-header { max-width: 40rem; margin: 0 0 2rem; }
-.presence-subtitle { color: var(--ink-2); }
-.presence-grid { display: grid; border-top: 1px solid var(--hair); }
-.presence-card { display: grid; grid-template-columns: minmax(9rem, 15rem) minmax(0, 1fr); gap: 0.5rem clamp(1.5rem, 5vw, 4rem); align-items: baseline; padding: clamp(1.3rem, 3vw, 2rem) 0; border-bottom: 1px solid var(--hair); }
-.metric-value { display: block; font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1; color: var(--teal-deep); }
-.metric-label { display: block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); margin-top: 0.5rem; }
-.meta-sector { font-family: var(--font-mono); font-size: 0.78rem; color: var(--teal-deep); letter-spacing: 0.04em; }
-.presence-card-meta h3 { margin: 0.35rem 0 0.4rem; }
-.presence-card-meta p { margin: 0; color: var(--ink-2); font-size: 1rem; }
-
 /* ===== Services ===== */
 .services-header h2 { font-size: clamp(2.2rem, 5vw, 4rem); margin-bottom: 2rem; }
 .services-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
@@ -497,6 +486,11 @@ main { display: block; }
 .project-title { margin: 0.35rem 0 0.6rem; font-size: clamp(1.35rem, 2.4vw, 1.9rem); }
 .project-card--featured .project-title { font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
 .project-brief { color: var(--ink-2); font-size: 1rem; }
+/* Proof attached to the work it belongs to (re-verify numbers before changing them) */
+.project-proof { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.2rem 0.7rem; margin: 0 0 1rem; padding-top: 0.9rem; border-top: 1px solid var(--hair); }
+.proof-value { font-family: var(--font-display); font-size: clamp(1.9rem, 3vw, 2.4rem); line-height: 1; color: var(--teal-deep); }
+.project-proof + .project-quote { border-top: 0; padding-top: 0; }
+.proof-label { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
 .project-highlights { list-style: none; padding: 0; margin: 0 0 1.2rem; display: grid; gap: 0.4rem; font-size: 0.96rem; color: var(--ink-2); }
 .project-highlights li { padding-left: 1.3rem; position: relative; }
 .project-highlights li::before { content: '›'; position: absolute; left: 0; color: var(--teal); font-family: var(--font-mono); }
@@ -719,7 +713,6 @@ main { display: block; }
   .nav-close-floating[hidden] { display: none; }
   .projects-grid, .service-content { grid-template-columns: 1fr; }
   .service-content h3 { grid-row: auto; }
-  .presence-card { grid-template-columns: 1fr; }
   .page-intro-grid { grid-template-columns: 1fr; }
   .page-intro-card { border-left: 0; border-top: 1px solid var(--hair); }
   .page-intro-card:first-child { border-top: 0; }
@@ -756,15 +749,15 @@ main { display: block; }
   .top-nav { grid-column: 3; justify-self: end; margin-left: 0; }
   .header-wordmark { width: 128px; }
 
-  .hero-head, .hero-copy, .manifesto-inner, .identity-copy, .process-head, .presence-header,
-  .services-header, .projects-header, .project-meta, .presence-card, .service-content,
+  .hero-head, .hero-copy, .manifesto-inner, .identity-copy, .process-head,
+  .services-header, .projects-header, .project-meta, .service-content,
   .services-cta, .final-cta-inner, .page-hero, .page-intro-card, .form-sidecard, .form-container > h2,
   .form-intro, .form-alt-contact, .site-footer, .term-hint { text-align: center; }
-  .hero-body, .manifesto-headline, .manifesto-body, .presence-header, .page-title, .page-subtitle,
+  .hero-body, .manifesto-headline, .manifesto-body, .page-title, .page-subtitle,
   .final-cta h2, .cta-body, .project-quote, .identity-copy p, .services-cta p { margin-inline: auto; }
   .hero-ctas, .service-tags, .services-cta, .services-cta-actions, .cta-actions { justify-content: center; }
   .identity-mark { margin-inline: auto; }
-  .presence-card { justify-items: center; }
+  .project-proof { justify-content: center; }
   .project-highlights { justify-items: center; }
   .project-highlights li { padding-left: 0; }
   .project-highlights li::before { position: static; margin-right: 0.4rem; }
