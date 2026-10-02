@@ -35,40 +35,55 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://baratastudio.com/#studio",
-    "name": "Barata Studio",
-    "slogan": "From briefing to launch: websites made by hand.",
-    "description": "Custom websites for businesses that need to look credible, clear and well resolved from the very first visit.",
-    "url": "https://baratastudio.com/",
-    "logo": "https://baratastudio.com/assets/logos/logo-claro-transparent.png",
-    "image": "https://baratastudio.com/assets/og/og-default.jpg",
-    "email": "berto.barata77@gmail.com",
-    "telephone": "+351939443377",
-    "founder": {
-      "@type": "Person",
-      "name": "Berto Barata",
-      "url": "https://bertobarata.com"
-    },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Portugal"
-    },
-    "sameAs": [
-      "https://instagram.com/berto_barata",
-      "https://bertobarata.com"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Websites" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing Pages" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Redesign" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Core Digital Identity" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maintenance & Growth" } }
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://baratastudio.com/#studio",
+        "name": "Barata Studio",
+        "slogan": "From briefing to launch: websites made by hand.",
+        "description": "Custom websites for businesses that need to look credible, clear and well resolved from the very first visit.",
+        "url": "https://baratastudio.com/",
+        "logo": "https://baratastudio.com/assets/logos/logo-claro-transparent.png",
+        "image": "https://baratastudio.com/assets/og/og-default.jpg",
+        "email": "berto.barata77@gmail.com",
+        "telephone": "+351939443377",
+        "founder": { "@id": "https://baratastudio.com/#berto" },
+        "areaServed": { "@type": "Country", "name": "Portugal" },
+        "knowsLanguage": ["pt", "en", "fr", "es"],
+        "sameAs": [
+          "https://instagram.com/berto_barata",
+          "https://bertobarata.com"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Websites" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing Pages" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Redesign" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Core Digital Identity" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maintenance & Growth" } }
+          ]
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://baratastudio.com/#berto",
+        "name": "Berto Barata",
+        "url": "https://bertobarata.com",
+        "jobTitle": "Web developer & designer",
+        "worksFor": { "@id": "https://baratastudio.com/#studio" },
+        "sameAs": ["https://bertobarata.com", "https://instagram.com/berto_barata", "https://github.com/bertobarata"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://baratastudio.com/#website",
+        "name": "Barata Studio",
+        "url": "https://baratastudio.com/",
+        "inLanguage": ["pt-PT", "en", "fr", "es"],
+        "publisher": { "@id": "https://baratastudio.com/#studio" }
+      }
+    ]
   }
   </script>
 
