@@ -20,6 +20,18 @@
       policy: 'Cookie Policy',
       accept: 'Accept',
       decline: 'Essential Only'
+    },
+    fr: {
+      message: 'Nous utilisons des <strong>cookies essentiels</strong> pour assurer le bon fonctionnement du site. Nous n\u2019utilisons pas de cookies de suivi.',
+      policy: 'Politique de cookies',
+      accept: 'Accepter',
+      decline: 'Essentiels uniquement'
+    },
+    es: {
+      message: 'Usamos <strong>cookies esenciales</strong> para que la web funcione correctamente. No usamos cookies de seguimiento.',
+      policy: 'Política de cookies',
+      accept: 'Aceptar',
+      decline: 'Solo esenciales'
     }
   };
 
@@ -57,7 +69,7 @@
       '<div class="cookie-inner">' +
         '<p class="cookie-text">' + t.message + '</p>' +
         '<div class="cookie-actions">' +
-          '<a href="politica-cookies.html" class="cookie-link">' + t.policy + '</a>' +
+          '<a href="' + (document.documentElement.getAttribute('data-root') || '') + 'politica-cookies.html" class="cookie-link">' + t.policy + '</a>' +
           '<button id="cookie-decline" class="cookie-btn cookie-btn--secondary">' + t.decline + '</button>' +
           '<button id="cookie-accept" class="cookie-btn cookie-btn--primary">' + t.accept + '</button>' +
         '</div>' +
