@@ -375,7 +375,7 @@
 
   var targets = document.querySelectorAll(
     '.manifesto-inner > *, .identity-inner > *, .process-head, .process-term, ' +
-    '.services-header, .service-item, .services-cta, .projects-header, .project-card, ' +
+    '.services-header, .service-item, .services-cta, .projects-header, .project-card, .projects-more, .apps-inner > h2, .apps-intro, .app-item, ' +
     '.final-cta-inner, .page-intro-grid, .faq-item, .form-sidecard, .form-container, .legal-shell'
   );
   var fold = window.innerHeight;
