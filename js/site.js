@@ -8,6 +8,73 @@
 (function () {
   'use strict';
 
+  // === Language (pages are built per language by scripts/build-i18n.py) ===
+  var LANG = (document.documentElement.lang || 'pt').slice(0, 2).toLowerCase();
+  var ROOT = document.documentElement.getAttribute('data-root') || '';
+  var I18N = {
+    pt: {
+      navigate: 'Navegar', talk: 'Falar', cta: 'Pedir proposta', close: 'Fechar', menu: 'Menu',
+      footer: '© Barata Studio · Do briefing ao launch',
+      waText: 'Olá Berto, vi o teu site e tenho interesse em desenvolver um projeto.',
+      waAria: 'Abrir conversa WhatsApp', formAria: 'Abrir formulário de contacto',
+      valueMissing: 'Preencha este campo.', selectMissing: 'Escolha uma opção.',
+      typeMismatch: 'Indique um email válido, por exemplo nome@empresa.pt.',
+      patternMismatch: 'Use só números, espaços e o sinal +.',
+      consent: 'Para enviar, aceite a política de privacidade e os termos.',
+      oneError: 'Há 1 campo por corrigir.', manyErrors: 'Há {n} campos por corrigir.',
+      busy: 'A abrir o WhatsApp…', ready: 'Pedido pronto. O WhatsApp vai abrir com a mensagem preenchida.',
+      submit: 'Enviar por WhatsApp',
+      waIntro: 'ola berto tudo bem? preciso de um site. heis os meus dados.....',
+      fields: ['Nome', 'Nome da empresa', 'Email', 'Telemóvel', 'Tipo de projeto', 'Prazo pretendido', 'Mensagem']
+    },
+    en: {
+      navigate: 'Navigate', talk: 'Talk', cta: 'Request a proposal', close: 'Close', menu: 'Menu',
+      footer: '© Barata Studio · From briefing to launch',
+      waText: 'Hi Berto, I saw your website and I am interested in a project.',
+      waAria: 'Open WhatsApp chat', formAria: 'Open contact form',
+      valueMissing: 'Please fill in this field.', selectMissing: 'Please choose an option.',
+      typeMismatch: 'Enter a valid email, for example name@company.com.',
+      patternMismatch: 'Use only numbers, spaces and the + sign.',
+      consent: 'To send, please accept the privacy policy and the terms.',
+      oneError: '1 field needs fixing.', manyErrors: '{n} fields need fixing.',
+      busy: 'Opening WhatsApp…', ready: 'Request ready. WhatsApp will open with the message filled in.',
+      submit: 'Send via WhatsApp',
+      waIntro: 'Hi Berto, I need a website. Here are my details:',
+      fields: ['Name', 'Company', 'Email', 'Mobile', 'Type of project', 'Desired timeline', 'Message']
+    },
+    fr: {
+      navigate: 'Naviguer', talk: 'Échanger', cta: 'Demander un devis', close: 'Fermer', menu: 'Menu',
+      footer: '© Barata Studio · Du brief au lancement',
+      waText: 'Bonjour Berto, j\u2019ai vu votre site et un projet m\u2019intéresse.',
+      waAria: 'Ouvrir la conversation WhatsApp', formAria: 'Ouvrir le formulaire de contact',
+      valueMissing: 'Veuillez remplir ce champ.', selectMissing: 'Veuillez choisir une option.',
+      typeMismatch: 'Indiquez un e-mail valide, par exemple nom@entreprise.fr.',
+      patternMismatch: 'Utilisez uniquement des chiffres, des espaces et le signe +.',
+      consent: 'Pour envoyer, acceptez la politique de confidentialité et les conditions.',
+      oneError: '1 champ à corriger.', manyErrors: '{n} champs à corriger.',
+      busy: 'Ouverture de WhatsApp…', ready: 'Demande prête. WhatsApp va s\u2019ouvrir avec le message rempli.',
+      submit: 'Envoyer par WhatsApp',
+      waIntro: 'Bonjour Berto, j\u2019ai besoin d\u2019un site. Voici mes informations :',
+      fields: ['Nom', 'Entreprise', 'E-mail', 'Mobile', 'Type de projet', 'Délai souhaité', 'Message']
+    },
+    es: {
+      navigate: 'Navegar', talk: 'Hablar', cta: 'Pedir presupuesto', close: 'Cerrar', menu: 'Menú',
+      footer: '© Barata Studio · Del briefing al lanzamiento',
+      waText: 'Hola Berto, he visto tu web y me interesa un proyecto.',
+      waAria: 'Abrir conversación de WhatsApp', formAria: 'Abrir formulario de contacto',
+      valueMissing: 'Rellena este campo.', selectMissing: 'Elige una opción.',
+      typeMismatch: 'Introduce un email válido, por ejemplo nombre@empresa.es.',
+      patternMismatch: 'Usa solo números, espacios y el signo +.',
+      consent: 'Para enviar, acepta la política de privacidad y los términos.',
+      oneError: 'Hay 1 campo por corregir.', manyErrors: 'Hay {n} campos por corregir.',
+      busy: 'Abriendo WhatsApp…', ready: 'Solicitud lista. WhatsApp se abrirá con el mensaje escrito.',
+      submit: 'Enviar por WhatsApp',
+      waIntro: 'Hola Berto, necesito una web. Estos son mis datos:',
+      fields: ['Nombre', 'Empresa', 'Email', 'Móvil', 'Tipo de proyecto', 'Plazo deseado', 'Mensaje']
+    }
+  };
+  var T = I18N[LANG] || I18N.pt;
+
   // === Mobile nav toggle ===
   var toggle = document.querySelector('.nav-toggle');
   var menu = document.querySelector('.top-nav ul');
@@ -47,7 +114,7 @@
     }
 
     function syncToggleLabel(open) {
-      toggle.textContent = open ? 'Fechar' : 'Menu';
+      toggle.textContent = open ? T.close : T.menu;
     }
 
     // === Move close button out of UL to body (avoid li styling interference) ===
@@ -105,18 +172,18 @@
       var navLabel = document.createElement('li');
       navLabel.className = 'nav-section-label';
       navLabel.setAttribute('aria-hidden', 'true');
-      navLabel.innerHTML = '<span>Navegar</span>';
+      navLabel.innerHTML = '<span>' + T.navigate + '</span>';
       items[0].parentNode.insertBefore(navLabel, items[0]);
 
       var falarLabel = document.createElement('li');
       falarLabel.className = 'nav-section-label';
       falarLabel.setAttribute('aria-hidden', 'true');
-      falarLabel.innerHTML = '<span>Falar</span>';
+      falarLabel.innerHTML = '<span>' + T.talk + '</span>';
       menu.appendChild(falarLabel);
 
-      var waText = encodeURIComponent('Olá Berto, vi o teu site e tenho interesse em desenvolver um projeto.');
+      var waText = encodeURIComponent(T.waText);
       var ctas = [
-        { href: 'formulario.html', label: 'Pedir proposta', cls: 'nav-cta-item', arrow: true },
+        { href: 'formulario.html', label: T.cta, cls: 'nav-cta-item', arrow: true },
         { href: 'https://wa.me/351939443377?text=' + waText, label: 'WhatsApp', cls: 'nav-secondary', external: true },
         { href: 'mailto:berto.barata77@gmail.com', label: 'berto.barata77@gmail.com', cls: 'nav-secondary' },
         { href: 'https://instagram.com/berto_barata', label: '@berto_barata', cls: 'nav-secondary', external: true }
@@ -143,7 +210,7 @@
       var footerLi = document.createElement('li');
       footerLi.className = 'nav-footer-text';
       footerLi.setAttribute('aria-hidden', 'true');
-      footerLi.textContent = '© Barata Studio · Do briefing ao launch';
+      footerLi.textContent = T.footer;
       menu.appendChild(footerLi);
     }
     // Only build the editorial overlay on mobile - on desktop the base 4-link
@@ -185,7 +252,7 @@
     var waBtn = document.querySelector('.whatsapp-float');
     if (!waBtn) return;
     var WA_NUMBER = '351939443377';
-    var WA_TEXT = 'Olá Berto, vi o teu site e tenho interesse em desenvolver um projeto.';
+    var WA_TEXT = T.waText;
     var DESKTOP_HREF = waBtn.getAttribute('href');
     var mq = window.matchMedia('(max-width: 768px)');
     function applyMode() {
@@ -193,14 +260,14 @@
         waBtn.setAttribute('href', 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT));
         waBtn.setAttribute('target', '_blank');
         waBtn.setAttribute('rel', 'noopener noreferrer');
-        waBtn.setAttribute('aria-label', 'Abrir conversa WhatsApp');
+        waBtn.setAttribute('aria-label', T.waAria);
         waBtn.setAttribute('data-tooltip', 'WhatsApp');
       } else {
         waBtn.setAttribute('href', DESKTOP_HREF);
         waBtn.removeAttribute('target');
         waBtn.removeAttribute('rel');
-        waBtn.setAttribute('aria-label', 'Abrir formulário de contacto');
-        waBtn.setAttribute('data-tooltip', 'Pedir proposta');
+        waBtn.setAttribute('aria-label', T.formAria);
+        waBtn.setAttribute('data-tooltip', T.cta);
       }
     }
     applyMode();
@@ -228,11 +295,11 @@
 
     // Inline validation replaces the native bubbles (kept as fallback without JS).
     var MESSAGES = {
-      valueMissing: 'Preencha este campo.',
-      selectMissing: 'Escolha uma opção.',
-      typeMismatch: 'Indique um email válido, por exemplo nome@empresa.pt.',
-      patternMismatch: 'Use só números, espaços e o sinal +.',
-      consent: 'Para enviar, aceite a política de privacidade e os termos.'
+      valueMissing: T.valueMissing,
+      selectMissing: T.selectMissing,
+      typeMismatch: T.typeMismatch,
+      patternMismatch: T.patternMismatch,
+      consent: T.consent
     };
     contactForm.setAttribute('novalidate', '');
     var submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -282,8 +349,8 @@
       var invalid = validated.filter(function (el) { return !check(el); });
       if (invalid.length) {
         status.textContent = invalid.length === 1
-          ? 'Há 1 campo por corrigir.'
-          : 'Há ' + invalid.length + ' campos por corrigir.';
+          ? T.oneError
+          : T.manyErrors.replace('{n}', invalid.length);
         invalid[0].focus();
         return;
       }
@@ -291,16 +358,16 @@
       var number = contactForm.getAttribute('data-whatsapp-number') || '351939443377';
 
       var fields = [
-        ['Nome', getFieldValue('nome')],
-        ['Nome da empresa', getFieldValue('empresa')],
-        ['Email', getFieldValue('email')],
-        ['Telemóvel', getFieldValue('telefone')],
-        ['Tipo de projeto', getFieldValue('tipo_projeto')],
-        ['Prazo pretendido', getFieldValue('prazo')],
-        ['Mensagem', getFieldValue('mensagem')]
+        [T.fields[0], getFieldValue('nome')],
+        [T.fields[1], getFieldValue('empresa')],
+        [T.fields[2], getFieldValue('email')],
+        [T.fields[3], getFieldValue('telefone')],
+        [T.fields[4], getFieldValue('tipo_projeto')],
+        [T.fields[5], getFieldValue('prazo')],
+        [T.fields[6], getFieldValue('mensagem')]
       ];
 
-      var lines = ['ola berto tudo bem? preciso de um site. heis os meus dados.....', ''];
+      var lines = [T.waIntro, ''];
 
       fields.forEach(function (field) {
         var label = field[0];
@@ -312,9 +379,9 @@
 
       if (submitBtn) {
         submitBtn.setAttribute('aria-busy', 'true');
-        submitBtn.textContent = 'A abrir o WhatsApp…';
+        submitBtn.textContent = T.busy;
       }
-      status.textContent = 'Pedido pronto. O WhatsApp vai abrir com a mensagem preenchida.';
+      status.textContent = T.ready;
 
       var whatsappUrl = 'https://wa.me/' + number + '?text=' + encodeURIComponent(lines.join('\n'));
       window.location.href = whatsappUrl;
@@ -324,7 +391,7 @@
     window.addEventListener('pageshow', function () {
       if (submitBtn && submitBtn.getAttribute('aria-busy') === 'true') {
         submitBtn.removeAttribute('aria-busy');
-        submitBtn.textContent = 'Enviar por WhatsApp';
+        submitBtn.textContent = T.submit;
         status.textContent = '';
       }
     });
@@ -343,7 +410,7 @@
   // === Service Worker ===
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('service-worker.js').catch(function () { /* ignore */ });
+      navigator.serviceWorker.register(ROOT + 'service-worker.js', { scope: ROOT || './' }).catch(function () { /* ignore */ });
     });
   }
 

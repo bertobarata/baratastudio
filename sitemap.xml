@@ -1,50 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://baratastudio.com/</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/en/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/fr/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/es/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/" />
   </url>
   <url>
     <loc>https://baratastudio.com/faq.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/faq.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/faq.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/faq.html" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/en/faq.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/faq.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/faq.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/faq.html" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/fr/faq.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/faq.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/faq.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/faq.html" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/es/faq.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/faq.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/faq.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/faq.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/faq.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/faq.html" />
   </url>
   <url>
     <loc>https://baratastudio.com/formulario.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/formulario.html" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/en/formulario.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/formulario.html" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/fr/formulario.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/formulario.html" />
+  </url>
+  <url>
+    <loc>https://baratastudio.com/es/formulario.html</loc>
+    <lastmod>2026-10-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://baratastudio.com/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://baratastudio.com/en/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://baratastudio.com/fr/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://baratastudio.com/es/formulario.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://baratastudio.com/formulario.html" />
   </url>
   <url>
     <loc>https://baratastudio.com/politica-privacidade.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://baratastudio.com/politica-cookies.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://baratastudio.com/termos-condicoes.html</loc>
-    <lastmod>2026-05-28</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://baratastudio.com/mettracker.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.4</priority>
   </url>
   <url>
     <loc>https://baratastudio.com/mettracker-privacidade.html</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
