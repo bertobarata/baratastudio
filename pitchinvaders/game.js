@@ -45,6 +45,7 @@ function resize() {
   canvas.width = Math.floor(cw * dpr); canvas.height = Math.floor(ch * dpr);
   document.documentElement.style.setProperty('--u', scale + 'px');
   $('rotate').classList.toggle('hidden', !(isTouch && vh > vw));
+  window.scrollTo(0, 0);
 }
 addEventListener('resize', resize);
 resize();
@@ -389,7 +390,7 @@ function nameError(msg) {
   nameHint.textContent = msg;
   nameHint.classList.add('error');
   nameInput.classList.remove('shake'); void nameInput.offsetWidth; nameInput.classList.add('shake');
-  nameInput.focus();
+  if (!isTouch) nameInput.focus();
 }
 
 // The name step is mandatory: nobody enters the pitch anonymous.
@@ -428,6 +429,7 @@ function startGame() {
     excite: 0.6, shake: 0, flash: 0, mode: 'play',
   });
   menu.classList.add('hidden'); over.classList.add('hidden'); pauseEl.classList.add('hidden');
+  document.body.classList.add('playing');
   hud.classList.remove('hidden'); ticker.classList.remove('hidden');
   btnSprint.classList.toggle('hidden', !isTouch);
   say(pick(LINES.start));
@@ -441,13 +443,14 @@ function togglePause() {
 
 function showMenu() {
   G.mode = 'menu';
+  document.body.classList.remove('playing');
   over.classList.add('hidden'); hud.classList.add('hidden'); ticker.classList.add('hidden'); btnSprint.classList.add('hidden');
   menu.classList.remove('hidden');
   loadBoard($('menu-board'));
   resetWorld();
   nameInput.value = '';
   syncName();
-  nameInput.focus();
+  if (!isTouch) nameInput.focus();
 }
 
 function say(text) { G.comment = { text, shown: 0, t: 0 }; }
@@ -471,6 +474,7 @@ function caught(s) {
 
 function finish() {
   G.mode = 'over';
+  document.body.classList.remove('playing');
   G.overLockUntil = performance.now() + 1500;
   const final = G.final;
   const isRecord = final > G.best;
@@ -1209,7 +1213,7 @@ function frame(now) {
 }
 requestAnimationFrame(frame);
 
-nameInput.focus();
+if (!isTouch) nameInput.focus();
 
 // test hook (read-only snapshot)
 if (params.has('debug')) window.__G = G;

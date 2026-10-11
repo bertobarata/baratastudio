@@ -188,19 +188,23 @@ button {
 
 /* ---------- overlays ---------- */
 .overlay {
-  position: absolute;
+  /* fixed to the viewport, not the letterboxed game box, so it never gets clipped on phones */
+  position: fixed;
   inset: 0;
-  display: grid;
-  place-items: center;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   background: radial-gradient(ellipse at center, rgba(8, 12, 20, .55), rgba(8, 12, 20, .88));
-  padding: 12px;
   overflow-y: auto;
 }
 
 .card {
   width: min(560px, 100%);
-  max-height: 100%;
-  overflow-y: auto;
+  margin: auto; /* centres when it fits, scrolls from the top when it doesn't */
+  flex-shrink: 0;
   background: var(--card);
   border: 1px solid var(--line);
   border-top: 5px solid var(--vest);
@@ -472,7 +476,9 @@ body.touch .desk-only { display: none; }
 .board li .sc { font-variant-numeric: tabular-nums; font-weight: 800; }
 .board li.me { background: rgba(242, 226, 5, .14); }
 
-#rotate {
+#rotate { display: none; }
+body.playing #rotate {
+  display: block;
   position: fixed;
   top: 10px;
   left: 50%;
