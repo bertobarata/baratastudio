@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Pitch Invader</title>
+  <meta name="description" content="Salta a vedação, invade o relvado e foge dos seguranças o máximo de tempo possível.">
+  <meta name="theme-color" content="#0f1420">
+  <meta property="og:title" content="Pitch Invader">
+  <meta property="og:description" content="Quanto tempo aguentas no relvado antes de seres apanhado pela segurança?">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏃</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="stage">
+    <canvas id="game" aria-label="Campo de futebol com o invasor e os seguranças"></canvas>
+
+    <div id="hud" class="hidden">
+      <div class="hud-block">
+        <span class="hud-label">Tempo em campo</span>
+        <span id="hud-score" class="hud-score">0.0</span>
+        <div class="stamina"><div id="stamina-fill"></div></div>
+      </div>
+      <div class="hud-block right">
+        <span class="hud-label">Recorde</span>
+        <span id="hud-best" class="hud-best">0.0</span>
+        <div class="hud-buttons">
+          <button id="btn-mute" class="icon-btn" aria-label="Som">🔊</button>
+          <button id="btn-pause" class="icon-btn" aria-label="Pausa">⏸</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ticker" class="hidden"><span class="ticker-tag">AO VIVO</span><span id="ticker-text"></span></div>
+
+    <button id="btn-sprint" class="hidden" aria-label="Sprint">SPRINT</button>
+
+    <section id="menu" class="overlay">
+      <div class="card">
+        <p class="kicker">Jornada 34 · Estádio Municipal</p>
+        <h1>PITCH<br>INVADER</h1>
+        <p class="tagline">Saltaste a vedação. Aguenta o máximo de tempo no relvado sem seres apanhado pela segurança.</p>
+        <label class="name-step" for="name">
+          <span class="step-label">1 · Escreve o teu nome</span>
+          <input id="name" maxlength="14" autocomplete="off" spellcheck="false" placeholder="O teu nome" required>
+          <span id="name-hint" class="name-hint">Precisas de um nome para entrar em campo.</span>
+        </label>
+
+        <div class="rules">
+          <span class="step-label">2 · Como se pontua</span>
+          <p class="rules-main">Cada <b>segundo</b> no relvado sem seres apanhado vale <b>1 ponto</b>. Os bónus <b>somam segundos</b> ao teu tempo:</p>
+          <ul class="rules-list">
+            <li><span class="pill">+5s</span> <span>Chuta a bola para dentro de uma baliza <small>(e os seguranças param para festejar)</small></span></li>
+            <li><span class="pill">+3s</span> <span>Selfie com o nº 10 dourado <small>(encosta-te a ele)</small></span></li>
+            <li><span class="pill">+1s</span> <span>Finta: deixa um segurança chegar perto e foge</span></li>
+          </ul>
+          <p class="rules-controls"><span class="desk-only"><b>Setas / WASD</b> para correr · <b>Espaço</b> para sprint (gasta energia)</span><span class="touch-only-inline">Arrasta o dedo para correr · botão <b>SPRINT</b> para acelerar</span></p>
+        </div>
+
+        <button id="btn-play" class="primary" disabled>ENTRAR EM CAMPO</button>
+        <div id="menu-board" class="board"></div>
+      </div>
+    </section>
+
+    <section id="over" class="overlay hidden">
+      <div class="card">
+        <p class="kicker" id="over-kicker">Fim da invasão</p>
+        <h2>APANHADO!</h2>
+        <p id="over-caption" class="caption"></p>
+        <div class="final">
+          <span id="over-score" class="final-score">0.0s</span>
+          <span id="over-rank" class="rank"></span>
+          <span id="over-record" class="record hidden">NOVO RECORDE!</span>
+        </div>
+        <p id="over-stats" class="stats"></p>
+        <div class="row">
+          <button id="btn-again" class="primary">OUTRA VEZ</button>
+          <button id="btn-menu" class="ghost">NOVO JOGADOR</button>
+        </div>
+        <div id="over-board" class="board"></div>
+      </div>
+    </section>
+
+    <section id="pause" class="overlay hidden">
+      <div class="card small">
+        <h2>INTERVALO</h2>
+        <p class="tagline">Os seguranças foram buscar um café.</p>
+        <button id="btn-resume" class="primary">CONTINUAR</button>
+      </div>
+    </section>
+
+    <div id="rotate" class="hidden">Roda o telemóvel para jogar melhor ↻</div>
+  </div>
+  <script src="config.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
