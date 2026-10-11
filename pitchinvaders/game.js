@@ -34,17 +34,24 @@ const nameInput = $('name'), btnSprint = $('btn-sprint'), btnMute = $('btn-mute'
 const isTouch = matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window;
 if (isTouch) document.body.classList.add('touch');
 
-let scale = 1, dpr = 1;
+// On an upright phone the landscape world is drawn rotated 90° (goals top/bottom) so it fills the screen.
+// World +x then points up the screen and world +y points right. UP/RIGHT are those screen directions in world space.
+let scale = 1, dpr = 1, PORTRAIT = false;
+let UP = [0, -1], RIGHT = [1, 0];
 function resize() {
   dpr = Math.min(window.devicePixelRatio || 1, 2);
   const vw = window.innerWidth, vh = window.innerHeight;
-  scale = Math.min(vw / W, vh / H);
-  const cw = Math.floor(W * scale), ch = Math.floor(H * scale);
+  PORTRAIT = isTouch && vh > vw;
+  document.body.classList.toggle('portrait', PORTRAIT);
+  UP = PORTRAIT ? [1, 0] : [0, -1];
+  RIGHT = PORTRAIT ? [0, 1] : [1, 0];
+  const SW = PORTRAIT ? H : W, SH = PORTRAIT ? W : H; // screen size in world units
+  scale = Math.min(vw / SW, vh / SH);
+  const cw = Math.floor(SW * scale), ch = Math.floor(SH * scale);
   stage.style.width = cw + 'px'; stage.style.height = ch + 'px';
   canvas.style.width = cw + 'px'; canvas.style.height = ch + 'px';
   canvas.width = Math.floor(cw * dpr); canvas.height = Math.floor(ch * dpr);
   document.documentElement.style.setProperty('--u', scale + 'px');
-  $('rotate').classList.toggle('hidden', !(isTouch && vh > vw));
   window.scrollTo(0, 0);
 }
 addEventListener('resize', resize);
@@ -234,6 +241,7 @@ function readInput() {
   if (joy.active) { x = joy.dx; y = joy.dy; }
   const m = Math.hypot(x, y);
   if (m > 1) { x /= m; y /= m; }
+  if (PORTRAIT) [x, y] = [-y, x]; // screen direction -> world direction
   return { x, y, sprint: !!(keys.Space || keys.ShiftLeft || keys.ShiftRight || touchSprint) };
 }
 
@@ -803,7 +811,7 @@ function updatePlay(dt) {
         if (s.jukeCd <= 0) {
           s.jukeCd = 4;
           G.jukes++; G.bonus += 1;
-          popup(pl.x, pl.y - 26, 'FINTA! +1', '#ffffff', 20);
+          popup(...above(pl.x, pl.y, 26), 'FINTA! +1', '#ffffff', 20);
           if (Math.random() < 0.6) say(pick(LINES.juke));
           audio.juke();
           G.excite = Math.max(G.excite, 1.1);
@@ -819,7 +827,7 @@ function updatePlay(dt) {
     G.selfieCd = 9;
     G.selfies++; G.bonus += 3;
     G.flash = 1;
-    popup(star.x, star.y - 30, 'SELFIE! +3', '#ffffff', 26);
+    popup(...above(star.x, star.y, 30), 'SELFIE! +3', '#ffffff', 26);
     say(pick(LINES.selfie));
     audio.shutter();
     G.excite = Math.max(G.excite, 1.2);
@@ -991,7 +999,7 @@ function drawCrowd() {
     ctx.fillStyle = g.c;
     for (const s of g.seats) {
       const b = Math.max(0, Math.sin(t * s.sp + s.ph)) * amp;
-      ctx.fillRect(s.x, s.y - b, 6, 6);
+      ctx.fillRect(s.x + UP[0] * b, s.y + UP[1] * b, 6, 6);
     }
   }
   ctx.fillStyle = 'rgba(232,190,150,.9)';
@@ -999,13 +1007,24 @@ function drawCrowd() {
     for (let i = 0; i < g.seats.length; i += 3) {
       const s = g.seats[i];
       const b = Math.max(0, Math.sin(t * s.sp + s.ph)) * amp;
-      ctx.fillRect(s.x + 1.5, s.y - b - 2, 3, 3);
+      ctx.fillRect(s.x + 1.5 + UP[0] * (b + 2), s.y + UP[1] * (b + 2), 3, 3);
     }
   }
 }
 
 function circle(x, y, r) { ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); }
 function ellipse(x, y, rx, ry) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, TAU); ctx.fill(); }
+// point d units "above" e on screen, optionally shifted sideways
+const above = (x, y, d, side = 0) => [x + UP[0] * d + RIGHT[0] * side, y + UP[1] * d + RIGHT[1] * side];
+// draw text that stays upright even when the world is rotated
+function label(text, x, y, fill, stroke) {
+  ctx.save();
+  ctx.translate(x, y);
+  if (PORTRAIT) ctx.rotate(Math.PI / 2);
+  if (stroke) { ctx.strokeStyle = stroke; ctx.strokeText(text, 0, 0); }
+  ctx.fillStyle = fill; ctx.fillText(text, 0, 0);
+  ctx.restore();
+}
 
 function shadow(x, y, r) {
   ctx.fillStyle = 'rgba(0,0,0,.25)';
@@ -1043,9 +1062,8 @@ function drawSquadMember(p) {
   }
   drawPerson(p.x, p.y, p.r, p.face, p.walk, moving, { body, arms, legs, head: '#d9a47a', hair: p.num % 3 ? '#2b1a10' : '#e0c27a' });
   if (p.team !== 'R') {
-    ctx.fillStyle = p.star ? '#ffd700' : 'rgba(255,255,255,.85)';
     ctx.font = '800 8px Rubik, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(p.num, p.x, p.y + p.r + 8);
+    label(p.num, ...above(p.x, p.y, -(p.r + 8)), p.star ? '#ffd700' : 'rgba(255,255,255,.85)');
   }
 }
 
@@ -1078,11 +1096,11 @@ function drawSteward(s) {
   // status marks
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   if (s.state === 'alert') {
-    ctx.fillStyle = '#e63b2e'; ctx.font = '800 20px Bungee, sans-serif';
-    ctx.fillText('!', s.x, s.y - s.r - 14 - Math.abs(Math.sin(G.time * 12)) * 4);
+    ctx.font = '800 20px Bungee, sans-serif';
+    label('!', ...above(s.x, s.y, s.r + 14 + Math.abs(Math.sin(G.time * 12)) * 4), '#e63b2e');
   } else if (s.stun > 0) {
-    ctx.fillStyle = '#f2e205'; ctx.font = '800 16px Rubik, sans-serif';
-    ctx.fillText('♪', s.x + Math.sin(G.time * 8) * 6, s.y - s.r - 12);
+    ctx.font = '800 16px Rubik, sans-serif';
+    label('♪', ...above(s.x, s.y, s.r + 12, Math.sin(G.time * 8) * 6), '#f2e205');
   } else if (s.tired) {
     ctx.fillStyle = '#7cc6ff';
     circle(s.x + s.r * 0.9, s.y - s.r - 2 + (G.time * 30 % 8), 2);
@@ -1099,10 +1117,10 @@ function drawPlayer() {
     ctx.fillStyle = '#e0a57d'; ellipse(0, 0, pl.r * 1.3, pl.r * 0.55);
     ctx.fillStyle = '#c84a1a'; circle(pl.r * 1.3, 0, pl.r * 0.42);
     ctx.restore();
-    ctx.fillStyle = '#f2e205'; ctx.font = '800 12px Rubik, sans-serif'; ctx.textAlign = 'center';
+    ctx.font = '800 12px Rubik, sans-serif'; ctx.textAlign = 'center';
     for (let i = 0; i < 3; i++) {
       const a = G.time * 4 + i * TAU / 3;
-      ctx.fillText('★', pl.x + Math.cos(a) * 16, pl.y - 18 + Math.sin(a) * 5);
+      label('★', ...above(pl.x, pl.y, 18 - Math.sin(a) * 5, Math.cos(a) * 16), '#f2e205');
     }
     return;
   }
@@ -1120,9 +1138,8 @@ function drawPlayer() {
   ctx.restore();
   // name tag
   ctx.font = '800 11px Rubik, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(0,0,0,.7)';
-  ctx.strokeText(G.name, pl.x, pl.y - 26);
-  ctx.fillStyle = '#fff'; ctx.fillText(G.name, pl.x, pl.y - 26);
+  ctx.lineWidth = 3;
+  label(G.name, ...above(pl.x, pl.y, 26), '#fff', 'rgba(0,0,0,.7)');
   if (pl.sprinting) {
     ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2;
     for (let i = -1; i <= 1; i++) {
@@ -1150,6 +1167,7 @@ function render() {
   const k = scale * dpr;
   ctx.setTransform(k, 0, 0, k, 0, 0);
   if (G.shake > 0) ctx.translate(rand(-1, 1) * G.shake * 0.4, rand(-1, 1) * G.shake * 0.4);
+  if (PORTRAIT) { ctx.translate(0, W); ctx.rotate(-Math.PI / 2); } // world (x, y) -> screen (y, W - x)
   ctx.drawImage(bg, 0, 0, W, H);
   drawCrowd();
 
@@ -1160,10 +1178,12 @@ function render() {
   ctx.globalAlpha = 1;
   drawBall();
 
+  // draw back-to-front by screen depth
+  const depth = e => (PORTRAIT ? -e.x : e.y);
   const ents = [];
-  for (const p of G.squad) ents.push([p.y, 0, p]);
-  for (const s of G.stewards) ents.push([s.y + (G.mode === 'caught' && s === G.catcher ? 20 : 0), 1, s]);
-  if (G.player && G.mode !== 'menu') ents.push([G.player.y, 2, G.player]);
+  for (const p of G.squad) ents.push([depth(p), 0, p]);
+  for (const s of G.stewards) ents.push([depth(s) + (G.mode === 'caught' && s === G.catcher ? 20 : 0), 1, s]);
+  if (G.player && G.mode !== 'menu') ents.push([depth(G.player), 2, G.player]);
   ents.sort((a, b) => a[0] - b[0]);
   for (const [, kind, e] of ents) {
     if (kind === 0) drawSquadMember(e);
@@ -1175,13 +1195,12 @@ function render() {
     const a = 1 - p.t / 1.3;
     ctx.globalAlpha = a;
     ctx.font = `${p.size}px Bungee, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(0,0,0,.6)';
-    const y = p.y - p.t * 40;
-    ctx.strokeText(p.text, p.x, y);
-    ctx.fillStyle = p.color; ctx.fillText(p.text, p.x, y);
+    ctx.lineWidth = 4;
+    label(p.text, ...above(p.x, p.y, p.t * 40), p.color, 'rgba(0,0,0,.6)');
   }
   ctx.globalAlpha = 1;
 
+  ctx.setTransform(k, 0, 0, k, 0, 0); // screen space from here on
   if (joy.active) {
     const ox = joy.ox / scale, oy = joy.oy / scale;
     ctx.strokeStyle = 'rgba(255,255,255,.4)'; ctx.lineWidth = 3;
@@ -1191,9 +1210,8 @@ function render() {
   }
 
   if (G.flash > 0) {
-    ctx.setTransform(k, 0, 0, k, 0, 0);
     ctx.fillStyle = `rgba(255,255,255,${G.flash * 0.7})`;
-    ctx.fillRect(0, 0, W, H);
+    ctx.fillRect(0, 0, W, W);
   }
 }
 

@@ -164,6 +164,7 @@ button {
 }
 
 #ticker-text { overflow: hidden; text-overflow: ellipsis; }
+body.portrait #ticker { white-space: normal; width: 92%; }
 
 @keyframes blink { 50% { opacity: .55; } }
 
@@ -475,23 +476,6 @@ body.touch .desk-only { display: none; }
 .board li .pos { color: var(--muted); }
 .board li .sc { font-variant-numeric: tabular-nums; font-weight: 800; }
 .board li.me { background: rgba(242, 226, 5, .14); }
-
-#rotate { display: none; }
-body.playing #rotate {
-  display: block;
-  position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--vest);
-  color: #111;
-  font-weight: 800;
-  padding: 8px 14px;
-  border-radius: 99px;
-  font-size: 13px;
-  z-index: 10;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .ticker-tag, .record { animation: none; }
