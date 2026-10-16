@@ -493,3 +493,37 @@
     demo();
   }
 })();
+
+/* Portfolio loops: posters load shortly before a card scrolls into view (a poster
+ * attribute would download all of them at page load); each recording plays only while
+ * on screen. Reduced motion or data-saver: poster only, the video is never downloaded. */
+(function () {
+  var vids = document.querySelectorAll('.showcase-video');
+  if (!vids.length || !('IntersectionObserver' in window)) return;
+  var conn = navigator.connection;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches || (conn && conn.saveData);
+
+  var near = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.poster = e.target.dataset.poster;
+      near.unobserve(e.target);
+    });
+  }, { rootMargin: '600px 0px' });
+  vids.forEach(function (v) { near.observe(v); });
+  if (still) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      var v = e.target;
+      if (e.isIntersecting) {
+        if (v.preload !== 'auto') v.preload = 'auto';
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        v.pause();
+      }
+    });
+  }, { threshold: 0.35 });
+  vids.forEach(function (v) { io.observe(v); });
+})();
