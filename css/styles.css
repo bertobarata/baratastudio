@@ -558,6 +558,30 @@ main { display: block; }
 .project-compact .project-title { font-size: 1.15rem; margin: 0.2rem 0 0.3rem; }
 .project-compact .project-brief { font-size: 0.94rem; margin-bottom: 0.4rem; }
 
+/* Showcase: live loop of the real site in a browser frame, phone overlay on the featured two. */
+.project-img-wrap.showcase { position: relative; overflow: visible; }
+.showcase-screen { position: relative; padding-top: 22px; background: oklch(0.2 0.02 215); }
+.showcase-screen::before {
+  content: ''; position: absolute; top: 7px; left: 10px; width: 8px; height: 8px; border-radius: 50%;
+  background: oklch(0.72 0.02 215); box-shadow: 13px 0 0 oklch(0.72 0.02 215), 26px 0 0 oklch(0.72 0.02 215);
+}
+.showcase-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: oklch(0.2 0.02 215); }
+.showcase-phone {
+  position: absolute; right: -0.9rem; bottom: -1.4rem; width: 21%; aspect-ratio: 390 / 844;
+  border: 4px solid oklch(0.2 0.02 215); border-radius: 18px; overflow: hidden; background: oklch(0.2 0.02 215);
+  box-shadow: 0 18px 34px -14px oklch(0.2 0.05 215 / 0.55);
+}
+.showcase-phone .showcase-video { height: 100%; aspect-ratio: auto; }
+.project-card--rev .showcase-phone { right: auto; left: -0.9rem; }
+.project-case { margin: 0 0 1.2rem; display: grid; gap: 0.8rem; }
+.project-case dt { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-deep); }
+.project-case dd { margin: 0.15rem 0 0; color: var(--ink-2); font-size: 0.98rem; max-width: 52ch; }
+.project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1.4rem; }
+.project-cta { display: inline-flex; align-items: center; min-height: 44px; font-family: var(--font-mono); font-size: 0.84rem; font-weight: 600; color: var(--teal-deep); text-decoration: underline; text-underline-offset: 0.25em; text-decoration-thickness: 1px; }
+.project-cta:hover { text-decoration-thickness: 2px; }
+.projects-cta { margin-top: clamp(3rem, 6vw, 4.5rem); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; padding: 1.4rem clamp(1.2rem, 3vw, 2rem); border-radius: var(--r-lg); background: var(--panel); border: 1px solid var(--glass-edge); box-shadow: var(--shadow-soft); }
+.projects-cta p { margin: 0; font-family: var(--font-display); font-size: clamp(1.2rem, 2.4vw, 1.6rem); }
+
 /* Status chips (apps and work in progress) */
 .app-status, .project-wip {
   display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.04em;
@@ -880,7 +904,8 @@ main { display: block; }
   .about-facets li { grid-template-columns: 1fr; justify-items: center; }
   .about-kicker { grid-row: auto; }
   .project-proof { justify-content: center; }
-  .project-link-row, .app-links, .app-head { justify-content: center; }
+  .project-link-row, .app-links, .app-head, .project-actions { justify-content: center; }
+  .projects-cta { justify-content: center; text-align: center; }
   .projects-more-title, .apps, .project-compact-meta { text-align: center; }
   .apps-intro { margin-inline: auto; }
   .app-item { grid-template-columns: 1fr; justify-items: center; text-align: center; }
