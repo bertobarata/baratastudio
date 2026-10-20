@@ -98,8 +98,9 @@
       name: { pt: 'apps', en: 'apps', fr: 'apps', es: 'apps' },
       desc: { pt: 'projetos em desenvolvimento', en: 'projects in development', fr: 'projets en développement', es: 'proyectos en desarrollo' },
       children: {
-        'meet-tracker': { url: 'https://apps.apple.com/pt/app/meet-tracker/id6813061781', desc: { pt: 'app iOS, na App Store', en: 'iOS app, on the App Store', fr: 'app iOS, sur l’App Store', es: 'app iOS, en la App Store' } },
-        'tvde': { url: 'https://apptvde.store', desc: { pt: 'app para o exame TVDE, em desenvolvimento', en: 'TVDE exam app, in development', fr: 'app pour l’examen TVDE, en développement', es: 'app para el examen TVDE, en desarrollo' } },
+        'meet-tracker': { url: 'https://apps.apple.com/pt/app/meet-tracker-vendas-e-metas/id6813061781', desc: { pt: 'app iOS, na App Store', en: 'iOS app, on the App Store', fr: 'app iOS, sur l’App Store', es: 'app iOS, en la App Store' } },
+        'tvde': { url: 'https://apps.apple.com/pt/app/tvde-imt-prep/id6816304654', desc: { pt: 'app para o exame TVDE, na App Store', en: 'TVDE exam app, on the App Store', fr: 'app pour l’examen TVDE, sur l’App Store', es: 'app para el examen TVDE, en la App Store' } },
+        'codigo': { desc: { pt: 'app para o exame de código, em desenvolvimento', en: 'driving theory exam app, in development', fr: 'app pour l’examen du code, en développement', es: 'app para el examen teórico, en desarrollo' } },
         'fine-rag': { desc: { pt: 'protótipo privado: perguntas sobre fichas FINE, a correr localmente', en: 'private prototype: questions about FINE sheets, running locally', fr: 'prototype privé : questions sur les fiches FINE, en local', es: 'prototipo privado: preguntas sobre fichas FINE, en local' } },
         'bertobarata.com': { url: 'https://bertobarata.com', desc: { pt: 'portfólio pessoal', en: 'personal portfolio', fr: 'portfolio personnel', es: 'portfolio personal' } }
       } },
