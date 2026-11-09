@@ -152,7 +152,8 @@
 
 /* ===== Base ===== */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-text-size-adjust: 100%; overflow-x: clip; }
+/* clip, not hidden: decorative glows (inset < 0) must never widen the page, and sticky keeps working. */
 body {
   margin: 0;
   background: var(--paper);
@@ -813,29 +814,6 @@ main { display: block; }
   .apps-list { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .nav-toggle {
-    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: var(--r-pill);
-    font-family: var(--font-mono); font-size: 0.84rem; font-weight: 500; color: var(--ink);
-    background: var(--panel); border: 1px solid var(--hair); cursor: pointer;
-  }
-  .header-cta { display: none; }
-  .top-nav { margin-left: auto; }
-  .top-nav ul {
-    position: fixed; inset: 0; flex-direction: column; gap: 0; justify-content: center;
-    padding: 5rem var(--gutter) calc(2rem + env(safe-area-inset-bottom)); background: oklch(0.97 0.014 88 / 0.9);
-    -webkit-backdrop-filter: blur(30px) saturate(1.5); backdrop-filter: blur(30px) saturate(1.5);
-    overflow-y: auto; overscroll-behavior: contain;
-    opacity: 0; visibility: hidden; transition: opacity 220ms var(--ease-out), visibility 0s linear 220ms;
-  }
-  .top-nav ul.open { opacity: 1; visibility: visible; transition-delay: 0s; }
-  .nav-item a { display: flex; justify-content: space-between; align-items: center; min-height: 56px; font-family: var(--font-display); font-size: 2rem; color: var(--ink); padding: 0.4rem 0; border-radius: 0; border-bottom: 1px solid var(--hair); background: none; }
-  .nav-arrow { color: var(--teal); }
-  .nav-section-label { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal-deep); margin: 1.6rem 0 0.4rem; }
-  .nav-cta-item a { justify-content: center; font-family: var(--font-display); background: var(--teal); color: var(--paper-hi); border-radius: var(--r-pill); min-height: 52px; padding: 0 1.4rem; font-size: 1.3rem; border: 0; }
-  .nav-secondary a { font-family: var(--font-mono); font-size: 0.92rem; color: var(--ink-2); border: 0; padding: 0; min-height: 44px; background: none; }
-  .nav-footer-text { margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-2); }
-  .nav-close-floating { display: grid; place-items: center; position: fixed; top: 20px; right: 22px; z-index: var(--z-overlay); width: 48px; height: 48px; border-radius: 50%; font-size: 1.6rem; line-height: 1; color: var(--ink); background: var(--glass-strong); border: 1px solid var(--hair); cursor: pointer; }
-  .nav-close-floating[hidden] { display: none; }
   .projects-grid, .service-content, .projects-grid--three, .projects-compact-list { grid-template-columns: 1fr; }
   .projects-grid--three .project-card:first-child { grid-column: auto; }
   .service-content h3 { grid-row: auto; }
@@ -887,13 +865,43 @@ main { display: block; }
   html:has(body.page-home) { scroll-padding-top: 1.5rem; }
 }
 
-/* ===== Mobile: everything centred (code stays left-aligned) ===== */
-@media (max-width: 768px) {
+/* ===== Tablet + mobile header: "Menu" overlay up to 1024px (the desktop row of links,
+   language switch and CTA does not fit below ~960px). Keep in sync with MENU_MQ in js/site.js. ===== */
+@media (max-width: 1024px) {
   .site-header { display: grid; grid-template-columns: 1fr auto 1fr; padding-left: 0.5rem; }
   .header-brand { grid-column: 2; justify-self: center; }
   .top-nav { grid-column: 3; justify-self: end; margin-left: 0; }
-  .header-wordmark { width: 128px; }
   .lang-switch--header { display: none; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 1.1rem; border-radius: var(--r-pill);
+    font-family: var(--font-mono); font-size: 0.84rem; font-weight: 500; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--hair); cursor: pointer;
+  }
+  .header-cta { display: none; }
+  .top-nav { margin-left: auto; }
+  .top-nav ul {
+    position: fixed; inset: 0; flex-direction: column; gap: 0; justify-content: center;
+    padding: 5rem var(--gutter) calc(2rem + env(safe-area-inset-bottom)); background: oklch(0.97 0.014 88 / 0.9);
+    -webkit-backdrop-filter: blur(30px) saturate(1.5); backdrop-filter: blur(30px) saturate(1.5);
+    overflow-y: auto; overscroll-behavior: contain;
+    opacity: 0; visibility: hidden; transition: opacity 220ms var(--ease-out), visibility 0s linear 220ms;
+  }
+  .top-nav ul.open { opacity: 1; visibility: visible; transition-delay: 0s; }
+  .nav-item a { display: flex; justify-content: space-between; align-items: center; min-height: 56px; font-family: var(--font-display); font-size: 2rem; color: var(--ink); padding: 0.4rem 0; border-radius: 0; border-bottom: 1px solid var(--hair); background: none; }
+  .nav-arrow { color: var(--teal); }
+  .nav-section-label { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal-deep); margin: 1.6rem 0 0.4rem; }
+  .nav-cta-item a { justify-content: center; font-family: var(--font-display); background: var(--teal); color: var(--paper-hi); border-radius: var(--r-pill); min-height: 52px; padding: 0 1.4rem; font-size: 1.3rem; border: 0; }
+  .nav-secondary a { font-family: var(--font-mono); font-size: 0.92rem; color: var(--ink-2); border: 0; padding: 0; min-height: 44px; background: none; }
+  .nav-footer-text { margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-2); }
+  .nav-close-floating { display: grid; place-items: center; position: fixed; top: 20px; right: 22px; z-index: var(--z-overlay); width: 48px; height: 48px; border-radius: 50%; font-size: 1.6rem; line-height: 1; color: var(--ink); background: var(--glass-strong); border: 1px solid var(--hair); cursor: pointer; }
+  .nav-close-floating[hidden] { display: none; }
+  /* The cookie notice sits above the overlay; hide it while the menu is open. */
+  body:has(.top-nav ul.open) #cookie-banner { visibility: hidden; }
+}
+
+/* ===== Mobile: everything centred (code stays left-aligned) ===== */
+@media (max-width: 768px) {
+  .header-wordmark { width: 128px; }
   .lang-switch--hero { float: none; margin: 0 auto 1rem; display: flex; width: fit-content; }
 
   .hero-head, .hero-copy, .manifesto-inner, .about-copy, .process-head,
@@ -996,7 +1004,7 @@ main { display: block; }
   .cookie-btn--primary { color: oklch(0.18 0.02 215); }
   .project-img-wrap { background: oklch(0.25 0.02 215 / 0.7); }
 }
-@media (prefers-color-scheme: dark) and (max-width: 768px) {
+@media (prefers-color-scheme: dark) and (max-width: 1024px) {
   .top-nav ul { background: oklch(0.17 0.016 215 / 0.9); }
   .nav-cta-item a { color: oklch(0.18 0.02 215); }
 }
