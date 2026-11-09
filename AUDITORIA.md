@@ -1,94 +1,102 @@
-# Auditoria unificada: Barata Studio (light glass + terminal)
+# Auditoria: navegação em telemóvel e tablet (baratastudio.com)
 
 Fontes: **[I]** impeccable audit, **[U]** ui-ux-pro-max, **[T]** tasteskill.
-Branch: `design/redesign` (sem commit). Atualizado a 2026-10-01 depois da ronda de correções com foco em mobile.
+Data: 2026-11-09. Base: `origin/main` (de76100 + PRs #18 e #19). Foco pedido pelo Berto: menu/header em tablet e telemóvel.
+A auditoria geral anterior (2026-10-01, 18/20) continua no histórico do git deste ficheiro.
 
-## Resultado
+## 1. Resumo
 
-| | Antes | Depois |
+- Lighthouse mobile, homepage (servidor local sem compressão): **Performance 92 · Acessibilidade 100 · Boas práticas 100 · SEO 100**. FCP 1,7 s, LCP 3,2 s, TBT 110 ms, CLS 0.
+- impeccable: **16/20** (bom). A descida face aos 18/20 de outubro vem toda do Responsivo.
+- Problemas: **2 P1**, **2 P2**, **2 P3**.
+- Causa principal: um brilho decorativo alarga a página. No telemóvel isso desloca o header e corta o menu aberto. No tablet, o header das páginas interiores não cabe.
+
+## 2. Notas por ferramenta
+
+### impeccable
+
+| Dimensão | Score | Achado-chave |
 |---|---|---|
-| Pontuação impeccable | 13/20 (aceitável) | **18/20 (excelente, polimento)** |
-| Lighthouse mobile, homepage | não medido | **Performance 99 · Acessibilidade 100 · Boas práticas 100 · SEO 100** |
-| Lighthouse mobile, FAQ | não medido | Performance 99 · Acessibilidade 100 |
-| Lighthouse mobile, formulário | não medido | Performance 93 · Acessibilidade 100 · SEO 100 |
-| LCP mobile (homepage) | 3,2 s | **2,0 s** |
-| CLS / bloqueio | 0 / 0 ms | 0 / 0 ms |
-| Peso das fontes | 584 KB | **122 KB** |
-| Elementos com blur na homepage | 16 | **2** (header + terminal do hero) |
-| Etiquetas `// ` na homepage | 7 | **3** |
+| Acessibilidade | 4 | Lighthouse 100; alvos de 44px no header e no menu |
+| Performance | 3 | 92 em local; LCP 3,2 s (outubro: 2,0 s), a medir de novo em produção |
+| Responsivo | 2 | Scroll horizontal na home em todas as larguras; header do tablet transborda até 168px |
+| Theming | 4 | Tokens completos, header usa o mesmo vidro em todas as páginas |
+| Anti-padrões | 3 | Vidro e terminal são escolhas registadas; sem travessões no header |
+| **Total** | **16/20** | Bom |
 
-| Dimensão (impeccable) | Antes | Depois | Nota |
-|---|---|---|---|
-| Acessibilidade | 3 | 4 | Lighthouse 100; terminal focável; erros de formulário anunciados |
-| Performance | 2 | 4 | Fontes em subset e com preload; hero sem depender de JS; blur reduzido |
-| Responsivo | 3 | 4 | Alvos de 44px em toque; iOS sem zoom no terminal; zonas seguras |
-| Tema | 3 | 3 | Tokens completos; light-only é decisão registada (sem modo escuro) |
-| Anti-padrões | 2 | 3 | Restam o vidro como material e o terminal no hero, ambos escolhas tuas |
+### ui-ux-pro-max
 
-Medições: Lighthouse 12 local em modo mobile com throttling simulado; ecrãs a 390px e 1920px; contraste calculado em OKLCH.
+| Categoria | Veredito |
+|---|---|
+| 1 Acessibilidade | Passa (Lighthouse 100, foco visível, `aria-expanded` no botão Menu) |
+| 2 Toque | Passa no header (44px). O menu aberto perde 4px à direita no telemóvel (P1-1) |
+| 3 Performance | Aceitável (92), sem impacto da navegação |
+| 4 Layout | **Falha**: scroll horizontal (P1-1) e header que não cabe entre 769 e 900px (P1-2) |
+| 5 Tipografia e cor | Passa |
+| 6 Animação | Passa (menu com fade de 220 ms, respeita `prefers-reduced-motion`) |
+| 7 Estilo | Passa |
 
----
+### tasteskill
 
-## Estado dos 29 pontos
+- **Design Read:** estúdio de uma pessoa, artesanal e calmo, com vidro claro e um toque técnico de terminal.
+- **Dials:** variância 6 (manter 6), densidade 4 (manter 4), movimento 4 (manter 4).
+- **Pre-Flight, só para a navegação:** 9 de 11 passam. Falham "sem scroll horizontal em nenhum breakpoint" e "nav colapsa antes de partir".
 
-Legenda: ✅ feito · ⚠️ feito com nota · ⏸️ por decidir/precisa de ti
+## 3. Problemas unificados
 
 ### P1
 
-| # | Problema | Estado | O que foi feito |
-|---|---|---|---|
-| 1 | Hero invisível até o JS correr | ✅ | Entrada do hero por CSS puro (o título só desliza, nunca fica invisível). O reveal por scroll aplica-se só ao que está abaixo da dobra no carregamento. |
-| 2 | Comico com 340 KB | ⚠️ | Subset latino de **50 KB** em `assets/fonts/web/`, com preload em todas as páginas, `font-display: optional` e cache no service worker. Nota: sem as alternativas contextuais, as letras repetidas ficam iguais. Numa primeira visita muito lenta pode aparecer a Zodiak no título; da segunda página em diante aparece sempre a Comico. Zodiak e JetBrains Mono também em subset. |
-| 3 | Histórico do terminal não focável | ✅ | `tabindex="0"`, `role="log"`, `aria-label`, anel de foco visível. |
-| 4 | Etiquetas `//` em 7 secções | ✅ | Ficam 3: hero, Processo, Projetos. |
+**P1-1. A home é mais larga do que o ecrã em todas as larguras** [I][U][T]
+- Local: `css/styles.css:372`, `.hero-terminal::before, .ice-glow::before { inset: -18% -10% }`. O culpado é o `.ice-glow` da secção de processo (`index.html:361`).
+- Evidência (Playwright):
+
+  | Ecrã | Área da página | Efeito |
+  |---|---|---|
+  | 390px (telemóvel) | 410px | header de 16 a 394px, assimétrico; no menu aberto as setas → e o botão "Pedir proposta" ficam 4px fora do ecrã |
+  | 820px | 864px | scroll horizontal |
+  | 1280px | 1348px | scroll horizontal |
+
+  Desligando o `.ice-glow::before`, a página fica com 390px e 820px exatos.
+- Correção: `html { overflow-x: clip; }`. Testado: 390, 820 e 1280 ficam exatos e os brilhos continuam visíveis. Usar `clip` e não `hidden`, para não partir `position: sticky`.
+
+**P1-2. Header das páginas interiores transborda no tablet (769 a 900px)** [I][U][T]
+- Local: `css/styles.css:273` (header em flex) e `:813` (o menu "Menu" só entra até 768px). Afeta FAQ, formulário, páginas legais e MetTracker, nas 4 línguas.
+- Evidência: o conteúdo do header ultrapassa o próprio header em 168px a 769px, 119px a 820px e 39px a 900px. O botão "Pedir proposta" fica cortado a partir de "PEDIR PR". A marca, os 3 links, o seletor de idioma e o botão somam cerca de 900px.
+- Na home, o header passou a aparecer no tablet com o PR #18. Cabe, mas é diferente do das outras páginas.
+- Correção:
+  - usar o menu "Menu" (o mesmo do telemóvel) até 1024px, em todas as páginas;
+  - no `site.js` há 3 sítios com `max-width: 768px` (`:218`, `:243`, `:257`) que passam a usar o mesmo limite;
+  - o seletor de idioma continua no rodapé e no hero.
 
 ### P2
 
-| # | Problema | Estado | O que foi feito |
-|---|---|---|---|
-| 5 | Hero fora das regras | ✅ | Título a toda a largura, em **2 linhas** no desktop; texto + botões à esquerda e terminal à direita por baixo; frase "Resposta em menos de 24h..." retirada do hero (já está no CTA final e no terminal); padding do topo reduzido. |
-| 6 | 4 rótulos para a mesma intenção | ✅ | **"Pedir proposta"** em header, hero, serviços, CTA final, rodapé, menu mobile e tooltip do botão flutuante. O segundo botão do CTA final passou a **"Falar no WhatsApp"** (intenção diferente). |
-| 7 | Cabeçalho dividido + 4 secções seguidas em duas colunas | ✅ | Manifesto empilhado; processo empilhado (título em cima, log a toda a largura). Agora há no máximo 2 secções seguidas em colunas. |
-| 8 | Alvos de toque pequenos | ✅ | Em ecrãs de toque: chips 44px, campo do terminal 44px, links do terminal com área maior, "Ver projeto", links do rodapé, contactos do CTA, logótipo, navegação e aviso de cookies a 44px. |
-| 9 | Formulário sem estados | ✅ | Validação ao sair do campo; mensagens em português por baixo de cada campo, ligadas por `aria-describedby`; resumo "Há N campos por corrigir" numa linha de estado; foco no primeiro erro; botão "A abrir o WhatsApp…" enquanto abre; reposição ao voltar; `<noscript>` com o email. Nomes dos campos inalterados. |
-| 10 | Sem modo escuro | ⚠️ | **Decidi light-only** por defeito (foi a tua escolha de tema) e registei-o em `PRODUCT.md` e com `<meta name="color-scheme" content="light">`. Se quiseres modo escuro, é uma ronda à parte. |
-| 11 | 16 camadas de blur | ✅ | Blur só em header, terminal do hero, menu mobile e aviso de cookies. O resto passou a painel translúcido sem blur. Adicionado `prefers-reduced-transparency`. |
-| 12 | Terminal como hero | ⚠️ | Mantido (decisão tua). Agora é mais útil: lista numerada de projetos e comando `abrir N`, que abre o site do projeto. Captura real no hero não adicionada, para não sobrecarregar. |
-| 13 | Métricas em cartão e números por verificar | ✅ | Visual corrigido: linhas tipográficas em vez de cartões. O "Performance Google 100/100" do Greenbond era falso (Lighthouse: 65 mobile, 85-86 desktop) e foi trocado por **"Acessibilidade Google 100/100"**, verificado no Lighthouse a 2026-10-01 em mobile e desktop. "800+ agendas" mantido (dado do cliente, não verificável por mim). |
-| 14 | `precos.html` com 404 | ✅ | `precos.html` mínima com redirect para a home, `noindex` e canonical. `Redirect 301` no `.htaccess` (caso um dia uses Apache). Fora do sitemap. |
-| 15 | `servico-exemplo.html` órfã | ✅ | Apagada. |
-| 16 | Escala de cantos sem regra | ✅ | pill / 28 / 22 / 12, documentada no topo do CSS e no `design.md`. |
-| 17 | `DESIGN.md` desatualizado | ✅ | `design.md` e `DESIGN.json` reescritos para o sistema light glass + terminal. |
+**P2-1. O aviso de cookies tapa o menu aberto no primeiro acesso** [U]
+- Local: `css/styles.css:755`, `#cookie-banner` com `z-index: var(--z-toast)` (150), acima do menu (120).
+- Evidência: captura do menu aberto a 390px. O aviso cobre "@berto_barata" e o rodapé do menu.
+- Correção: com o menu aberto, esconder o aviso (`body:has(.top-nav ul.open) #cookie-banner { visibility: hidden }`). Ele volta quando o menu fecha.
+
+**P2-2. Botão do WhatsApp e header têm comportamentos diferentes entre 769 e 1024px** [U]
+- Local: `js/site.js:257`. Até 768px o botão abre o WhatsApp diretamente; acima disso abre o formulário, também num tablet com toque.
+- Correção: usar o mesmo limite de 1024px, ou decidir pelo tipo de dispositivo (`pointer: coarse`).
 
 ### P3
 
-| # | Problema | Estado | O que foi feito |
-|---|---|---|---|
-| 18 | Pontos de janela em todo o lado | ✅ | Só no terminal do hero. Saíram do terminal do processo e das 7 molduras de projeto. |
-| 19 | Cursor a piscar no logótipo | ✅ | Removido. Fica só o cursor nativo no campo do terminal. |
-| 20 | `addEventListener('scroll')` | ✅ | Trocado por IntersectionObserver com sentinela; leitura de posições agrupada (sem reflow forçado). |
-| 21 | Ficheiros mortos e `cnr.webp` pesado | ✅ | 4 `phone-*.webp` apagados; `cnr.webp` 232 → 142 KB (foto de folhagem, q60). |
-| 22 | Imagens sem `width`/`height` | ✅ | 1200×750 em todas, mais `decoding="async"`. |
-| 23 | Etiquetas mono pequenas | ✅ | Mínimo 0,78rem (12,5px). |
-| 24 | Teal a 3,9:1 sobre a aurora | ✅ | Etiquetas pequenas em `--teal-deep` (10:1). |
-| 25 | z-index arbitrário | ✅ | Tokens: float 90, header 100, overlay 120, toast 150, skip 200. |
-| 26 | Cores soltas | ✅ | Tudo em tokens (`--ok`, `--dot-*`, `--whatsapp`, `--term-chip`...). |
-| 27 | Humor no terminal | ✅ | "sudo" removido; mensagens funcionais. |
-| 28 | Em dashes no texto legal | ✅ | Os 3 travessões da política de privacidade do Meet Tracker trocados por parênteses, com aprovação do Berto. Zero em dashes visíveis no site (fora dos `<title>`). |
-| 29 | `color-scheme` em falta | ✅ | Adicionado em todas as páginas. |
+**P3-1. O limite 768px está repetido em 3 sítios do `site.js`.** Passar para uma única constante, para não voltarem a ficar diferentes do CSS. [I]
 
-### Extra (mobile, fora da lista original)
+**P3-2. O LCP mobile voltou a 3,2 s** (era 2,0 s em outubro). Medido em local, sem compressão nem cache. Medir em produção antes de agir. [I]
 
-- Aviso de cookies quase opaco: o link tinha 2,98:1 sobre o terminal (Lighthouse). Agora passa.
-- `scroll-padding-top` para os links de âncora não ficarem escondidos debaixo do header fixo.
-- Botão do WhatsApp e aviso de cookies respeitam a zona segura do iPhone.
-- Menu mobile com scroll próprio e itens de 56px.
-- Botões ocupam a largura toda em ecrãs até 560px.
+## 4. O que está bem
 
----
+- Header e menu com alvos de 44px, `aria-expanded`, foco visível, fecho com Esc, X e toque num link.
+- Menu do telemóvel bem desenhado: secções Navegar e Falar, botão claro para pedir proposta.
+- Acessibilidade Lighthouse 100.
+- A afirmação "100/100 Acessibilidade Google" no projeto Greenbond foi verificada nesta sessão e está certa: greenbond.pt dá 100.
 
-## O que falta
+## 5. Ordem de ataque
 
-1. **Testar num telemóvel real** (o Berto testa em casa). Medi em emulação: Lighthouse mobile e iframe a 390px.
-2. Link inverso e estilo partilhado no `bertobarata.com`.
-3. Rever o "800+ agendas" da Ludy Artes se houver número atualizado.
+1. **Lote 1 (um PR):** P1-1 + P1-2 + P2-1 + P2-2 + P3-1. Verificar a 390, 768, 820, 1024, 1025 e 1280px, em PT e FR, que é a língua com os rótulos mais longos.
+2. **Lote 2:** P3-2. Correr o Lighthouse em produção e só depois decidir.
+
+## 6. Decisões do Berto
+
+- Menu "Menu" até 1024px em vez de links no header do tablet. Recomendado: é o que garante que nada parte com rótulos mais longos em FR e ES.

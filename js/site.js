@@ -7,6 +7,8 @@
  */
 (function () {
   'use strict';
+  // Header switches to the "Menu" overlay up to this width (keep in sync with css/styles.css).
+  var MENU_MQ = '(max-width: 1024px)';
 
   // === Language (pages are built per language by scripts/build-i18n.py) ===
   var LANG = (document.documentElement.lang || 'pt').slice(0, 2).toLowerCase();
@@ -215,7 +217,7 @@
     }
     // Only build the editorial overlay on mobile - on desktop the base 4-link
     // nav must stay clean (the injected sections/CTAs/arrows were cluttering it).
-    var mobileMenuMQ = window.matchMedia('(max-width: 768px)');
+    var mobileMenuMQ = window.matchMedia(MENU_MQ);
     if (mobileMenuMQ.matches) enhanceMobileMenu();
     mobileMenuMQ.addEventListener('change', function (e) {
       if (e.matches) enhanceMobileMenu();
@@ -240,7 +242,7 @@
     });
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 768 && menu.classList.contains('open')) {
+      if (!window.matchMedia(MENU_MQ).matches && menu.classList.contains('open')) {
         closeMenu();
         syncToggleLabel(false);
       }
@@ -254,7 +256,7 @@
     var WA_NUMBER = '351939443377';
     var WA_TEXT = T.waText;
     var DESKTOP_HREF = waBtn.getAttribute('href');
-    var mq = window.matchMedia('(max-width: 768px)');
+    var mq = window.matchMedia(MENU_MQ);
     function applyMode() {
       if (mq.matches) {
         waBtn.setAttribute('href', 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT));
