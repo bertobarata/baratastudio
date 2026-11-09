@@ -185,7 +185,7 @@
       var ctas = [
         { href: 'formulario.html', label: T.cta, cls: 'nav-cta-item', arrow: true },
         { href: 'https://wa.me/351939443377?text=' + waText, label: 'WhatsApp', cls: 'nav-secondary', external: true },
-        { href: 'mailto:berto.barata77@gmail.com', label: 'berto.barata77@gmail.com', cls: 'nav-secondary' },
+        { href: 'mailto:berto@baratastudio.com', label: 'berto@baratastudio.com', cls: 'nav-secondary' },
         { href: 'https://instagram.com/berto_barata', label: '@berto_barata', cls: 'nav-secondary', external: true }
       ];
       ctas.forEach(function (c) {
