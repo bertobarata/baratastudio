@@ -96,7 +96,8 @@
     }
 
     function getFocusable() {
-      return Array.from(menu.querySelectorAll(focusableSelectors));
+      // The Menu/Fechar toggle stays visible above the sheet, so it is part of the loop.
+      return [toggle].concat(Array.from(menu.querySelectorAll(focusableSelectors)));
     }
 
     function trapFocus(e) {
@@ -119,39 +120,28 @@
       toggle.textContent = open ? T.close : T.menu;
     }
 
-    // === Move close button out of UL to body (avoid li styling interference) ===
+    // The toggle itself closes the sheet (it stays above it), so the old close item goes.
     var existingCloseLi = menu.querySelector('.nav-close-item');
     if (existingCloseLi) existingCloseLi.remove();
-    var floatingClose = document.createElement('button');
-    floatingClose.type = 'button';
-    floatingClose.className = 'nav-close-floating';
-    floatingClose.setAttribute('aria-label', 'Fechar menu');
-    floatingClose.innerHTML = '&times;';
-    floatingClose.hidden = true;
-    document.body.appendChild(floatingClose);
+    var floatingClose = null;
 
-    toggle.addEventListener('click', function () {
+    toggle.addEventListener('click', function (e) {
       var open = menu.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
       document.body.classList.toggle('menu-open', open);
       syncToggleLabel(open);
-      floatingClose.hidden = !open;
       if (open) {
+        // Keyboard activation (detail 0) moves focus into the sheet; a tap keeps it on the toggle.
         var focusable = getFocusable();
-        if (focusable[0]) focusable[0].focus();
+        if (e.detail === 0 && focusable[1]) focusable[1].focus();
         document.addEventListener('keydown', trapFocus);
       } else {
         closeMenu();
       }
     });
 
-    floatingClose.addEventListener('click', function () {
-      closeMenu({ restoreFocus: true });
-      syncToggleLabel(false);
-      floatingClose.hidden = true;
-    });
 
-    // === Enhance mobile menu with sections, numbers, secondary CTAs ===
+    // === Mobile/tablet sheet: primary links on top, actions (proposal, contacts, language) at the bottom ===
     function enhanceMobileMenu() {
       if (menu.dataset.enhanced === '1') return;
       menu.dataset.enhanced = '1';
@@ -159,8 +149,9 @@
       var items = Array.from(menu.querySelectorAll('li'));
       if (!items.length) return;
 
-      items.forEach(function (li) {
+      items.forEach(function (li, i) {
         li.classList.add('nav-item');
+        li.style.setProperty('--i', i);
         var a = li.querySelector('a');
         if (a && !a.querySelector('.nav-arrow')) {
           var ar = document.createElement('span');
@@ -171,49 +162,43 @@
         }
       });
 
-      var navLabel = document.createElement('li');
-      navLabel.className = 'nav-section-label';
-      navLabel.setAttribute('aria-hidden', 'true');
-      navLabel.innerHTML = '<span>' + T.navigate + '</span>';
-      items[0].parentNode.insertBefore(navLabel, items[0]);
+      var actions = document.createElement('li');
+      actions.className = 'nav-actions';
+      actions.style.setProperty('--i', items.length);
 
-      var falarLabel = document.createElement('li');
-      falarLabel.className = 'nav-section-label';
-      falarLabel.setAttribute('aria-hidden', 'true');
-      falarLabel.innerHTML = '<span>' + T.talk + '</span>';
-      menu.appendChild(falarLabel);
+      var cta = document.createElement('a');
+      cta.className = 'nav-cta';
+      cta.href = 'formulario.html';
+      cta.textContent = T.cta;
+      actions.appendChild(cta);
 
-      var waText = encodeURIComponent(T.waText);
-      var ctas = [
-        { href: 'formulario.html', label: T.cta, cls: 'nav-cta-item', arrow: true },
-        { href: 'https://wa.me/351939443377?text=' + waText, label: 'WhatsApp', cls: 'nav-secondary', external: true },
-        { href: 'mailto:berto@baratastudio.com', label: 'berto@baratastudio.com', cls: 'nav-secondary' },
-        { href: 'https://instagram.com/berto_barata', label: '@berto_barata', cls: 'nav-secondary', external: true }
-      ];
-      ctas.forEach(function (c) {
-        var li = document.createElement('li');
-        li.className = c.cls;
+      var contacts = document.createElement('div');
+      contacts.className = 'nav-contacts';
+      [
+        { href: 'https://wa.me/351939443377?text=' + encodeURIComponent(T.waText), label: 'WhatsApp', external: true },
+        { href: 'mailto:berto@baratastudio.com', label: 'Email', aria: 'Email: berto@baratastudio.com' },
+        { href: 'https://instagram.com/berto_barata', label: 'Instagram', external: true }
+      ].forEach(function (c) {
         var a = document.createElement('a');
+        a.className = 'nav-contact';
         a.href = c.href;
         a.textContent = c.label;
+        if (c.aria) a.setAttribute('aria-label', c.aria);
         if (c.external) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
-        if (c.arrow) {
-          var ar = document.createElement('span');
-          ar.className = 'nav-arrow';
-          ar.setAttribute('aria-hidden', 'true');
-          ar.textContent = '→';
-          a.appendChild(document.createTextNode(' '));
-          a.appendChild(ar);
-        }
-        li.appendChild(a);
-        menu.appendChild(li);
+        contacts.appendChild(a);
       });
+      actions.appendChild(contacts);
 
-      var footerLi = document.createElement('li');
-      footerLi.className = 'nav-footer-text';
-      footerLi.setAttribute('aria-hidden', 'true');
-      footerLi.textContent = T.footer;
-      menu.appendChild(footerLi);
+      // Reuse the page's own language links (correct per-page URLs, built by build-i18n.py).
+      var langSource = document.querySelector('.lang-switch--footer') || document.querySelector('.lang-switch--header');
+      if (langSource) {
+        var lang = langSource.cloneNode(true);
+        lang.classList.remove('lang-switch--footer', 'lang-switch--header');
+        lang.classList.add('lang-switch--menu');
+        actions.appendChild(lang);
+      }
+
+      menu.appendChild(actions);
     }
     // Only build the editorial overlay on mobile - on desktop the base 4-link
     // nav must stay clean (the injected sections/CTAs/arrows were cluttering it).
@@ -249,32 +234,16 @@
     });
   }
 
-  // === WhatsApp float: mobile opens wa.me directly, desktop keeps form ===
+  // === WhatsApp float: always opens the WhatsApp chat (the icon promises WhatsApp;
+  //     it used to send desktop visitors to the form, which read as "not working") ===
   (function () {
     var waBtn = document.querySelector('.whatsapp-float');
     if (!waBtn) return;
-    var WA_NUMBER = '351939443377';
-    var WA_TEXT = T.waText;
-    var DESKTOP_HREF = waBtn.getAttribute('href');
-    var mq = window.matchMedia(MENU_MQ);
-    function applyMode() {
-      if (mq.matches) {
-        waBtn.setAttribute('href', 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT));
-        waBtn.setAttribute('target', '_blank');
-        waBtn.setAttribute('rel', 'noopener noreferrer');
-        waBtn.setAttribute('aria-label', T.waAria);
-        waBtn.setAttribute('data-tooltip', 'WhatsApp');
-      } else {
-        waBtn.setAttribute('href', DESKTOP_HREF);
-        waBtn.removeAttribute('target');
-        waBtn.removeAttribute('rel');
-        waBtn.setAttribute('aria-label', T.formAria);
-        waBtn.setAttribute('data-tooltip', T.cta);
-      }
-    }
-    applyMode();
-    if (mq.addEventListener) mq.addEventListener('change', applyMode);
-    else mq.addListener(applyMode);
+    waBtn.setAttribute('href', 'https://wa.me/351939443377?text=' + encodeURIComponent(T.waText));
+    waBtn.setAttribute('target', '_blank');
+    waBtn.setAttribute('rel', 'noopener noreferrer');
+    waBtn.setAttribute('aria-label', T.waAria);
+    waBtn.setAttribute('data-tooltip', 'WhatsApp');
   })();
 
   // === Footer year ===
