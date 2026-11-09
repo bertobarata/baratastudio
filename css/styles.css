@@ -799,7 +799,9 @@ main { display: block; }
 
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-  .hero-grid { grid-template-columns: 1fr; grid-template-areas: "head" "term" "copy"; align-items: start; }
+  /* Tablet/mobile: no terminal; hero goes title -> copy + CTAs -> projects. */
+  .hero-grid { grid-template-columns: 1fr; grid-template-areas: "head" "copy"; align-items: start; }
+  .hero-terminal { display: none; }
   .about-inner, .form-layout { grid-template-columns: 1fr; }
   .about-photo { max-width: 300px; }
   .form-sidecard { position: static; }
@@ -878,7 +880,8 @@ main { display: block; }
 @media (pointer: coarse) { .lang-switch a { min-height: 40px; min-width: 2.8rem; } }
 
 /* ===== Homepage on desktop: no header bar, the hero terminal is the menu ===== */
-@media (min-width: 769px) {
+/* The terminal is the home navigation on desktop only; tablet keeps the header. */
+@media (min-width: 1025px) {
   .page-home .site-header { display: none; }
   .page-home .hero { padding-top: clamp(2.5rem, 5vw, 4.5rem); }
   html:has(body.page-home) { scroll-padding-top: 1.5rem; }
