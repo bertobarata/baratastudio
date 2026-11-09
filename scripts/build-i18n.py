@@ -34,7 +34,7 @@ KEEP = {
     'Barata Studio', 'FAQ', 'Email', 'WhatsApp', 'Instagram', 'Tab', 'ls', 'ok', '↑', '$',
     'berto@baratastudio.com', '@berto_barata', 'bertobarata.com', 'berto@barata-studio:',
     'berto@barata-studio: ~', '~', '$ ls -l', 'apps/', 'faq/', 'briefing', 'design', 'build', 'launch',
-    'Meet Tracker', 'FINE RAG', 'Astro', 'SwiftUI · SwiftData · CloudKit', 'Next.js · Ollama · LanceDB',
+    'Meet Tracker', 'FINE RAG', 'Astro', 'SwiftUI, SwiftData, CloudKit', 'Next.js, Ollama, LanceDB',
     '100/100', '800+', '·', 'PT', 'EN', 'FR', 'ES', 'Português', 'English', 'Français', 'Español',
     'Barata Studio · Websites Personalizados', '©', '×', 'Language', 'Langue', 'Idioma',
 }

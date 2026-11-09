@@ -372,7 +372,7 @@ async function loadBoard(el, me) {
       return;
     } catch { /* fall back to the local board */ }
   }
-  renderRows(el, ONLINE ? 'Top invasores (sem ligação — neste dispositivo)' : 'Top invasores (neste dispositivo)', localBoard(), me);
+  renderRows(el, ONLINE ? 'Top invasores (neste dispositivo, sem ligação)' : 'Top invasores (neste dispositivo)', localBoard(), me);
 }
 
 function renderRows(el, title, rows, me) {

@@ -721,7 +721,12 @@ main { display: block; }
 .consent-row { display: flex !important; align-items: flex-start; gap: 0.7rem !important; text-transform: none !important; letter-spacing: 0 !important; font-family: var(--font-body) !important; font-size: 0.95rem !important; font-weight: 400 !important; flex-wrap: wrap; }
 .consent-row span { flex: 1; min-width: 12rem; }
 .consent-row .field-error { flex-basis: 100%; }
-.consent-row input { margin-top: 0.3rem; width: 22px; height: 22px; accent-color: var(--teal); flex: none; }
+.consent-row input { margin: 0.15rem 0 0; width: 24px; height: 24px; accent-color: var(--teal); flex: none; cursor: pointer; }
+/* The whole row is the tap target (the label wraps the checkbox): at least 44px tall. */
+.consent-row { min-height: 44px; padding-block: 0.6rem; cursor: pointer; }
+/* Links inside the sentence: taller hit box (WCAG 2.5.8, 24px) without changing the line. */
+.consent-row a { padding-block: 0.25rem; }
+.legal-shell p a, .legal-shell li a { padding-block: 0.15rem; }
 .contact-form .button { justify-self: start; }
 .form-status { margin: 0; font-size: 0.95rem; color: var(--teal-deep); }
 .form-status:empty { display: none; }
@@ -795,7 +800,8 @@ body:has(#cookie-banner:not(.cookie-hiding)) .whatsapp-float { bottom: calc(var(
   .term-line a { display: inline-block; padding: 0.45rem 0.1rem; }
   .term-dir { min-height: 44px; }
   .project-link { min-height: 44px; }
-  .footer-contact-line a { min-height: 44px; }
+  .footer-contact-line a { min-height: 44px; min-width: 44px; justify-content: center; }
+  .legal-standalone-link { display: inline-flex; align-items: center; min-height: 44px; }
   .cta-info-item { min-height: 44px; }
   .info-value { display: inline-flex; align-items: center; min-height: 44px; }
   .top-nav a { min-height: 44px; }
@@ -858,7 +864,7 @@ body:has(#cookie-banner:not(.cookie-hiding)) .whatsapp-float { bottom: calc(var(
 .hero-title:lang(en) { font-size: clamp(2.2rem, 3.9vw, 3.15rem); }
 .hero-title:lang(fr) { font-size: clamp(2.1rem, 3.6vw, 2.95rem); }
 .hero-title:lang(es) { font-size: clamp(2rem, 3.3vw, 2.65rem); }
-@media (pointer: coarse) { .lang-switch a { min-height: 40px; min-width: 2.8rem; } }
+@media (pointer: coarse) { .lang-switch a { min-height: 44px; min-width: 2.8rem; } }
 
 /* ===== Homepage on desktop: no header bar, the hero terminal is the menu ===== */
 /* The terminal is the home navigation on desktop only; tablet keeps the header. */
@@ -1047,4 +1053,17 @@ body:has(#cookie-banner:not(.cookie-hiding)) .whatsapp-float { bottom: calc(var(
   .top-nav ul { background: oklch(0.17 0.016 215 / 0.94); }
   .top-nav .nav-cta, .top-nav .nav-cta:hover { color: oklch(0.18 0.02 215); }
   body.menu-open .nav-toggle { background: var(--panel); }
+}
+
+/* ===== Phones: small mono labels stay readable (min. 12.5px, © 13px, Menu 14px) ===== */
+@media (max-width: 768px) {
+  .app-status, .project-wip, .info-label, .about-kicker, .section-label, .footer-title,
+  .project-sector, .proof-label, .service-tag, .page-intro-kicker, .projects-more-title,
+  .project-case dt, .app-body .app-stack, .contact-form label, .cookie-link,
+  .lang-switch:not(.lang-switch--menu) a { font-size: 0.8rem; }
+  .service-tag { padding-inline: 0.55rem; } /* same number of rows as before */
+  .footer-bottom small { font-size: 0.8125rem; }
+  .lang-switch--footer { display: flex; width: fit-content; margin: 0 auto 1rem; } /* © line gets its own row */
+  .footer-bottom small { display: block; text-wrap: balance; }
+  .nav-toggle { font-size: 0.875rem; }
 }
