@@ -78,7 +78,7 @@ Barata Studio desenha e implementa websites feitos à mão, com direção editor
 |---|---|
 | `{{SITE_URL}}` | por fechar |
 | `{{SITE_DESCRIPTION}}` | por fechar |
-| `{{EMAIL}}` | `berto.barata77@gmail.com` temporário |
+| `{{EMAIL}}` | `berto@baratastudio.com` temporário |
 | `{{TELEFONE_WHATSAPP}}` | `351939443377` |
 | `{{TELEFONE_DISPLAY}}` | `+351 939 443 377` |
 | `{{INSTAGRAM_URL}}` | `https://instagram.com/berto_barata` |

@@ -15,7 +15,7 @@ Esta diretiva estabelece o padrão de execução para qualquer intervenção fut
 ## 3. Estratégia Comercial & SEO
 *   **CTAs de Intenção:** Manter a diferenciação entre "Escolher Plano" (WhatsApp direto com mensagem preenchida) e "Pedir Orçamento" (Formulário).
 *   **SEO Local:** Títulos e Meta Tags devem sempre conter keywords relevantes como "Web Design", "Websites Personalizados" e "Portugal".
-*   **Professionalismo:** O email `berto.barata77@gmail.com` deve estar sempre integrado de forma limpa, mantendo o tom premium do estúdio.
+*   **Professionalismo:** O email `berto@baratastudio.com` deve estar sempre integrado de forma limpa, mantendo o tom premium do estúdio.
 
 ## 4. Auditoria Obrigatória
 Qualquer alteração estrutural deve ser seguida de um `/impeccable audit` para validar a integridade de marca e a fluidez da experiência.

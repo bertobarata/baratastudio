@@ -32,7 +32,7 @@ META_KEYS = ('description', 'og:title', 'og:description')
 # Visible strings that stay the same in every language.
 KEEP = {
     'Barata Studio', 'FAQ', 'Email', 'WhatsApp', 'Instagram', 'Tab', 'ls', 'ok', '↑', '$',
-    'berto.barata77@gmail.com', '@berto_barata', 'bertobarata.com', 'berto@barata-studio:',
+    'berto@baratastudio.com', '@berto_barata', 'bertobarata.com', 'berto@barata-studio:',
     'berto@barata-studio: ~', '~', '$ ls -l', 'apps/', 'faq/', 'briefing', 'design', 'build', 'launch',
     'Meet Tracker', 'FINE RAG', 'Astro', 'SwiftUI · SwiftData · CloudKit', 'Next.js · Ollama · LanceDB',
     '100/100', '800+', '·', 'PT', 'EN', 'FR', 'ES', 'Português', 'English', 'Français', 'Español',
