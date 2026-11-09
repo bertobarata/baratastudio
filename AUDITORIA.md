@@ -1,15 +1,28 @@
-# Auditoria: navegação em telemóvel e tablet (baratastudio.com)
+# Auditoria completa: baratastudio.com
 
-Fontes: **[I]** impeccable audit, **[U]** ui-ux-pro-max, **[T]** tasteskill.
-Data: 2026-11-09. Base: `origin/main` (de76100 + PRs #18 e #19). Foco pedido pelo Berto: menu/header em tablet e telemóvel.
-A auditoria geral anterior (2026-10-01, 18/20) continua no histórico do git deste ficheiro.
+Fontes: **[I]** impeccable audit, **[U]** ui-ux-pro-max, **[T]** tasteskill. **[B]** é feedback direto do Berto.
+Data: 2026-11-09, produção depois do PR #20 (b84fa86). Âmbito:
+- 12 páginas: PT, mais a home em EN, FR e ES;
+- 2 larguras: 1440x900 e 390x844 (telemóvel);
+- tema claro e tema escuro.
+
+A auditoria focada na navegação (Lote 1, já corrigido) e a de outubro estão no histórico do git deste ficheiro.
 
 ## 1. Resumo
 
-- Lighthouse mobile, homepage (servidor local sem compressão): **Performance 92 · Acessibilidade 100 · Boas práticas 100 · SEO 100**. FCP 1,7 s, LCP 3,2 s, TBT 110 ms, CLS 0.
-- impeccable: **16/20** (bom). A descida face aos 18/20 de outubro vem toda do Responsivo.
-- Problemas: **2 P1**, **2 P2**, **2 P3**.
-- Causa principal: um brilho decorativo alarga a página. No telemóvel isso desloca o header e corta o menu aberto. No tablet, o header das páginas interiores não cabe.
+- Lighthouse mobile em produção:
+
+  | Página | Performance | Acessibilidade | Boas práticas | SEO | LCP |
+  |---|---|---|---|---|---|
+  | Home | 99 | 100 | 100 | 100 | 1,9 s |
+  | FAQ | 100 | 100 | 100 | 100 | 1,7 s |
+  | Formulário | 100 | 100 | 100 | 100 | 1,8 s |
+
+  CLS 0 em todas.
+- impeccable: **17/20** (bom).
+- Problemas: **1 P1**, **4 P2**, **3 P3**.
+- As medições técnicas estão limpas: 0 scroll horizontal e 0 textos com contraste insuficiente nas 48 combinações (12 páginas x 2 larguras x 2 temas).
+- O ponto fraco é a experiência do menu no telemóvel e no tablet, e algum texto e alvos de toque pequenos.
 
 ## 2. Notas por ferramenta
 
@@ -17,86 +30,124 @@ A auditoria geral anterior (2026-10-01, 18/20) continua no histórico do git des
 
 | Dimensão | Score | Achado-chave |
 |---|---|---|
-| Acessibilidade | 4 | Lighthouse 100; alvos de 44px no header e no menu |
-| Performance | 3 | 92 em local; LCP 3,2 s (outubro: 2,0 s), a medir de novo em produção |
-| Responsivo | 2 | Scroll horizontal na home em todas as larguras; header do tablet transborda até 168px |
-| Theming | 4 | Tokens completos, header usa o mesmo vidro em todas as páginas |
-| Anti-padrões | 3 | Vidro e terminal são escolhas registadas; sem travessões no header |
-| **Total** | **16/20** | Bom |
+| Acessibilidade | 4 | Lighthouse 100 nas 3 páginas; 0 falhas de contraste; foco visível; imagens com alt; títulos sem saltos |
+| Performance | 4 | 99 a 100, LCP 1,7 a 1,9 s, CLS 0; imagens com lazy loading e dimensões |
+| Responsivo | 3 | Sem scroll horizontal; menu móvel apertado (P1); alguns alvos e textos pequenos (P2) |
+| Theming | 4 | Tokens completos; tema escuro sem falhas de contraste |
+| Anti-padrões | 2 | Travessões nos títulos das páginas PT; vidro em 8 regras CSS; terminal falso no hero do desktop (decisão registada) |
+| **Total** | **17/20** | Bom |
 
 ### ui-ux-pro-max
 
 | Categoria | Veredito |
 |---|---|
-| 1 Acessibilidade | Passa (Lighthouse 100, foco visível, `aria-expanded` no botão Menu) |
-| 2 Toque | Passa no header (44px). O menu aberto perde 4px à direita no telemóvel (P1-1) |
-| 3 Performance | Aceitável (92), sem impacto da navegação |
-| 4 Layout | **Falha**: scroll horizontal (P1-1) e header que não cabe entre 769 e 900px (P1-2) |
-| 5 Tipografia e cor | Passa |
-| 6 Animação | Passa (menu com fade de 220 ms, respeita `prefers-reduced-motion`) |
+| 1 Acessibilidade | Passa |
+| 2 Toque | **Falha parcial**: seletor de idioma no rodapé com 40px de altura, caixa de consentimento com 22x22 |
+| 3 Performance | Passa |
+| 4 Layout | **Falha**: menu do telemóvel e do tablet apertado, secção de projetos com 5.114px de altura no telemóvel |
+| 5 Tipografia e cor | Falha parcial: texto abaixo de 14px no telemóvel (o mais pequeno é o © no rodapé, com 10,4px) |
+| 6 Animação | Passa (respeita `prefers-reduced-motion` no CSS e no JS) |
 | 7 Estilo | Passa |
+| Pre-Delivery | Passa: contraste, foco, alt, reduced motion e as larguras 375, 768, 1024 e 1440. Falha: alvos de 44px |
 
 ### tasteskill
 
-- **Design Read:** estúdio de uma pessoa, artesanal e calmo, com vidro claro e um toque técnico de terminal.
-- **Dials:** variância 6 (manter 6), densidade 4 (manter 4), movimento 4 (manter 4).
-- **Pre-Flight, só para a navegação:** 9 de 11 passam. Falham "sem scroll horizontal em nenhum breakpoint" e "nav colapsa antes de partir".
+- **Design Read:** estúdio de uma pessoa em Lisboa; artesanal, calmo e credível; vidro claro com um toque técnico de terminal; registo de marca.
+- **Dials:**
+
+  | Dial | Atual | Recomendado |
+  |---|---|---|
+  | Variância | 6 | 6 |
+  | Densidade | 4 | 3 no menu móvel, 4 no resto |
+  | Movimento | 4 | 4 |
+- **Pre-Flight:** 20 de 23 passam.
+  - Falha: travessões nos títulos (9.G).
+  - Falha: pontos médios em excesso, 3 linhas com 2 ou mais "·" (9.F).
+  - Falha: terminal falso no hero (9.F). É uma decisão de marca registada e só aparece no desktop desde o PR #18.
+  - Passa: só 3 etiquetas por cima dos títulos em 8 secções (o limite é 3).
 
 ## 3. Problemas unificados
 
 ### P1
 
-**P1-1. A home é mais larga do que o ecrã em todas as larguras** [I][U][T]
-- Local: `css/styles.css:372`, `.hero-terminal::before, .ice-glow::before { inset: -18% -10% }`. O culpado é o `.ice-glow` da secção de processo (`index.html:361`).
-- Evidência (Playwright):
+**P1-1. O menu do telemóvel e do tablet está apertado e confuso** [B][U][T]
+- Local: `js/site.js:152` (`enhanceMobileMenu`) e o bloco `@media (max-width: 1024px)` em `css/styles.css`.
+- Evidência, a partir das capturas do menu aberto a 390px e 820px:
 
-  | Ecrã | Área da página | Efeito |
-  |---|---|---|
-  | 390px (telemóvel) | 410px | header de 16 a 394px, assimétrico; no menu aberto as setas → e o botão "Pedir proposta" ficam 4px fora do ecrã |
-  | 820px | 864px | scroll horizontal |
-  | 1280px | 1348px | scroll horizontal |
-
-  Desligando o `.ice-glow::before`, a página fica com 390px e 820px exatos.
-- Correção: `html { overflow-x: clip; }`. Testado: 390, 820 e 1280 ficam exatos e os brilhos continuam visíveis. Usar `clip` e não `hidden`, para não partir `position: sticky`.
-
-**P1-2. Header das páginas interiores transborda no tablet (769 a 900px)** [I][U][T]
-- Local: `css/styles.css:273` (header em flex) e `:813` (o menu "Menu" só entra até 768px). Afeta FAQ, formulário, páginas legais e MetTracker, nas 4 línguas.
-- Evidência: o conteúdo do header ultrapassa o próprio header em 168px a 769px, 119px a 820px e 39px a 900px. O botão "Pedir proposta" fica cortado a partir de "PEDIR PR". A marca, os 3 links, o seletor de idioma e o botão somam cerca de 900px.
-- Na home, o header passou a aparecer no tablet com o PR #18. Cabe, mas é diferente do das outras páginas.
+  | O que se vê | Porque é um problema |
+  |---|---|
+  | 9 blocos empilhados e centrados na vertical: "NAVEGAR", 3 links, "FALAR", botão, 3 contactos em texto simples, texto de rodapé | Tudo amontoado no meio do ecrã |
+  | Os primeiros 230px do ecrã ficam vazios, só com um X | Espaço desperdiçado |
+  | A marca desaparece e o botão "Fechar" fica tapado pelo próprio menu | Há dois controlos de fechar e um deles não se vê |
+  | No tablet o botão estica a 756px e as setas ficam a 756px dos rótulos | O menu parece esticado e vazio |
+  | Não há seletor de idioma | Nas páginas interiores do telemóvel o idioma só se muda no rodapé |
 - Correção:
-  - usar o menu "Menu" (o mesmo do telemóvel) até 1024px, em todas as páginas;
-  - no `site.js` há 3 sítios com `max-width: 768px` (`:218`, `:243`, `:257`) que passam a usar o mesmo limite;
-  - o seletor de idioma continua no rodapé e no hero.
+  1. O header fica por cima do menu, com a marca e "Menu"/"Fechar" no mesmo sítio, e sai o X flutuante.
+  2. Os links principais ficam no topo, com mais espaço entre eles; saem as etiquetas "NAVEGAR" e "FALAR" e o texto de rodapé.
+  3. As ações ficam em baixo: o botão, uma linha com 3 botões de contacto e o seletor de idioma.
+  4. Coluna com no máximo 560px.
+  5. Entrada suave dos itens, desligada com `prefers-reduced-motion`.
 
 ### P2
 
-**P2-1. O aviso de cookies tapa o menu aberto no primeiro acesso** [U]
-- Local: `css/styles.css:755`, `#cookie-banner` com `z-index: var(--z-toast)` (150), acima do menu (120).
-- Evidência: captura do menu aberto a 390px. O aviso cobre "@berto_barata" e o rodapé do menu.
-- Correção: com o menu aberto, esconder o aviso (`body:has(.top-nav ul.open) #cookie-banner { visibility: hidden }`). Ele volta quando o menu fecha.
+**P2-1. Travessões nos títulos das 8 páginas PT** [I][T]
+- Local: `<title>`, `og:title` e `twitter:title` de `index.html`, `faq.html`, `formulario.html`, das páginas legais e das do MetTracker. Exemplo: "FAQ — Perguntas Frequentes — Barata Studio".
+- Evidência: o varrimento encontrou 8 páginas PT. As versões EN, FR e ES já não os têm.
+- Os títulos aparecem no separador do browser e nos resultados do Google.
+- Correção: "FAQ · Barata Studio" ou "FAQ | Barata Studio".
 
-**P2-2. Botão do WhatsApp e header têm comportamentos diferentes entre 769 e 1024px** [U]
-- Local: `js/site.js:257`. Até 768px o botão abre o WhatsApp diretamente; acima disso abre o formulário, também num tablet com toque.
-- Correção: usar o mesmo limite de 1024px, ou decidir pelo tipo de dispositivo (`pointer: coarse`).
+**P2-2. Alvos de toque abaixo de 44px no telemóvel** [I][U]
+- Evidência:
+
+  | Elemento | Tamanho | Onde |
+  |---|---|---|
+  | Seletor de idioma do rodapé | 45x40 | 14 páginas |
+  | Caixa de consentimento do formulário | 22x22 | formulário |
+  | Link "FAQ" no rodapé EN/FR | 33x44 | home EN e FR |
+- Correção: `min-height: 44px` no seletor do rodapé; área de toque de 44px na caixa, através do `label`; `min-width: 44px` nos links do rodapé.
+
+**P2-3. Texto abaixo de 14px no telemóvel** [U]
+- Evidência:
+
+  | Texto | Tamanho | Onde |
+  |---|---|---|
+  | © do rodapé | 10,4px | todas as páginas |
+  | Estados das apps, "Em desenvolvimento" e etiqueta "Email" | 11,84px | home |
+  | Título do rodapé e etiquetas de secção | 12,48px | home e rodapé |
+  | Botão "Menu" | 13,44px | todas as páginas |
+
+  O texto corrido (17px) está bem.
+- Correção: mínimo de 12,5px nas etiquetas mono em maiúsculas e 13px no ©. Não é preciso chegar aos 14px em tudo: as maiúsculas com espaçamento leem-se maiores.
+
+**P2-4. A secção de projetos ocupa 38% da home no telemóvel** [U][T]
+- Evidência: a secção tem 5.114px de altura numa página de 13.287px a 390px. No desktop tem 2.800 de 9.296px.
+- Correção: no telemóvel mostrar os 2 projetos em destaque e pôr "Outros projetos" numa lista compacta que abre ao toque.
+- É uma decisão de conteúdo (secção 6).
 
 ### P3
 
-**P3-1. O limite 768px está repetido em 3 sítios do `site.js`.** Passar para uma única constante, para não voltarem a ficar diferentes do CSS. [I]
+**P3-1. Pontos médios em excesso.** "SwiftUI · SwiftData · CloudKit", "Next.js · Ollama · LanceDB" e a linha das línguas. Usar vírgulas ou quebras de linha. [T]
 
-**P3-2. O LCP mobile voltou a 3,2 s** (era 2,0 s em outubro). Medido em local, sem compressão nem cache. Medir em produção antes de agir. [I]
+**P3-2. O aviso de cookies é alto no telemóvel.** Tem cerca de 230px a 390px e tapa o início dos projetos na primeira visita. Pôr o texto numa linha e os botões lado a lado. [U]
+
+**P3-3. Vidro em 8 regras CSS.** É uma escolha registada. Manter, mas não acrescentar mais. [I]
 
 ## 4. O que está bem
 
-- Header e menu com alvos de 44px, `aria-expanded`, foco visível, fecho com Esc, X e toque num link.
-- Menu do telemóvel bem desenhado: secções Navegar e Falar, botão claro para pedir proposta.
-- Acessibilidade Lighthouse 100.
-- A afirmação "100/100 Acessibilidade Google" no projeto Greenbond foi verificada nesta sessão e está certa: greenbond.pt dá 100.
+- Performance e acessibilidade de topo em produção: 99 a 100, CLS 0, LCP abaixo de 2 s.
+- Contraste aprovado em todos os textos, no tema claro e no escuro.
+- i18n completo: 5 hreflang por página, canonical certo, sitemap com 17 URLs e alternates.
+- Imagens com alt, dimensões e lazy loading; títulos sem saltos; foco visível; movimento reduzido respeitado.
+- O "100/100 Acessibilidade Google" do Greenbond é verdade (Lighthouse 100).
+- Header do desktop limpo e navegação sem scroll horizontal (PR #20).
 
 ## 5. Ordem de ataque
 
-1. **Lote 1 (um PR):** P1-1 + P1-2 + P2-1 + P2-2 + P3-1. Verificar a 390, 768, 820, 1024, 1025 e 1280px, em PT e FR, que é a língua com os rótulos mais longos.
-2. **Lote 2:** P3-2. Correr o Lighthouse em produção e só depois decidir.
+1. **Lote 2:** P1-1, o redesenho do menu móvel.
+2. **Lote 3:** P2-1, P2-2, P2-3 e P3-1 (títulos, alvos, tamanhos, pontos).
+3. **Lote 4:** P2-4 e P3-2, depois da decisão de conteúdo.
 
 ## 6. Decisões do Berto
 
-- Menu "Menu" até 1024px em vez de links no header do tablet. Recomendado: é o que garante que nada parte com rótulos mais longos em FR e ES.
+- P2-4: encurtar a lista de projetos no telemóvel?
+- Terminal no hero do desktop: manter, porque é a assinatura da marca (decisão já registada).
