@@ -54,6 +54,7 @@
       if (banner && banner.parentNode) {
         banner.parentNode.removeChild(banner);
       }
+      document.documentElement.style.removeProperty('--cookie-h');
     }, 350);
   }
 
@@ -76,6 +77,11 @@
       '</div>';
 
     document.body.appendChild(banner);
+    // Let the WhatsApp button sit above the banner instead of under it.
+    var root = document.documentElement;
+    function syncHeight() { root.style.setProperty('--cookie-h', banner.offsetHeight + 'px'); }
+    syncHeight();
+    if (window.ResizeObserver) new ResizeObserver(syncHeight).observe(banner);
 
     document.getElementById('cookie-accept').addEventListener('click', function () {
       saveConsent('all');

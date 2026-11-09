@@ -742,6 +742,10 @@ main { display: block; }
   transition: transform 160ms var(--ease-out);
 }
 .whatsapp-float svg { width: 28px; height: 28px; }
+/* While the cookie notice is up, lift the button above it (it used to sit underneath and
+   swallow the tap on phones and tablets). --cookie-h is set by js/cookie-consent.js. */
+body:has(#cookie-banner:not(.cookie-hiding)) .whatsapp-float { bottom: calc(var(--cookie-h, 0px) + 28px + env(safe-area-inset-bottom)); }
+.whatsapp-float { transition: transform 160ms var(--ease-out), bottom 300ms var(--ease-out); }
 .whatsapp-float:active { transform: scale(0.95); }
 .whatsapp-float::after {
   content: attr(data-tooltip); position: absolute; right: 68px; white-space: nowrap;

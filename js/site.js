@@ -234,32 +234,16 @@
     });
   }
 
-  // === WhatsApp float: mobile opens wa.me directly, desktop keeps form ===
+  // === WhatsApp float: always opens the WhatsApp chat (the icon promises WhatsApp;
+  //     it used to send desktop visitors to the form, which read as "not working") ===
   (function () {
     var waBtn = document.querySelector('.whatsapp-float');
     if (!waBtn) return;
-    var WA_NUMBER = '351939443377';
-    var WA_TEXT = T.waText;
-    var DESKTOP_HREF = waBtn.getAttribute('href');
-    var mq = window.matchMedia(MENU_MQ);
-    function applyMode() {
-      if (mq.matches) {
-        waBtn.setAttribute('href', 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_TEXT));
-        waBtn.setAttribute('target', '_blank');
-        waBtn.setAttribute('rel', 'noopener noreferrer');
-        waBtn.setAttribute('aria-label', T.waAria);
-        waBtn.setAttribute('data-tooltip', 'WhatsApp');
-      } else {
-        waBtn.setAttribute('href', DESKTOP_HREF);
-        waBtn.removeAttribute('target');
-        waBtn.removeAttribute('rel');
-        waBtn.setAttribute('aria-label', T.formAria);
-        waBtn.setAttribute('data-tooltip', T.cta);
-      }
-    }
-    applyMode();
-    if (mq.addEventListener) mq.addEventListener('change', applyMode);
-    else mq.addListener(applyMode);
+    waBtn.setAttribute('href', 'https://wa.me/351939443377?text=' + encodeURIComponent(T.waText));
+    waBtn.setAttribute('target', '_blank');
+    waBtn.setAttribute('rel', 'noopener noreferrer');
+    waBtn.setAttribute('aria-label', T.waAria);
+    waBtn.setAttribute('data-tooltip', 'WhatsApp');
   })();
 
   // === Footer year ===
